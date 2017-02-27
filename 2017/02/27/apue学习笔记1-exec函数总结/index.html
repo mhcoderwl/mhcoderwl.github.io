@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>categories | mhcoderwl的博客</title>
+  <title>apue学习笔记1-exec函数总结 | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="c/c++">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="这学期开始看apue第三版,并记录相关知识点的笔记.首先复习exec函数的使用.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="apue学习笔记1-exec函数总结">
+<meta property="og:url" content="http://yoursite.com/2017/02/27/apue学习笔记1-exec函数总结/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="c/c++">
-<meta property="og:updated_time" content="2017-02-26T07:38:46.062Z">
+<meta property="og:description" content="这学期开始看apue第三版,并记录相关知识点的笔记.首先复习exec函数的使用.">
+<meta property="og:updated_time" content="2017-02-27T10:30:11.389Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="c/c++">
+<meta name="twitter:title" content="apue学习笔记1-exec函数总结">
+<meta name="twitter:description" content="这学期开始看apue第三版,并记录相关知识点的笔记.首先复习exec函数的使用.">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -145,27 +145,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-undefined" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-apue学习笔记1-exec函数总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      categories
+      apue学习笔记1-exec函数总结
     </h1>
   
 
         
-        <a href="/categories/index.html" class="archive-article-date">
-  	<time datetime="2017-02-26T07:31:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
+        <a href="/2017/02/27/apue学习笔记1-exec函数总结/" class="archive-article-date">
+  	<time datetime="2017-02-27T07:46:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>这学期开始看apue第三版,并记录相关知识点的笔记.首先复习exec函数的使用.</p>
+<a id="more"></a>
+<p>exec函数总共有七个:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">execl</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* pathname,<span class="keyword">const</span> <span class="keyword">char</span>* arg0,...<span class="comment">/*(char* )0 */</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">execv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* pathname,<span class="keyword">char</span>* <span class="keyword">const</span> argv[])</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">execle</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* pathname,<span class="keyword">const</span> <span class="keyword">char</span>* arg0,...</span></span></div><div class="line">				<span class="comment">/* (char*)0,char* const envp[]*/</span>);</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">execve</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* pathname,<span class="keyword">char</span>* <span class="keyword">const</span> argv[],<span class="keyword">char</span>* <span class="keyword">const</span> envp[])</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">execlp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* filename,<span class="keyword">const</span> <span class="keyword">char</span>* arg0,...<span class="comment">/*(char*)0 */</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">execvp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* filename,<span class="keyword">char</span>* <span class="keyword">const</span> argv[])</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fexecve</span><span class="params">(<span class="keyword">int</span> fd,<span class="keyword">char</span>* <span class="keyword">const</span> argv[],<span class="keyword">char</span> *<span class="keyword">const</span> envp[])</span></span>;</div></pre></td></tr></table></figure></p>
+<p> 函数之间第一个区别在前4个取路径做参数,后两个函数取文件名做参数,最后一个取文件描述符.也就是说后两个函数可以从环境变量PATH中寻找.<br>第二个区别与参数表有关,以const char* arg0,arg1…传入的为参数列表,需要以空指针做结尾<br>第三个区别环境变量：exec函数族使用了系统默认的环境变量，也可以传入指定的环境变量。这里以“e”（environment）结尾的两个函数execle、execve就可以在envp[]中指定当前进程所使用的环境变量替换掉该进程继承的所以环境变量。<br>这七个只有execve是内核的系统调用,其他的都是库函数.上代码实例:<br><figure class="highlight cpp"><figcaption><span>exec.c/*echoall程序用来打印命令行参数和环境表 */</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"apue.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>** argv)</span></span>&#123;</div><div class="line">	<span class="keyword">pid_t</span> pid;</div><div class="line">	<span class="keyword">char</span>** env_init=&#123;<span class="string">"USER=unknown"</span>,<span class="string">"PATH=/tmp"</span>,<span class="literal">NULL</span>&#125;;</div><div class="line">	<span class="keyword">if</span>((pid=fork())&lt;<span class="number">0</span>)&#123;</div><div class="line">		err_sys(<span class="string">"fork error"</span>);</div><div class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pid==<span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">if</span>(execle(<span class="string">"/home/wangliang/bin/echoall"</span>,<span class="string">"echoall"</span>,<span class="string">"myarg1"</span>,<span class="string">"MY ARG2"</span>,(<span class="keyword">char</span>*)<span class="number">0</span>,env_init)&lt;<span class="number">0</span>)</div><div class="line">			err_sys(<span class="string">"execle error"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(waitpid(pid,<span class="literal">NULL</span>,<span class="number">0</span>)&lt;<span class="number">0</span>)</div><div class="line">		error_sys(<span class="string">"wait error"</span>);</div><div class="line">	<span class="keyword">if</span>((pid=fork)==<span class="number">0</span>)</div><div class="line">		<span class="keyword">if</span>(execlp(<span class="string">"echoall"</span>,<span class="string">"echoall"</span>,<span class="string">"only 1arg"</span>,(<span class="keyword">char</span>*)<span class="number">0</span>)&lt;<span class="number">0</span>)</div><div class="line">			err_sys(<span class="string">"execlp() error"</span>);</div><div class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
       
 
       
@@ -194,7 +198,29 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">apue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/编程/" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -244,7 +270,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/categories/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/02/27/apue学习笔记1-exec函数总结/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -256,6 +282,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2017/02/26/利用hexo和github-page-搭建个人博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">利用hexo和githubpage搭建个人博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 
 
@@ -288,7 +324,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
