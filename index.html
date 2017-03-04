@@ -146,6 +146,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-fork-和vfork-的总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/04/fork-和vfork-的总结/">fork()和vfork()的总结</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/04/fork-和vfork-的总结/" class="archive-article-date">
+  	<time datetime="2017-03-04T07:04:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  fork()函数可以创建一个新的进程,被称为子进程,子进程获得父进程数据空间,堆和栈的副本.父子进程不共享这些存储空间部分,共享正文段.<br>  看下面一个实例:<br>
+        
+          <a class="article-more-a" href="/2017/03/04/fork-和vfork-的总结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">apue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/04/fork-和vfork-的总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-递归降序遍历目录结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -166,9 +241,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参考apue第四章代码:<br><figure class="highlight nimrod"><figcaption><span>4.22.c/*此程序用来递归降序遍历文件层次结构,命令行传入一个参数作为起点路径名.*/</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#include&lt;errno.h&gt;</span></div><div class="line"><span class="comment">#include"apue.h"</span></div><div class="line"><span class="comment">#include&lt;limits.h&gt;//定义了数据类型的范围.例如INT_MAX宏为该环境下int类型的最大值.</span></div><div class="line"><span class="comment">#include&lt;dirent.h</span></div><div class="line">&lt;!--more--&gt;</div><div class="line">typedef <span class="built_in">int</span> <span class="type">Myfunc</span>(<span class="keyword">const</span> <span class="built_in">char</span>*,<span class="keyword">const</span> struct stat*,<span class="built_in">int</span>);</div><div class="line"><span class="built_in">char</span>* path_alloc(size_t*);</div><div class="line"><span class="keyword">static</span> <span class="type">Myfunc</span> myfunc;</div><div class="line"><span class="keyword">static</span> <span class="built_in">int</span> myftw(<span class="built_in">char</span>*,<span class="type">Myfunc</span>*);</div><div class="line"><span class="keyword">static</span> <span class="built_in">int</span> dopath(<span class="type">Myfunc</span>*);</div><div class="line"><span class="keyword">static</span> long nreg,ndir,nblk,nchr,nfifo,nslink,nsock,ntot;</div><div class="line"></div><div class="line"><span class="built_in">int</span> main( <span class="built_in">int</span> argc,<span class="built_in">char</span>** argv)&#123;</div><div class="line">	<span class="built_in">int</span> ret;</div><div class="line">	<span class="keyword">if</span>(argc!=<span class="number">2</span>)</div><div class="line">		err_quit(<span class="string">"Usage: ftw &lt;starting-pathname&gt;"</span>);</div><div class="line">	ret=myftw(argv[<span class="number">1</span>],myfunc);</div><div class="line">	ntot=nreg+ndir+nblk+nchr+nfifo+nslink+nsock;</div><div class="line">	<span class="keyword">if</span>(ntot==<span class="number">0</span>)</div><div class="line">		ntot=<span class="number">1</span>;</div><div class="line">	printf(<span class="string">"regular files= %7ld,%5.12f %%\n"</span>,nreg,nreg*<span class="number">100</span>.<span class="number">0</span>/ntot);</div><div class="line">	printf(<span class="string">"directories = %7ld,%5.12f %%\n"</span>,ndir,ndir*<span class="number">100</span>.<span class="number">0</span>/ntot);</div><div class="line">	printf(<span class="string">"block special = %7ld,%5.12f %%\n"</span>,nblk,nblk*<span class="number">100</span>.<span class="number">0</span>/ntot);</div><div class="line">	printf(<span class="string">"char special = %7ld,%5.12f %%\n"</span>,nchr,nchr*<span class="number">100</span>.<span class="number">0</span>/ntot);</div><div class="line">	printf(<span class="string">"FIFOS    = %7ld,%5.12f %%\n"</span>,nfifo,nfifo*<span class="number">100</span>.<span class="number">0</span>/ntot);</div><div class="line">	printf(<span class="string">"symbolic links = %7ld,%5.12f %%\n"</span>,nslink,nslink*<span class="number">100</span>.<span class="number">0</span>/ntot);</div><div class="line">	printf(<span class="string">"sockets = %7ld,%5.12f %%\n"</span>,nsock,nsock*<span class="number">100</span>.<span class="number">0</span>/ntot);</div><div class="line">	exit(ret);</div><div class="line">&#125;</div><div class="line">/*文件名路径分配函数</div><div class="line"><span class="comment">#ifdef	PATH_MAX</span></div><div class="line"><span class="keyword">static</span> long	pathmax = <span class="type">PATH_MAX</span>;</div><div class="line"><span class="comment">#else</span></div><div class="line"><span class="keyword">static</span> long	pathmax = <span class="number">0</span>;</div><div class="line"><span class="comment">#endif</span></div><div class="line"></div><div class="line"><span class="keyword">static</span> long	posix_version = <span class="number">0</span>;</div><div class="line"><span class="keyword">static</span> long	xsi_version = <span class="number">0</span>;</div><div class="line"></div><div class="line">/* <span class="type">If</span> <span class="type">PATH_MAX</span> <span class="keyword">is</span> indeterminate, no guarantee this <span class="keyword">is</span> adequate */</div><div class="line"><span class="comment">#define	PATH_MAX_GUESS	1024</span></div><div class="line"></div><div class="line"><span class="built_in">char</span> *</div><div class="line">path_alloc(size_t *sizep) /* also <span class="keyword">return</span> allocated size, <span class="keyword">if</span> nonnull */</div><div class="line">&#123;</div><div class="line">	<span class="built_in">char</span>	*<span class="keyword">ptr</span>;</div><div class="line">	size_t	size;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (posix_version == <span class="number">0</span>)</div><div class="line">		posix_version = sysconf(_SC_VERSION);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (xsi_version == <span class="number">0</span>)</div><div class="line">		xsi_version = sysconf(_SC_XOPEN_VERSION);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (pathmax == <span class="number">0</span>) &#123;		/* first time through */</div><div class="line">		errno = <span class="number">0</span>;</div><div class="line">		<span class="keyword">if</span> ((pathmax = pathconf(<span class="string">"/"</span>, _PC_PATH_MAX)) &lt; <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">if</span> (errno == <span class="number">0</span>)</div><div class="line">				pathmax = <span class="type">PATH_MAX_GUESS</span>;	/* it's indeterminate */</div><div class="line">			<span class="keyword">else</span></div><div class="line">				err_sys(<span class="string">"pathconf error for _PC_PATH_MAX"</span>);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			pathmax++;		/* add one since it's relative to root */</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * <span class="type">Before</span> <span class="type">POSIX</span>.<span class="number">1</span>-<span class="number">2001</span>, we aren't guaranteed that <span class="type">PATH_MAX</span> includes</div><div class="line">	 * the terminating null byte.  <span class="type">Same</span> goes <span class="keyword">for</span> <span class="type">XPG3</span>.</div><div class="line">	 */</div><div class="line">	<span class="keyword">if</span> ((posix_version &lt; <span class="number">200112</span>L) &amp;&amp; (xsi_version &lt; <span class="number">4</span>))</div><div class="line">		size = pathmax + <span class="number">1</span>;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		size = pathmax;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> ((<span class="keyword">ptr</span> = malloc(size)) == <span class="type">NULL</span>)</div><div class="line">		err_sys(<span class="string">"malloc error for pathname"</span>);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (sizep != <span class="type">NULL</span>)</div><div class="line">		*sizep = size;</div><div class="line">	<span class="keyword">return</span>(<span class="keyword">ptr</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">#define FTW_F 1</span></div><div class="line"><span class="comment">#define FTW_D 2</span></div><div class="line"><span class="comment">#define FTW_DNR 3</span></div><div class="line"><span class="comment">#define FTW_NS 4</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">char</span>* fullpath;</div><div class="line"><span class="keyword">static</span> size_t pathlen;</div><div class="line"><span class="keyword">static</span> <span class="built_in">int</span> myftw(<span class="built_in">char</span>* pathname,<span class="type">Myfunc</span>* func)&#123;</div><div class="line">	fullpath=path_alloc(&amp;pathlen);</div><div class="line">	<span class="keyword">if</span>(pathlen&lt;=strlen(pathname))&#123;</div><div class="line">		pathlen=strlen(pathname)*<span class="number">2</span>;</div><div class="line">		<span class="keyword">if</span>((fullpath=realloc(fullpath,pathlen))==<span class="type">NULL</span>)</div><div class="line">			err_sys(<span class="string">"realloc failed"</span>);</div><div class="line">	&#125;</div><div class="line">	strcpy(fullpath,pathname);</div><div class="line">	<span class="keyword">return</span> dopath(func);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*用来递归调用myfunc来处理路径内的每个文件.</div><div class="line"><span class="keyword">static</span> <span class="built_in">int</span> dopath(<span class="type">Myfunc</span>* func)&#123;</div><div class="line">	struct stat statbuf;</div><div class="line">	struct dirent* dirp;</div><div class="line">	<span class="type">DIR</span>* dp;</div><div class="line">	<span class="built_in">int</span>  ret,n;</div><div class="line">	<span class="keyword">if</span>(lstat(fullpath,&amp;statbuf)&lt;<span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> func(fullpath,&amp;statbuf,<span class="type">FTW_NS</span>);</div><div class="line">	<span class="keyword">if</span>(<span class="type">S_ISDIR</span>(statbuf.st_mode)==<span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span>(func(fullpath,&amp;statbuf,<span class="type">FTW_F</span>));</div><div class="line">	<span class="keyword">if</span>(ret=func(fullpath,&amp;statbuf,<span class="type">FTW_D</span>)!=<span class="number">0</span>)</div><div class="line">	<span class="keyword">return</span> ret;</div><div class="line">	n=strlen(fullpath);</div><div class="line">	<span class="keyword">if</span>(n+<span class="type">NAME_MAX</span>+<span class="number">2</span>&gt;pathlen)&#123;</div><div class="line">	pathlen*=<span class="number">2</span>;</div><div class="line">	<span class="keyword">if</span>((fullpath=realloc(fullpath,pathlen))==<span class="type">NULL</span>)</div><div class="line">		err_sys(<span class="string">"realloc failed"</span>);</div><div class="line">	&#125;</div><div class="line">	fullpath[n++]='/';</div><div class="line">	fullpath[n]=<span class="number">0</span>;</div><div class="line">	<span class="keyword">if</span>((dp=opendir(fullpath))==<span class="type">NULL</span>)</div><div class="line">		<span class="keyword">return</span> func(fullpath,&amp;statbuf,<span class="type">FTW_DNR</span>);</div><div class="line">	<span class="keyword">while</span>((dirp=readdir(dp))!=<span class="type">NULL</span>)&#123;</div><div class="line">	<span class="keyword">if</span>(strcmp(dirp-&gt;d_name,<span class="string">"."</span>)==<span class="number">0</span>||strcmp(dirp-&gt;d_name,<span class="string">".."</span>)==<span class="number">0</span>)</div><div class="line">		<span class="keyword">continue</span>;</div><div class="line">	strcpy(&amp;fullpath[n],dirp-&gt;d_name);</div><div class="line">	<span class="keyword">if</span>((ret=dopath(func))!=<span class="number">0</span>)</div><div class="line">	<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	fullpath[n-<span class="number">1</span>]=<span class="number">0</span>;</div><div class="line">	closedir(dp);</div><div class="line">	<span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line">/*用来判断输入路径的文件类型,也可能是目录文件*/</div><div class="line"><span class="keyword">static</span> <span class="built_in">int</span> myfunc(<span class="keyword">const</span> <span class="built_in">char</span>* pathname,<span class="keyword">const</span> struct stat* statptr,<span class="built_in">int</span> <span class="keyword">type</span>)&#123;</div><div class="line">	switch(<span class="keyword">type</span>)&#123;</div><div class="line">		<span class="keyword">case</span> <span class="type">FTW_F</span>:</div><div class="line">			<span class="keyword">if</span>(<span class="type">S_ISREG</span>(statptr-&gt;st_mode))</div><div class="line">				nreg++;</div><div class="line">			<span class="keyword">if</span>(<span class="type">S_ISBLK</span>(statptr-&gt;st_mode))</div><div class="line">				ndir++;</div><div class="line">			<span class="keyword">if</span>(<span class="type">S_ISCHR</span>(statptr-&gt;st_mode))</div><div class="line">				nchr++;</div><div class="line">			<span class="keyword">if</span>(<span class="type">S_ISFIFO</span>(statptr-&gt;st_mode))</div><div class="line">				nfifo++;</div><div class="line">			<span class="keyword">if</span>(<span class="type">S_ISLNK</span>(statptr-&gt;st_mode))</div><div class="line">				nslink++;</div><div class="line">			<span class="keyword">if</span>(<span class="type">S_ISSOCK</span>(statptr-&gt;st_mode))</div><div class="line">				nsock++;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="type">FTW_D</span>:</div><div class="line">			ndir++;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="type">FTW_DNR</span>:</div><div class="line">			err_ret(<span class="string">"Can't read directory %s"</span>,pathname);</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="type">FTW_NS</span>:</div><div class="line">			err_ret(<span class="string">"stat error for %s"</span>,pathname);</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行结果如下:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ /home/wangliang/apue/<span class="number">4.22</span> /</div><div class="line">regular files=  <span class="number">389832</span>,<span class="number">70.403768044225</span> %</div><div class="line">directories =   <span class="number">61804</span>,<span class="number">11.161819656173</span> %</div><div class="line">block special =       <span class="number">0</span>,<span class="number">0.000000000000</span> %</div><div class="line">char special =     <span class="number">230</span>,<span class="number">0.041538064218</span> %</div><div class="line">FIFOS    =       <span class="number">6</span>,<span class="number">0.001083601675</span> %</div><div class="line">symbolic links =  <span class="number">101781</span>,<span class="number">18.381677018073</span> %</div><div class="line">sockets =      <span class="number">56</span>,<span class="number">0.010113615636</span> %</div></pre></td></tr></table></figure></p>
-
+        <p>参考apue第四章代码:<br>
+        
+          <a class="article-more-a" href="/2017/03/03/递归降序遍历目录结构/#more">more >></a>
+        
       
 
       
@@ -256,11 +332,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">c/c++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">apue</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">apue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">c/c++</a>
         		</li>
       		
 		</ul>
@@ -547,11 +623,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+                <a href="javascript:void(0)" class="js-tag color5">apue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">apue</a>
+                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
               </li>
              
               <li class="article-tag-list-item">
