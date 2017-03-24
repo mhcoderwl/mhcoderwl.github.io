@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>categories | mhcoderwl的博客</title>
+  <title>检查带环链表入口问题 | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="c/c++">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="这两天一直在做链表的题目,遇到了一道有环链表的问题,感觉很有趣:题目:给一个链表,如果有回路返回回路开始的节点,没有回路则返回NULL  思路:两个指针一快一慢,fas与slow相遇时,fast已经在圈内循环了n圈,设slow走了n步,则fast走了2s步(fast步数还等于s加上在环上多转的n圈),设环长为r,于是:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="检查带环链表入口问题">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/检查带环链表入口问题/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="c/c++">
-<meta property="og:updated_time" content="2017-02-26T07:38:46.062Z">
+<meta property="og:description" content="这两天一直在做链表的题目,遇到了一道有环链表的问题,感觉很有趣:题目:给一个链表,如果有回路返回回路开始的节点,没有回路则返回NULL  思路:两个指针一快一慢,fas与slow相遇时,fast已经在圈内循环了n圈,设slow走了n步,则fast走了2s步(fast步数还等于s加上在环上多转的n圈),设环长为r,于是:">
+<meta property="og:updated_time" content="2017-03-24T12:28:48.687Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="c/c++">
+<meta name="twitter:title" content="检查带环链表入口问题">
+<meta name="twitter:description" content="这两天一直在做链表的题目,遇到了一道有环链表的问题,感觉很有趣:题目:给一个链表,如果有回路返回回路开始的节点,没有回路则返回NULL  思路:两个指针一快一慢,fas与slow相遇时,fast已经在圈内循环了n圈,设slow走了n步,则fast走了2s步(fast步数还等于s加上在环上多转的n圈),设环长为r,于是:">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -145,27 +145,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-undefined" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-检查带环链表入口问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      categories
+      检查带环链表入口问题
     </h1>
   
 
         
-        <a href="/categories/index.html" class="archive-article-date">
-  	<time datetime="2017-02-26T07:31:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
+        <a href="/2017/03/24/检查带环链表入口问题/" class="archive-article-date">
+  	<time datetime="2017-03-24T12:21:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>这两天一直在做链表的题目,遇到了一道有环链表的问题,感觉很有趣:<br>题目:给一个链表,如果有回路返回回路开始的节点,没有回路则返回NULL<br>  思路:两个指针一快一慢,fas与slow相遇时,fast已经在圈内循环了n圈,设slow走了n步,则fast走了2s步(fast步数还等于s加上在环上多转的n圈),设环长为r,于是:                                           2s=s+nr<br>                          s=nr<br> 设整个链表长L,环入口点与相遇点距离为a,起点到环入口点的距离为x,则:<br> <a id="more"></a><br>                          x+a=nr=(n-1)r+r=(n-1)r+L-x<br>                          x=(n-1)r+(L-x-a)<br> L-x-a为相遇点到环入口点的距离,由此可知,从链表头到环入口点等于n-1圈内环+相遇点到入口点,于是我们可以从head开始另设一个指针slow2,两个慢指针<br> slow2,两个慢指针每次前进一步,它俩一定会在环入口点相遇*/<br> <figure class="highlight autoit"><figcaption><span>2.2.12.cpp</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line">using namespace std<span class="comment">;</span></div><div class="line">struct ListNode&#123;</div><div class="line">	<span class="built_in">int</span> val<span class="comment">;</span></div><div class="line">	ListNode* <span class="keyword">next</span><span class="comment">;</span></div><div class="line">	ListNode(<span class="built_in">int</span> x):val(x),<span class="keyword">next</span>(<span class="literal">NULL</span>)&#123;&#125;</div><div class="line">&#125;<span class="comment">;</span></div><div class="line"></div><div class="line">class Solution&#123;</div><div class="line">	ListNode* detectCycle(ListNode* head)&#123;</div><div class="line">		ListNode* slow=head,*fast=head<span class="comment">;</span></div><div class="line">		<span class="keyword">while</span>(fast&amp;&amp;fast-&gt;<span class="keyword">next</span>)&#123;</div><div class="line">			slow=slow-&gt;<span class="keyword">next</span><span class="comment">;</span></div><div class="line">			fast=fast-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span><span class="comment">;</span></div><div class="line">			<span class="keyword">if</span>(slow==fast)&#123;</div><div class="line">				ListNode* slow2=head<span class="comment">;</span></div><div class="line">				<span class="keyword">while</span>(slow2!=slow)&#123;</div><div class="line">					slow2=-&gt;slow2-&gt;<span class="keyword">next</span><span class="comment">;</span></div><div class="line">					slow=slow-&gt;<span class="keyword">next</span><span class="comment">;</span></div><div class="line">				&#125;</div><div class="line">				<span class="keyword">return</span> slow2<span class="comment">;</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">NULL</span><span class="comment">;</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
       
 
       
@@ -194,6 +195,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -244,7 +260,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/categories/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/24/检查带环链表入口问题/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -256,6 +272,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/15/互斥量和避免死锁/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">互斥量和避免死锁</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 
 
@@ -288,7 +314,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
