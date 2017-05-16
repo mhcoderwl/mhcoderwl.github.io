@@ -146,6 +146,139 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-5种IO模型总结-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/16/5种IO模型总结-1/">5种IO模型总结</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/16/5种IO模型总结-1/" class="archive-article-date">
+  	<time datetime="2017-05-16T10:20:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在unix环境下,有5种IO模型,前4种属于同步IO:</p>
+<ul>
+<li>阻塞式IO</li>
+<li>非阻塞式IO</li>
+<li>IO复用(select和poll,还有更好的epoll)</li>
+<li>信号驱动式IO(SIGIO)</li>
+<li>异步IO(aio_系列函数)</li>
+</ul>
+<h2 id="阻塞式IO"><a href="#阻塞式IO" class="headerlink" title="阻塞式IO"></a>阻塞式IO</h2><p>最流行的IO模型,默认情况下,所有套接字都是阻塞的,例如read,write,recvfrom.不再赘述(要注意不等于同步)</p>
+<h2 id="非阻塞式IO"><a href="#非阻塞式IO" class="headerlink" title="非阻塞式IO"></a>非阻塞式IO</h2><p>进程把一个套接字设置成非阻塞是在通知内核:当所请求的IO操作非得把本进程投入睡眠才能完成时,不要把本进程投入睡眠,而是返回一个错误.<br>例如调用recvfrom时,如果内核空间无数据报准备好,则立即返回EWOULDBLOCK错误.如果有的话就会阻塞一直到IO完成.(按理论来说这种也属于同步IO)当一个应用进程对一个非阻塞描述符循环调用recvfrom时,称之为轮询,缺点式耗费cpu.</p>
+<h2 id="IO复用模型"><a href="#IO复用模型" class="headerlink" title="IO复用模型"></a>IO复用模型</h2><p>调用select,系统阻塞在这个系统调用上,而不是真正的IO系统调用上,例如进程调用select,等待任一套接字变可读,一旦返回说明某个套接字的状态发生了变化,之后继续处理.</p>
+<h2 id="信号驱动式"><a href="#信号驱动式" class="headerlink" title="信号驱动式"></a>信号驱动式</h2><p>即让内核在描述符就绪时发送信号SIGIO通知进程,可以通过开启套接字的信号驱动式IO功能,通过sigaction系统调用安装一个信号处理函数.<br>这种优势在于等待数据报到达期间进程不被阻塞.</p>
+<h2 id="异步IO模型"><a href="#异步IO模型" class="headerlink" title="异步IO模型"></a>异步IO模型</h2><p>告知内核某个操作,并让内核在整个操作完成后再通知进程.</p>
+<p>总结:前四种IO的第一步各不相同,但第二部都一样,都会阻塞等待IO完成.但第五种不会阻塞.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">unp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">unix</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/16/5种IO模型总结-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-5种IO模型总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/16/5种IO模型总结/">5种IO模型总结</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/16/5种IO模型总结/" class="archive-article-date">
+  	<time datetime="2017-05-16T10:19:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/16/5种IO模型总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-字符串匹配KMP算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -827,23 +960,23 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">unp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">unix</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">apue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -856,6 +989,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
             
             <div class="clearfix"></div>

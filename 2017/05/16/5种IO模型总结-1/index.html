@@ -6,18 +6,45 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>互斥量和避免死锁 | mhcoderwl的博客</title>
+  <title>5种IO模型总结 | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="互斥量互斥变量是用pthread_mutex_t数据类型表示的,在使用互斥变量之前,必须首先对它进行初始化,可以把它设置为常量PTHREAD_MUTEX_INITIALIZER(只适用于静态分配的互斥量),也可以调用pthread_mutex_init进行初始化,如果动态分配互斥量,在释放内存前需要调用pthread_mutex_destory.1234567#include&amp;lt;pthread">
+  <meta name="description" content="在unix环境下,有5种IO模型,前4种属于同步IO:
+
+阻塞式IO
+非阻塞式IO
+IO复用(select和poll,还有更好的epoll)
+信号驱动式IO(SIGIO)
+异步IO(aio_系列函数)
+
+阻塞式IO最流行的IO模型,默认情况下,所有套接字都是阻塞的,例如read,write,recvfrom.不再赘述(要注意不等于同步)
+非阻塞式IO进程把一个套接字设置成非阻塞是在通知内核:当所请">
 <meta property="og:type" content="article">
-<meta property="og:title" content="互斥量和避免死锁">
-<meta property="og:url" content="http://yoursite.com/2017/03/15/互斥量和避免死锁/index.html">
+<meta property="og:title" content="5种IO模型总结">
+<meta property="og:url" content="http://yoursite.com/2017/05/16/5种IO模型总结-1/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="互斥量互斥变量是用pthread_mutex_t数据类型表示的,在使用互斥变量之前,必须首先对它进行初始化,可以把它设置为常量PTHREAD_MUTEX_INITIALIZER(只适用于静态分配的互斥量),也可以调用pthread_mutex_init进行初始化,如果动态分配互斥量,在释放内存前需要调用pthread_mutex_destory.1234567#include&amp;lt;pthread">
-<meta property="og:updated_time" content="2017-03-15T05:49:39.843Z">
+<meta property="og:description" content="在unix环境下,有5种IO模型,前4种属于同步IO:
+
+阻塞式IO
+非阻塞式IO
+IO复用(select和poll,还有更好的epoll)
+信号驱动式IO(SIGIO)
+异步IO(aio_系列函数)
+
+阻塞式IO最流行的IO模型,默认情况下,所有套接字都是阻塞的,例如read,write,recvfrom.不再赘述(要注意不等于同步)
+非阻塞式IO进程把一个套接字设置成非阻塞是在通知内核:当所请">
+<meta property="og:updated_time" content="2017-05-16T11:13:54.174Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="互斥量和避免死锁">
-<meta name="twitter:description" content="互斥量互斥变量是用pthread_mutex_t数据类型表示的,在使用互斥变量之前,必须首先对它进行初始化,可以把它设置为常量PTHREAD_MUTEX_INITIALIZER(只适用于静态分配的互斥量),也可以调用pthread_mutex_init进行初始化,如果动态分配互斥量,在释放内存前需要调用pthread_mutex_destory.1234567#include&amp;lt;pthread">
+<meta name="twitter:title" content="5种IO模型总结">
+<meta name="twitter:description" content="在unix环境下,有5种IO模型,前4种属于同步IO:
+
+阻塞式IO
+非阻塞式IO
+IO复用(select和poll,还有更好的epoll)
+信号驱动式IO(SIGIO)
+异步IO(aio_系列函数)
+
+阻塞式IO最流行的IO模型,默认情况下,所有套接字都是阻塞的,例如read,write,recvfrom.不再赘述(要注意不等于同步)
+非阻塞式IO进程把一个套接字设置成非阻塞是在通知内核:当所请">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -145,28 +172,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-互斥量和避免死锁" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-5种IO模型总结-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      互斥量和避免死锁
+      5种IO模型总结
     </h1>
   
 
         
-        <a href="/2017/03/15/互斥量和避免死锁/" class="archive-article-date">
-  	<time datetime="2017-03-15T05:17:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-15</time>
+        <a href="/2017/05/16/5种IO模型总结-1/" class="archive-article-date">
+  	<time datetime="2017-05-16T10:20:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="互斥量"><a href="#互斥量" class="headerlink" title="互斥量"></a>互斥量</h2><p>互斥变量是用pthread_mutex_t数据类型表示的,在使用互斥变量之前,必须首先对它进行初始化,可以把它设置为常量PTHREAD_MUTEX_INITIALIZER(只适用于静态分配的互斥量),也可以调用pthread_mutex_init进行初始化,如果动态分配互斥量,在释放内存前需要调用pthread_mutex_destory.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pthread.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_init</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* <span class="keyword">restrict</span> mutex,</span></span></div><div class="line">			<span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span>* <span class="keyword">restrict</span> attr);</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_destory</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_lock</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_trylock</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>; <span class="comment">//不阻塞,只尝试加锁,若失败返回EBUSY.</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_unlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>;</div></pre></td></tr></table></figure><br><a id="more"></a></p>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>如果线程试图对同一个互斥量加锁两次,那么它自身就会陷入死锁状态,但是使用互斥量时,还有其他不太明显的方式也能产生死锁,例如,程序中使用一个以上的互斥量时,如果允许一个线程一直占用第一个互斥量,并且在试图锁住第二个互斥量时处于阻塞状态,但是拥有第二个互斥量的线程也在师徒锁住第一个互斥量.因为两个线程都在相互请求另一个线程拥有的资源,所以这两个线程都无法向前运行,于是就产生死锁.<br>解决办法就是控制互斥量加锁顺序,比如同时要对互斥量A和B加锁,如果所有线程总是在对B加锁前锁住A,那么使用这两个就不会产生死锁.可以参考下面的例子:<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div></pre></td><td class="code"><pre><div class="line">#include&lt;stdlib.h&gt;</div><div class="line">#include&lt;pthread.h&gt;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> NHASH=<span class="number">29</span>;</div><div class="line">#define HASH(id) (((unsigned long)id)%NHASH)</div><div class="line">pthread_mutex_t hashlock=PTHREAD_MUTEX_INITIALIZER;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> f_count;</div><div class="line">	pthread_mutex_t f_lock;</div><div class="line">	<span class="keyword">int</span> f_id;</div><div class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* f_next;<span class="comment">//protected by hashlock</span></div><div class="line">&#125;;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* fh[NHASH];</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* foo_alloc(<span class="keyword">int</span> id)&#123;</div><div class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* fp;</div><div class="line">	<span class="keyword">int</span> idx;</div><div class="line">	<span class="keyword">if</span>((fp=(<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>*)malloc(<span class="keyword">sizeof</span>(<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>)))!=NULL)&#123;</div><div class="line">		fp-&gt;f_count=<span class="number">1</span>;</div><div class="line">		fp-&gt;f_id=id;</div><div class="line">		<span class="keyword">if</span>(pthread_mutex_init(&amp;fp-&gt;f_lock,NULL)!=<span class="number">0</span>)&#123;</div><div class="line">			free(fp);</div><div class="line">			<span class="keyword">return</span> NULL;</div><div class="line">		&#125;</div><div class="line">		idx=HASH(id);</div><div class="line">		pthread_mutex_lock(&amp;hashlock);</div><div class="line">		fp-&gt;f_next=fh[idx];</div><div class="line">		fh[idx]=fp;</div><div class="line">		pthread_mutex_lock(&amp;fp-&gt;f_lock);</div><div class="line">		pthread_mutex_unlock(&amp;hashlock);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> fp;</div><div class="line">&#125;</div><div class="line">void foo_hold(<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* fp)&#123;</div><div class="line">	pthread_mutex_lock(&amp;fp-&gt;f_lock);</div><div class="line">	fp-&gt;f_count++;</div><div class="line">	pthread_mutex_unlock(&amp;fp-&gt;f_lock);</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* foo_find(<span class="keyword">int</span> id)&#123;</div><div class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* fp;</div><div class="line">	pthread_mutex_lock(&amp;hashlock);</div><div class="line">	<span class="keyword">for</span>(fp=fh[HASH(id)];fp!=NULL;fp=fp-&gt;f_next)&#123;</div><div class="line">		<span class="keyword">if</span>(fp-&gt;f_id==id)&#123;</div><div class="line">			fp-&gt;f_count++;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	pthread_mutex_unlock(&amp;hashlock);</div><div class="line">	<span class="keyword">return</span> fp;</div><div class="line">&#125;</div><div class="line"><span class="comment">//第一个版本的释放函数,严格按照每种互斥量的功能来锁住临界区,由于需要考虑互斥量使用顺序,会导致代码变得复杂.(foo_rele函数中先上锁在观察是否需要修改fh散列表,如果需要修改则必须先解锁在按顺序上锁)</span></div><div class="line">void foo_rele(<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* fp)&#123;</div><div class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* tfp;</div><div class="line">	<span class="keyword">int</span> idx;</div><div class="line">	pthread_mutex_lock(&amp;fp-&gt;f_lock);</div><div class="line">	<span class="keyword">if</span>(fp-&gt;f_count==<span class="number">1</span>)&#123;</div><div class="line">		pthread_mutex_unlock(&amp;fp-&gt;f_lock);</div><div class="line">		pthread_mutex_lock(&amp;hashlock);</div><div class="line">		pthread_mutex_lock(&amp;fp-&gt;f_lock);</div><div class="line">		<span class="keyword">if</span>(fp-&gt;f_count!=<span class="number">1</span>)&#123;</div><div class="line">			fp-&gt;f_count--;</div><div class="line">			pthread_mutex_unlock(&amp;fp-&gt;f_lock);</div><div class="line">			pthread_mutex_unlock(&amp;hashlock);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			idx=HASH(fp-&gt;f_id);</div><div class="line">			tfp=fh[idx];</div><div class="line">			<span class="keyword">if</span>(tfp==fp)&#123;</div><div class="line">				fh[idx]=fp-&gt;f_next;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="keyword">while</span>(tfp-&gt;f_next!=fp)</div><div class="line">					tfp=tfp-&gt;f_next;</div><div class="line">				tfp-&gt;f_next=fp-&gt;f_next;</div><div class="line">				&#125;</div><div class="line">		&#125;</div><div class="line">		pthread_mutex_unlock(&amp;fp-&gt;f_lock);</div><div class="line">		pthread_mutex_unlock(&amp;hashlock);</div><div class="line">		pthread_mutex_destory(&amp;fp-&gt;f_lock);</div><div class="line">		free(fp);</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		fp-&gt;f_count--;</div><div class="line">		pthread_mutex_unlock(&amp;fp-&gt;f_lock);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//第二个版本的释放函数.直接用hashlock来锁住对fp的操作,避免了两个互斥量使用的顺序问题.简化了代码.但是线程阻塞的概率会更大,因为hashlock使用的范围更大.需要权衡两者的使用.</span></div><div class="line">void foo_rele2(<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* fp)&#123;</div><div class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">foo</span></span>* tfp;</div><div class="line">	<span class="keyword">int</span> idx;</div><div class="line">	pthread_mutex_lock(&amp;hashlock);</div><div class="line">	<span class="keyword">if</span>(--fp-&gt;f_count==<span class="number">0</span>)&#123;</div><div class="line">		idx=HASH(fp-&gt;f_id);</div><div class="line">		tfp=fh[idx];</div><div class="line">		<span class="keyword">if</span>(tfp==fp)&#123;</div><div class="line">			fh[idx]=fp-&gt;f_next;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="keyword">while</span>(tfp-&gt;f_next!=fp)</div><div class="line">				tfp=tfp-&gt;f_next;</div><div class="line">			tfp-&gt;f_next=fp-&gt;f_next;</div><div class="line">		&#125;</div><div class="line">		pthread_mutex_unlock(&amp;hashlock);</div><div class="line">		pthread_mutex_destory(&amp;fp-&gt;f_lock);</div><div class="line">		free(fp);</div><div class="line">	&#125;<span class="keyword">else</span></div><div class="line">		pthread_mutex_unlock(&amp;hashlock);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <p>在unix环境下,有5种IO模型,前4种属于同步IO:</p>
+<ul>
+<li>阻塞式IO</li>
+<li>非阻塞式IO</li>
+<li>IO复用(select和poll,还有更好的epoll)</li>
+<li>信号驱动式IO(SIGIO)</li>
+<li>异步IO(aio_系列函数)</li>
+</ul>
+<h2 id="阻塞式IO"><a href="#阻塞式IO" class="headerlink" title="阻塞式IO"></a>阻塞式IO</h2><p>最流行的IO模型,默认情况下,所有套接字都是阻塞的,例如read,write,recvfrom.不再赘述(要注意不等于同步)</p>
+<h2 id="非阻塞式IO"><a href="#非阻塞式IO" class="headerlink" title="非阻塞式IO"></a>非阻塞式IO</h2><p>进程把一个套接字设置成非阻塞是在通知内核:当所请求的IO操作非得把本进程投入睡眠才能完成时,不要把本进程投入睡眠,而是返回一个错误.<br>例如调用recvfrom时,如果内核空间无数据报准备好,则立即返回EWOULDBLOCK错误.如果有的话就会阻塞一直到IO完成.(按理论来说这种也属于同步IO)当一个应用进程对一个非阻塞描述符循环调用recvfrom时,称之为轮询,缺点式耗费cpu.</p>
+<h2 id="IO复用模型"><a href="#IO复用模型" class="headerlink" title="IO复用模型"></a>IO复用模型</h2><p>调用select,系统阻塞在这个系统调用上,而不是真正的IO系统调用上,例如进程调用select,等待任一套接字变可读,一旦返回说明某个套接字的状态发生了变化,之后继续处理.</p>
+<h2 id="信号驱动式"><a href="#信号驱动式" class="headerlink" title="信号驱动式"></a>信号驱动式</h2><p>即让内核在描述符就绪时发送信号SIGIO通知进程,可以通过开启套接字的信号驱动式IO功能,通过sigaction系统调用安装一个信号处理函数.<br>这种优势在于等待数据报到达期间进程不被阻塞.</p>
+<h2 id="异步IO模型"><a href="#异步IO模型" class="headerlink" title="异步IO模型"></a>异步IO模型</h2><p>告知内核某个操作,并让内核在整个操作完成后再通知进程.</p>
+<p>总结:前四种IO的第一步各不相同,但第二部都一样,都会阻塞等待IO完成.但第五种不会阻塞.</p>
 
       
 
@@ -201,11 +240,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">apue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">unp</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">unix</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
         		</li>
       		
 		</ul>
@@ -261,7 +304,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/15/互斥量和避免死锁/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/16/5种IO模型总结-1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -275,18 +318,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/03/24/检查带环链表入口问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          检查带环链表入口问题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/04/fork-和vfork-的总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">fork()和vfork()的总结</div>
+    <a href="/2017/05/16/5种IO模型总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">5种IO模型总结</div>
       <i class="icon-circle-right"></i>
     </a>
   
