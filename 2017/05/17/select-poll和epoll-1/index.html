@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/17/select-poll和epoll-1/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
 <meta property="og:description" content="selectselect函数允许进程指示内核等待多个事件中的任何一个发生,只有在一个或多个事件(描述符状态变化)发生或者阻塞时间超时会返回.select的接口如下:">
-<meta property="og:updated_time" content="2017-05-18T10:58:42.069Z">
+<meta property="og:updated_time" content="2017-05-18T11:26:02.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="select,poll和epoll">
 <meta name="twitter:description" content="selectselect函数允许进程指示内核等待多个事件中的任何一个发生,只有在一个或多个事件(描述符状态变化)发生或者阻塞时间超时会返回.select的接口如下:">
@@ -234,6 +234,7 @@ int FD_ISSET(int fd,FD_SET \*fdset); //测试是否有指定位描述符
 </tr>
 </tbody>
 </table>
+<p>说明:关闭套接字的读一半后,执行读操作会立即返回EOF,所以也算作可读状态,关闭写一半,执行写操作会立即返回SIGPIPE信号,算作可写状态.</p>
 <h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h2><p>poll功能和select相似,在处理流设备时,能提供额外信息.<br>poll函数接口原型:</p>
 <pre><code>#include&lt;poll.h&gt;
 int poll(struct pollfd *fdarray,unsigned long nfds,int timeout);
@@ -600,6 +601,10 @@ void error_handling(const char* message){
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">apue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">unp</a>
               </li>
              
@@ -609,10 +614,6 @@ void error_handling(const char* message){
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">socket</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">apue</a>
               </li>
              
               <li class="article-tag-list-item">
