@@ -146,6 +146,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-创建博客网站项目启动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/25/创建博客网站项目启动/">创建博客网站项目启动</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/25/创建博客网站项目启动/" class="archive-article-date">
+  	<time datetime="2017-06-25T10:43:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题外"><a href="#题外" class="headerlink" title="题外"></a>题外</h2>
+        
+          <a class="article-more-a" href="/2017/06/25/创建博客网站项目启动/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">web 开发</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Flask框架</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/25/创建博客网站项目启动/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-select-poll和epoll-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -240,15 +316,10 @@
 <li>非阻塞式IO</li>
 <li>IO复用(select和poll,还有更好的epoll)</li>
 <li>信号驱动式IO(SIGIO)</li>
-<li>异步IO(aio_系列函数)</li>
-</ul>
-<h2 id="阻塞式IO"><a href="#阻塞式IO" class="headerlink" title="阻塞式IO"></a>阻塞式IO</h2><p>最流行的IO模型,默认情况下,所有套接字都是阻塞的,例如read,write,recvfrom.不再赘述(要注意不等于同步)</p>
-<h2 id="非阻塞式IO"><a href="#非阻塞式IO" class="headerlink" title="非阻塞式IO"></a>非阻塞式IO</h2><p>进程把一个套接字设置成非阻塞是在通知内核:当所请求的IO操作非得把本进程投入睡眠才能完成时,不要把本进程投入睡眠,而是返回一个错误.<br>例如调用recvfrom时,如果内核空间无数据报准备好,则立即返回EWOULDBLOCK错误.如果有的话就会阻塞一直到IO完成.(按理论来说这种也属于同步IO)当一个应用进程对一个非阻塞描述符循环调用recvfrom时,称之为轮询,缺点式耗费cpu.</p>
-<h2 id="IO复用模型"><a href="#IO复用模型" class="headerlink" title="IO复用模型"></a>IO复用模型</h2><p>调用select,系统阻塞在这个系统调用上,而不是真正的IO系统调用上,例如进程调用select,等待任一套接字变可读,一旦返回说明某个套接字的状态发生了变化,之后继续处理.</p>
-<h2 id="信号驱动式"><a href="#信号驱动式" class="headerlink" title="信号驱动式"></a>信号驱动式</h2><p>即让内核在描述符就绪时发送信号SIGIO通知进程,可以通过开启套接字的信号驱动式IO功能,通过sigaction系统调用安装一个信号处理函数.<br>这种优势在于等待数据报到达期间进程不被阻塞.</p>
-<h2 id="异步IO模型"><a href="#异步IO模型" class="headerlink" title="异步IO模型"></a>异步IO模型</h2><p>告知内核某个操作,并让内核在整个操作完成后再通知进程.</p>
-<p>总结:前四种IO的第一步各不相同,但第二部都一样,都会阻塞等待IO完成.但第五种不会阻塞.</p>
-
+<li>异步IO(aio_系列函数)
+        
+          <a class="article-more-a" href="/2017/05/16/5种IO模型总结-1/#more">more >></a>
+        
       
 
       
@@ -805,90 +876,10 @@
 
 
   
-    <article id="post-利用hexo和github-page-搭建个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/利用hexo和github-page-搭建个人博客/">利用hexo和githubpage搭建个人博客</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/利用hexo和github-page-搭建个人博客/" class="archive-article-date">
-  	<time datetime="2017-02-26T13:03:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  最近博主花了几天的时间终于搭建好了自己的小窝,也是在入坑爬坑的过程弄出来了,参照网上的一些资料教程,自己总结的一套方法如下:</p>
-<h2 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h2><p>  Node.js是一个开放源代码、跨平台的、可用于服务器端和网络应用的运行环境，该应用由 C++ 语言写成，在 Node.js 运行时运行。Node.js 提供事件驱动和非阻塞 I/O API，可优化应用程序的吞吐量和规模。这些技术通常被用于实时应用程序。并且它是采用 Google 的 V8 引擎来执行代码，它的大部分基本模块都是用 JavaScript 写成的，包含有一系列内置模块，使得程序可以作为独立服务器运行，从而脱离 Apache HTTP Server 或 IIS 运行。<br>而 npm 也即 Node包管理器（Node Package Manager），它是一个以 Javascript 编写的软件包管理系统，默认环境为 Node.js 。<br>
-        
-          <a class="article-more-a" href="/2017/02/26/利用hexo和github-page-搭建个人博客/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/个人日志/" class="article-tag-list-link color5">个人日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/利用hexo和github-page-搭建个人博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -978,10 +969,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">apue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">unp</a>
               </li>
              
@@ -994,19 +981,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">apue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">sql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color2">web 开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Flask框架</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1019,6 +1014,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
             
             <div class="clearfix"></div>
