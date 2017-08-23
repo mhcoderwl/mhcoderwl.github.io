@@ -6,17 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: unp | mhcoderwl的博客</title>
+  <title>自制radix_tree | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="c/c++">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mhcoderwl的博客">
-<meta property="og:url" content="http://yoursite.com/tags/unp/index.html">
+  <meta name="description" content="介绍前缀树radix tree,中文基数树,是用来解决hash冲突和hash表的设计,前缀树是一种有序树,用于保存关联数组,键一般都为字符串.每个节点的所有子孙都有相同的前缀.最后所有的叶子节点保存了要存储的元素.前缀树经常用于搜索提示,比如输入一个网址,可以自动搜索出可能的选择.前缀树的问题在于可能过于稀疏,空间浪费严重.比如几个字符串有相同某段前缀,但是如果按每个字符来分的话,会出现很多没有用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自制radix_tree">
+<meta property="og:url" content="http://yoursite.com/2017/08/21/自制radix-tree/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="c/c++">
+<meta property="og:description" content="介绍前缀树radix tree,中文基数树,是用来解决hash冲突和hash表的设计,前缀树是一种有序树,用于保存关联数组,键一般都为字符串.每个节点的所有子孙都有相同的前缀.最后所有的叶子节点保存了要存储的元素.前缀树经常用于搜索提示,比如输入一个网址,可以自动搜索出可能的选择.前缀树的问题在于可能过于稀疏,空间浪费严重.比如几个字符串有相同某段前缀,但是如果按每个字符来分的话,会出现很多没有用">
+<meta property="og:updated_time" content="2017-08-22T05:53:41.977Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mhcoderwl的博客">
-<meta name="twitter:description" content="c/c++">
+<meta name="twitter:title" content="自制radix_tree">
+<meta name="twitter:description" content="介绍前缀树radix tree,中文基数树,是用来解决hash冲突和hash表的设计,前缀树是一种有序树,用于保存关联数组,键一般都为字符串.每个节点的所有子孙都有相同的前缀.最后所有的叶子节点保存了要存储的元素.前缀树经常用于搜索提示,比如输入一个网址,可以自动搜索出可能的选择.前缀树的问题在于可能过于稀疏,空间浪费严重.比如几个字符串有相同某段前缀,但是如果按每个字符来分的话,会出现很多没有用">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -144,110 +145,163 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-自制radix-tree" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/17/select-poll和epoll-1/" class="archive-article-date">
-  	<time datetime="2017-05-17T02:18:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/17/select-poll和epoll-1/">select,poll和epoll</a>
+    <h1 class="article-title" itemprop="name">
+      自制radix_tree
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/08/21/自制radix-tree/" class="archive-article-date">
+  	<time datetime="2017-08-21T07:21:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="前缀树"><a href="#前缀树" class="headerlink" title="前缀树"></a>前缀树</h2><p>radix tree,中文基数树,是用来解决hash冲突和hash表的设计,前缀树是一种有序树,<br>用于保存关联数组,键一般都为字符串.每个节点的所有子孙都有相同的前缀.最后所有的叶子节点保存了要存储的元素.<br>前缀树经常用于搜索提示,比如输入一个网址,可以自动搜索出可能的选择.前缀树的问题在于可能过于稀疏,空间浪费严重.比如几个字符串有相同某段前缀,但是如果按每个字符来分的话,会出现很多没有用的节点.</p>
+<a id="more"></a>
+<h2 id="前缀压缩树"><a href="#前缀压缩树" class="headerlink" title="前缀压缩树"></a>前缀压缩树</h2><p>为了解决问题,出现了压缩前缀树,对于基数树的每个节点,如果该节点是唯一的儿子的话,就和父节点合并.<br>下面就来自己实现一个基数树容器.</p>
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>首先,是一颗树,就必须有节点类的定义,radix_tree_node,其次,既然是容器,我们需要一个迭代器的类,最后是radix_tree本身.</p>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>第一,节点要存什么,节点要存的信息有键和要存的元素,我们可以用一个pair来实现,其次,节点要有子节点,由于子节点数量不确定,我们可以用map来存,如果用线性表来存访问速度就会是O(n).为了方便还存了父节点和键.<br>声明代码如下:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> radix_tree_node &#123;</div><div class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> radix_tree&lt;K, T&gt;;</div><div class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> radix_tree_it&lt;K, T&gt;;</div><div class="line"></div><div class="line">    <span class="keyword">typedef</span> <span class="built_in">std</span>::pair&lt;<span class="keyword">const</span> K, T&gt; value_type;</div><div class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="built_in">std</span>::<span class="built_in">map</span>&lt;K, radix_tree_node&lt;K, T&gt;* &gt;::iterator it_child;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line"><span class="comment">//构造和析构</span></div><div class="line">    radix_tree_node() : m_children(), m_parent(<span class="literal">NULL</span>), m_value(<span class="literal">NULL</span>), m_depth(<span class="number">0</span>), m_is_leaf(<span class="literal">false</span>), m_key() &#123; &#125;</div><div class="line">    radix_tree_node(<span class="keyword">const</span> value_type &amp;val);</div><div class="line"></div><div class="line">    ~radix_tree_node();</div><div class="line"><span class="comment">//类成员</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">map</span>&lt;K, radix_tree_node&lt;K, T&gt;*&gt; m_children;</div><div class="line">    radix_tree_node&lt;K, T&gt; *m_parent;</div><div class="line">    value_type *m_value;</div><div class="line">    <span class="keyword">int</span> m_depth;</div><div class="line">    <span class="keyword">bool</span> m_is_leaf;</div><div class="line">    K m_key;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="重载析构"><a href="#重载析构" class="headerlink" title="重载析构"></a>重载析构</h3><p>在初始化对象的时候，根据参数的不同，使用不同的构造函数，这里我们写了重载构造函数和删除对象时的析构函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line">radix_tree_node&lt;K, T&gt;::radix_tree_node(<span class="keyword">const</span> value_type &amp;val) :</div><div class="line">    m_children(),</div><div class="line">    m_parent(<span class="literal">NULL</span>),</div><div class="line">    m_value(<span class="literal">NULL</span>),</div><div class="line">    m_depth(<span class="number">0</span>),</div><div class="line">    m_is_leaf(<span class="literal">false</span>),</div><div class="line">    m_key()</div><div class="line">&#123;</div><div class="line">    m_value = <span class="keyword">new</span> value_type(val);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line">radix_tree_node&lt;K, T&gt;::~radix_tree_node()</div><div class="line">&#123;</div><div class="line">    it_child it;</div><div class="line">    <span class="keyword">for</span> (it = m_children.begin(); it != m_children.end(); ++it) &#123;</div><div class="line">        <span class="keyword">delete</span> it-&gt;second;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">delete</span> m_value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要注意释放申请的内存</p>
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>我们要定义树的迭代器,首先迭代器能访问树节点上保存的信息(键值),不能访问其他信息,自己定义的迭代器最好继承标准库迭代器std::iterator:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line"><span class="comment">//要继承的iterator实例化参数要加std::forward_iterator_tag,因为树是向前迭代器</span></div><div class="line"><span class="keyword">class</span> radix_tree_it : <span class="keyword">public</span> <span class="built_in">std</span>::iterator&lt;<span class="built_in">std</span>::forward_iterator_tag, <span class="built_in">std</span>::pair&lt;K, T&gt; &gt; &#123;</div><div class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> radix_tree&lt;K, T&gt;;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    radix_tree_it() : m_pointee(<span class="number">0</span>) &#123; &#125;</div><div class="line">    radix_tree_it(<span class="keyword">const</span> radix_tree_it&amp; r) : m_pointee(r.m_pointee) &#123; &#125;</div><div class="line">    radix_tree_it&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> radix_tree_it&amp; r) &#123; m_pointee = r.m_pointee; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</div><div class="line">    ~radix_tree_it() &#123; &#125;</div><div class="line"></div><div class="line">    <span class="built_in">std</span>::pair&lt;<span class="keyword">const</span> K, T&gt;&amp; <span class="keyword">operator</span>*  () <span class="keyword">const</span>;</div><div class="line">    <span class="built_in">std</span>::pair&lt;<span class="keyword">const</span> K, T&gt;* <span class="keyword">operator</span>-&gt; () <span class="keyword">const</span>;</div><div class="line">    <span class="keyword">const</span> radix_tree_it&lt;K, T&gt;&amp; <span class="keyword">operator</span>++ ();</div><div class="line">    radix_tree_it&lt;K, T&gt; <span class="keyword">operator</span>++ (<span class="keyword">int</span>);</div><div class="line">    <span class="comment">// const radix_tree_it&lt;K, T&gt;&amp; operator-- ();</span></div><div class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>!= (<span class="keyword">const</span> radix_tree_it&lt;K, T&gt; &amp;lhs) <span class="keyword">const</span>;</div><div class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>== (<span class="keyword">const</span> radix_tree_it&lt;K, T&gt; &amp;lhs) <span class="keyword">const</span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    radix_tree_node&lt;K, T&gt; *m_pointee;</div><div class="line">    radix_tree_it(radix_tree_node&lt;K, T&gt; *p) : m_pointee(p) &#123; &#125;</div><div class="line"></div><div class="line">    radix_tree_node&lt;K, T&gt;* increment(radix_tree_node&lt;K, T&gt;* node) <span class="keyword">const</span>;</div><div class="line">    radix_tree_node&lt;K, T&gt;* descend(radix_tree_node&lt;K, T&gt;* node) <span class="keyword">const</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>我们重载了一些操作符,接下来看如何实现</p>
+<h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line"><span class="built_in">std</span>::pair&lt;<span class="keyword">const</span> K, T&gt;&amp; radix_tree_it&lt;K, T&gt;::<span class="keyword">operator</span>* () <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> *m_pointee-&gt;m_value;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line"><span class="built_in">std</span>::pair&lt;<span class="keyword">const</span> K, T&gt;* radix_tree_it&lt;K, T&gt;::<span class="keyword">operator</span>-&gt; () <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> m_pointee-&gt;m_value;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> radix_tree_it&lt;K, T&gt;::<span class="keyword">operator</span>!= (<span class="keyword">const</span> radix_tree_it&lt;K, T&gt; &amp;lhs) <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> m_pointee != lhs.m_pointee;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> radix_tree_it&lt;K, T&gt;::<span class="keyword">operator</span>== (<span class="keyword">const</span> radix_tree_it&lt;K, T&gt; &amp;lhs) <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> m_pointee == lhs.m_pointee;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">const</span> radix_tree_it&lt;K, T&gt;&amp; radix_tree_it&lt;K, T&gt;::<span class="keyword">operator</span>++ ()</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (m_pointee != <span class="literal">NULL</span>)</div><div class="line">        m_pointee = increment(m_pointee);</div><div class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> T&gt;</div><div class="line">radix_tree_it&lt;K, T&gt; radix_tree_it&lt;K, T&gt;::<span class="keyword">operator</span>++ (<span class="keyword">int</span>)</div><div class="line">&#123;</div><div class="line">    radix_tree_it&lt;K, T&gt; copy(*<span class="keyword">this</span>);</div><div class="line">    ++(*<span class="keyword">this</span>);</div><div class="line">    <span class="keyword">return</span> copy;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="实现increment和descend"><a href="#实现increment和descend" class="headerlink" title="实现increment和descend"></a>实现increment和descend</h3><p>关键在于如何遍历树的叶子节点,从一个叶子节点要寻找的下一个节点要么是自己的下一个兄弟节点,需要通过父节点来访问到,要么自己已经是最后一个兄弟节点,这时候需要找父节点的下一个兄弟节点,再往下找到叶子节点</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">template &lt;typename K, typename T&gt;</div><div class="line">radix_tree_node&lt;K, T&gt;* radix_tree_it&lt;K, T&gt;::increment(radix_tree_node&lt;K, T&gt;* node) <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">    radix_tree_node&lt;K, T&gt;* <span class="keyword">parent</span> = node-&gt;m_parent;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">parent</span> == <span class="keyword">NULL</span>)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">NULL</span>;</div><div class="line"></div><div class="line">    typename radix_tree_node&lt;K, T&gt;::it_child it = <span class="keyword">parent</span>-&gt;m_children.find(node-&gt;m_key);</div><div class="line">    assert(it != <span class="keyword">parent</span>-&gt;m_children.end());</div><div class="line">    ++it;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (it == <span class="keyword">parent</span>-&gt;m_children.end())</div><div class="line">        <span class="keyword">return</span> increment(<span class="keyword">parent</span>);</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> descend(it-&gt;second);</div><div class="line">&#125;</div><div class="line"></div><div class="line">template &lt;typename K, typename T&gt;</div><div class="line">radix_tree_node&lt;K, T&gt;* radix_tree_it&lt;K, T&gt;::descend(radix_tree_node&lt;K, T&gt;* node) <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (node-&gt;m_is_leaf)</div><div class="line">        <span class="keyword">return</span> node;</div><div class="line"></div><div class="line">    typename radix_tree_node&lt;K, T&gt;::it_child it = node-&gt;m_children.begin();</div><div class="line"></div><div class="line">    assert(it != node-&gt;m_children.end());</div><div class="line"></div><div class="line">    <span class="keyword">return</span> descend(it-&gt;second);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来要实现radix_tree,也是核心部分.</p>
+<h2 id="radix-tree"><a href="#radix-tree" class="headerlink" title="radix_tree"></a>radix_tree</h2>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">unp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">unix</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/21/自制radix-tree/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/16/5种IO模型总结-1/" class="archive-article-date">
-  	<time datetime="2017-05-16T10:20:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/16/5种IO模型总结-1/">5种IO模型总结</a>
-    </h1>
+  
+    <a href="/2017/06/25/创建博客网站项目启动/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">创建博客网站项目启动</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">unp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">unix</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -270,9 +324,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
