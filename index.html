@@ -146,6 +146,132 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-高性能服务器框架" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/27/高性能服务器框架/">高性能服务器框架</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/27/高性能服务器框架/" class="archive-article-date">
+  	<time datetime="2017-08-27T06:59:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="两种高效的事件处理方式"><a href="#两种高效的事件处理方式" class="headerlink" title="两种高效的事件处理方式"></a>两种高效的事件处理方式</h2><h3 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h3><p>Reactor模式要求主线程只负责监听文件描述符的是否有事件发生,有的话就通知工作线程去处理,主线程本身不做任何实质性工作,接受新连接(accept),处理客户请求均在工作线程中完成<br>使用同步I/O模型的话流程如下:</p>
+<ol>
+<li>主线程往epoll内核事件表中注册socket上的读就绪事件(这步先不用注册写)</li>
+<li>调用epoll_wait等待socket上有数据可读.</li>
+<li>当socket上有数据可读时,epoll_wait通知主线程,主线程则将socket可读事件放入请求队列</li>
+<li>线程池中某个睡眠状态的线程被唤醒,从socket读取数据,并处理客户请求,然后往epoll内核事件表中注册socket上的写就绪事件.</li>
+<li>主线程调用epoll_wait等待socket可写</li>
+<li>当socket可写时,epoll_wait通知主线程,主线程则将socket可写事件放入请求队列</li>
+<li>线程池中某个睡眠状态的线程被唤醒,往socket写入服务器处理客户请求的结果</li>
+</ol>
+<p>注意一点,读写用两个线程分开执行,但线程不区分只读线程和只写线程.</p>
+<p><img src="http://img.blog.csdn.net/20140224092317468?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Reactor模式"></p>
+<h3 id="Proactor模式"><a href="#Proactor模式" class="headerlink" title="Proactor模式"></a>Proactor模式</h3><p>Proactor模式相反,要求主线程处理所有的I/O操作,工作线程仅仅负责业务逻辑.<br>使用异步I/O模型实现的Proactor模式工作流程:</p>
+<ol>
+<li>主线程调用aio_read函数想内核注册socket上的读完成事件,并告诉内核用户读缓冲区的位置(这是为了能让读到的内容复制到用户缓冲区,如何实现),以及读操作完成时如何通知应用程序(一种方法用signal)</li>
+<li>主线程继续处理其他逻辑</li>
+<li>读入用户缓冲区后,内核将向应用程序发送一个信号,以通知应用程序数据可用.</li>
+<li>收到信号,应用程序预先定义好的信号处理函数选择一个工作线程来处理客户请求,工作线程处理完客户请求后,调用aio_write(异步)函数向内核注册写完成事件,并告诉内核用户写缓冲区的位置,以及写操作完成时如何通知应用程序.(信号)</li>
+<li>主线程继续处理其他逻辑</li>
+<li>当用户缓冲区的数据被写入socket之后,内核将向应用程序,发送一个信号,以通知应用程序数据已经发送完毕.</li>
+<li>应用程序预先定义好的信号处理函数选择一个工作线程来做善后处理,比如决定是否关闭socket.</li>
+</ol>
+<p><img src="http://img.blog.csdn.net/20140224092338234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Proactor模式"></p>
+<h3 id="同步I-O实现Proactor模式"><a href="#同步I-O实现Proactor模式" class="headerlink" title="同步I/O实现Proactor模式"></a>同步I/O实现Proactor模式</h3><p>主线程执行数据读写操作,主线程向工作线程通知这一”完成事件”.那么从工作线程的角度来看,他们就直接获得了数据读写的结果,接下来要做的只是对读写的结果进行逻辑处理.<br>与Reactor唯一的不同就是主线程读完socketfd中的内容,打包成请求对象入请求队列,然后唤醒工作线程来处理,然后向epoll中注册写就绪事件,接着主线程执行写操作.</p>
+<p><img src="http://img.blog.csdn.net/20140224092409312?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="同步IO实现Proactor"></p>
+<h2 id="两种高效的并发模式"><a href="#两种高效的并发模式" class="headerlink" title="两种高效的并发模式"></a>两种高效的并发模式</h2><p>并发模式主要用来解决I/O密集型的情况,如果是计算密集型,用多线程反而由于任务切换过频繁导致效率降低.I/O操作的速度没有CPU的计算速度快,所以阻塞在I/O上会浪费CPU计算时间.如果一个线程阻塞在I/O,那么由操作系统调度该线程CPU占用率减小,给其他线程提高CPU占用率.</p>
+<h3 id="半同步-半异步模式"><a href="#半同步-半异步模式" class="headerlink" title="半同步/半异步模式"></a>半同步/半异步模式</h3><p>在这种模式中,同步线程主要用来处理客户逻辑,相当于逻辑单元,异步线程用来处理IO事件,相当于IO处理单元.异步线程(主线程)监听到请求,封装成请求对象插入请求队列,请求队列将通知同步工作线程来处理,同步工作线程不会被中断.</p>
+<h3 id="半同步半反应堆模式"><a href="#半同步半反应堆模式" class="headerlink" title="半同步半反应堆模式"></a>半同步半反应堆模式</h3><p>特点:</p>
+<ol>
+<li>异步线程只有一个，由主线程来充当，负责监听所有socket上的事件。</li>
+<li>如果有新的连接请求，主线程就接受之，以得到新的连接socket</li>
+<li>在epoll内核事件表中注册该socket上的读写事件</li>
+<li>如果连接socket上有读写事件发生，即有新的客户请求到来或有数据要发送到客户端，主线程就将该连接socket插入请求队列。</li>
+<li>所有工作线程都睡眠在请求队列上，当有任务到来时，它们将通过竞争获得任务的接管权。</li>
+</ol>
+<p>缺点:</p>
+<ol>
+<li>主线程和工作线程共享同一个请求队列,所以主线程在插入请求对象时,会加锁保护队列,使得工作线程无法读取请求对象.浪费CPU时间.</li>
+<li>工作线程同一时间只能处理一个客户请求.</li>
+</ol>
+<p>改进:<br>主线程监听是否有新的连接,有的话就分配给工作线程,工作线程调用epoll_wait,将得到的新连接的事件添加到自己的epoll内核注册表中.</p>
+<h3 id="领导者-追随者模式"><a href="#领导者-追随者模式" class="headerlink" title="领导者/追随者模式"></a>领导者/追随者模式</h3><p>领导者线程用来监听IO事件,如果检测到事件,首先推举一个新的追随者线程为领导者线程,然后去处理事件.<br>领导者追随者模式包含如下几个组件:句柄集,线程集,事件处理器,和具体的事件处理器.</p>
+<p><img src="http://img.blog.csdn.net/20140224092529312?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="领导者/追随者模式"></p>
+<ul>
+<li>句柄集:用来表示IO资源,也就是文件描述符的集合</li>
+<li>线程集:所有线程的管理者,其中的线程处于三种状态之一,leader,follower,processing.</li>
+<li>事件处理器:一系列的回调函数,这些回调函数用来处理业务逻辑.用之前需要绑定一个文件描述符,这样有事件发生,就执行该事件处理器的回调函数.</li>
+<li>具体的事件处理器:事件处理的派生类,重载父类的回调函数,用来处理特定的任务.</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20140224092601953?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="流程"></p>
+<p>接下来说明对于http的报文如何解析.</p>
+<h2 id="有限状态机"><a href="#有限状态机" class="headerlink" title="有限状态机"></a>有限状态机</h2><p>有限状态机就是每次循环执行和状态相对应的逻辑,然后转移到下一种状态,<br>比如在http报文分析中,我们将主状态分为读请求行和读头部字段,从状态分为每行的读取状态:读完一行,行不完整,行有错误.然后每次循环读一行,对主状态switch,先解析请求行,然后转移主状态,再次循环执行解析头部字段.</p>
+<h2 id="提高性能的其他建议"><a href="#提高性能的其他建议" class="headerlink" title="提高性能的其他建议"></a>提高性能的其他建议</h2><ol>
+<li>池化思想:不要动态分配线程进程,用事先分配好的线程池或进程池,减小系统调用开销</li>
+<li>数据复制:避免不必要的数据复制,特别在用户空间和内核空间之间.</li>
+<li>上下文切换和锁:不要使用过多线程,减小上下文切换的开销.不要频繁使用锁,会降低线程的并发性.</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">服务器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/27/高性能服务器框架/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-自制radix-tree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -786,85 +912,6 @@
 
 
   
-    <article id="post-typedef总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/02/typedef总结/">typedef总结</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/02/typedef总结/" class="archive-article-date">
-  	<time datetime="2017-03-02T02:23:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在apue上看到如下定义:<br><figure class="highlight cpp"><figcaption><span>4.22.c</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="keyword">int</span> <span class="title">Myfunc</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*,<span class="keyword">const</span> <span class="keyword">struct</span> stat*,<span class="keyword">int</span>)</span></span>;</div><div class="line"><span class="keyword">static</span> Myfunc myfunc;</div></pre></td></tr></table></figure><br>
-        
-          <a class="article-more-a" href="/2017/03/02/typedef总结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">apue</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">c/c++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/02/typedef总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -958,6 +1005,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">apue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">unp</a>
               </li>
              
@@ -970,15 +1021,23 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">apue</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1006,15 +1065,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
               </li>
              
               <li class="article-tag-list-item">
