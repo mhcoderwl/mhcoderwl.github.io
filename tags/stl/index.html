@@ -6,18 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>fork()和vfork()的总结 | mhcoderwl的博客</title>
+  <title>Tag: stl | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="fork()函数可以创建一个新的进程,被称为子进程,子进程获得父进程数据空间,堆和栈的副本.父子进程不共享这些存储空间部分,共享正文段.  看下面一个实例:">
-<meta property="og:type" content="article">
-<meta property="og:title" content="fork()和vfork()的总结">
-<meta property="og:url" content="http://yoursite.com/2017/03/04/fork-和vfork-的总结/index.html">
+  <meta name="description" content="c/c++">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mhcoderwl的博客">
+<meta property="og:url" content="http://yoursite.com/tags/stl/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="fork()函数可以创建一个新的进程,被称为子进程,子进程获得父进程数据空间,堆和栈的副本.父子进程不共享这些存储空间部分,共享正文段.  看下面一个实例:">
-<meta property="og:updated_time" content="2017-03-04T08:22:34.110Z">
+<meta property="og:description" content="c/c++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fork()和vfork()的总结">
-<meta name="twitter:description" content="fork()函数可以创建一个新的进程,被称为子进程,子进程获得父进程数据空间,堆和栈的副本.父子进程不共享这些存储空间部分,共享正文段.  看下面一个实例:">
+<meta name="twitter:title" content="mhcoderwl的博客">
+<meta name="twitter:description" content="c/c++">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -145,172 +144,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-fork-和vfork-的总结" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      fork()和vfork()的总结
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/09/22/shared-ptr和weak-ptr/" class="archive-article-date">
+  	<time datetime="2017-09-22T00:53:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-22</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/22/shared-ptr和weak-ptr/">shared_ptr和weak_ptr</a>
     </h1>
   
 
-        
-        <a href="/2017/03/04/fork-和vfork-的总结/" class="archive-article-date">
-  	<time datetime="2017-03-04T07:04:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  fork()函数可以创建一个新的进程,被称为子进程,子进程获得父进程数据空间,堆和栈的副本.父子进程不共享这些存储空间部分,共享正文段.<br>  看下面一个实例:<br><a id="more"></a><br><figure class="highlight cpp"><figcaption><span>8.3.c/*打印父子进程的输出*/</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></div><div class="line"> <span class="keyword">int</span> globvar= <span class="number">6</span>;</div><div class="line"><span class="keyword">char</span> buf[] = <span class="string">"a write to stdout\n"</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> main()&#123;</div><div class="line">	<span class="keyword">int</span> var;</div><div class="line">	<span class="keyword">pid_t</span> pid;</div><div class="line">	var=<span class="number">88</span>;</div><div class="line">	<span class="keyword">if</span>(write(STDOUT_FILENO,buf,<span class="keyword">sizeof</span>(buf)<span class="number">-1</span>)!=<span class="keyword">sizeof</span>(buf)<span class="number">-1</span>)</div><div class="line">		err_sys(<span class="string">"write error"</span>);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"before fork\n"</span>);</div><div class="line">	<span class="keyword">if</span>((pid=fork())&lt;<span class="number">0</span>)</div><div class="line">	err_sys(<span class="string">"fork error"</span>);</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(pid==<span class="number">0</span>)&#123;</div><div class="line">		globvar++;</div><div class="line">		var++;</div><div class="line">	&#125;<span class="keyword">else</span></div><div class="line">		sleep(<span class="number">2</span>);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"pid=%ld,glob=%d,var=%d\n"</span>,(<span class="keyword">long</span>)getpid(),globvar,var);</div><div class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行后结果:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ gcc <span class="number">8.3</span>.c -o8<span class="number">.3</span> -lapue</div><div class="line">$ ./<span class="number">8.3</span></div><div class="line">a write to stdout</div><div class="line">before fork</div><div class="line">pid=<span class="number">5423</span>,glob=<span class="number">7</span>,var=<span class="number">89</span></div><div class="line">pid=<span class="number">5422</span>,glob=<span class="number">6</span>,var=<span class="number">88</span></div></pre></td></tr></table></figure><br>一切正常运行,但是如果我们重定向标准输出流之后:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ./<span class="number">8.3</span> &gt; temp.out</div><div class="line">$ cat temp.out</div><div class="line">a write to stdout</div><div class="line">before fork</div><div class="line">pid=<span class="number">5481</span>,glob=<span class="number">7</span>,var=<span class="number">89</span></div><div class="line">before fork</div><div class="line">pid=<span class="number">5480</span>,glob=<span class="number">6</span>,var=<span class="number">88</span></div></pre></td></tr></table></figure><br>  可以看到printf输出了两次,原因是在fork()之前调用了一次printf一次,但当调用fork()时,该行数据还在缓冲区中(因为重定向之后为全缓冲),然后讲父进程数据空间复制到子进程中时,该缓冲区数据也被复制到子进程中,此时父进程和子进程各自有了带该行内容的缓冲区.当进程终止时,缓冲区内容被刷新写到文件中.</p>
-<p>子进程和父进程之间的区别如下:<br> fork返回值不同(进程ID不同)<br>子进程不继承父进程设置的文件锁<br>子进程的未处理闹钟被清除.<br>子进程的未处理信号集设置为空集.<br>有时候实际用户ID的进程总数超过了系统限制,会导致fork()失败.</p>
-<p>vfork()函数用于创建一个新进程,而该进程的目的是exec一个新程序.vfork()不会将父进程的地址空间完全复制到子进程中,另一个区别是,vfork()保证子进程先运行,在它调用exec或exit之后父进程才可能被调度运行,当子进程调用这两个函数中的任意一个时,父进程会恢复运行.(如果在调用这两个函数之前子进程依赖父进程的进一步动作会导致死锁.)<br>引用网上的一个说法:<br>为什么会有vfork，因为以前的fork 很傻， 它创建一个子进程时，将会创建一个新的地址空间，并且拷贝父进程的资源，而往往在子进程中会执行exec 调用，这样，前面的拷贝工作就是白费力气了，这种情况下，聪明的人就想出了vfork，它产生的子进程刚开始暂时与父进程共享地址空间（其实就是线程的概念了），因为这时候子进程在父进程的地址空间中运行，所以子进程不能进行写操作，并且在儿子 霸占”着老子的房子时候，要委屈老子一下了，让他在外面歇着（阻塞），一旦儿子执行了exec 或者exit 后，相 于儿子买了自己的房子了，这时候就相当于分家了。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">apue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">stl</a>
         		</li>
       		
 		</ul>
 	</div>
 
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/04/fork-和vfork-的总结/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/03/15/互斥量和避免死锁/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          互斥量和避免死锁
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/03/03/递归降序遍历目录结构/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">递归降序遍历目录结构</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-    <div class="duoshuo"></div>
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -333,9 +224,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

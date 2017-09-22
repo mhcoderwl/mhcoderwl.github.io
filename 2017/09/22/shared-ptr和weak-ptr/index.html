@@ -6,18 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>fork()和vfork()的总结 | mhcoderwl的博客</title>
+  <title>shared_ptr和weak_ptr | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="fork()函数可以创建一个新的进程,被称为子进程,子进程获得父进程数据空间,堆和栈的副本.父子进程不共享这些存储空间部分,共享正文段.  看下面一个实例:">
+  <meta name="description" content="shared_ptr线程安全性  shared_ptr 本身不是 100% 线程安全的。它的引用计数本身是安全且无锁的，但对象的读写则不是，因为 shared_ptr 有两个数据成员，读写操作不能原子化。根据文档，shared_ptr 的线程安全级别和内建类型、标准库容器、string 一样，即：
+
+一个 shared_ptr 实体可被多个线程同时读取；
+两个的 shared_ptr 实体可以被两">
 <meta property="og:type" content="article">
-<meta property="og:title" content="fork()和vfork()的总结">
-<meta property="og:url" content="http://yoursite.com/2017/03/04/fork-和vfork-的总结/index.html">
+<meta property="og:title" content="shared_ptr和weak_ptr">
+<meta property="og:url" content="http://yoursite.com/2017/09/22/shared-ptr和weak-ptr/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="fork()函数可以创建一个新的进程,被称为子进程,子进程获得父进程数据空间,堆和栈的副本.父子进程不共享这些存储空间部分,共享正文段.  看下面一个实例:">
-<meta property="og:updated_time" content="2017-03-04T08:22:34.110Z">
+<meta property="og:description" content="shared_ptr线程安全性  shared_ptr 本身不是 100% 线程安全的。它的引用计数本身是安全且无锁的，但对象的读写则不是，因为 shared_ptr 有两个数据成员，读写操作不能原子化。根据文档，shared_ptr 的线程安全级别和内建类型、标准库容器、string 一样，即：
+
+一个 shared_ptr 实体可被多个线程同时读取；
+两个的 shared_ptr 实体可以被两">
+<meta property="og:updated_time" content="2017-09-22T05:30:17.262Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fork()和vfork()的总结">
-<meta name="twitter:description" content="fork()函数可以创建一个新的进程,被称为子进程,子进程获得父进程数据空间,堆和栈的副本.父子进程不共享这些存储空间部分,共享正文段.  看下面一个实例:">
+<meta name="twitter:title" content="shared_ptr和weak_ptr">
+<meta name="twitter:description" content="shared_ptr线程安全性  shared_ptr 本身不是 100% 线程安全的。它的引用计数本身是安全且无锁的，但对象的读写则不是，因为 shared_ptr 有两个数据成员，读写操作不能原子化。根据文档，shared_ptr 的线程安全级别和内建类型、标准库容器、string 一样，即：
+
+一个 shared_ptr 实体可被多个线程同时读取；
+两个的 shared_ptr 实体可以被两">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -145,30 +154,51 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-fork-和vfork-的总结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-shared-ptr和weak-ptr" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      fork()和vfork()的总结
+      shared_ptr和weak_ptr
     </h1>
   
 
         
-        <a href="/2017/03/04/fork-和vfork-的总结/" class="archive-article-date">
-  	<time datetime="2017-03-04T07:04:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-04</time>
+        <a href="/2017/09/22/shared-ptr和weak-ptr/" class="archive-article-date">
+  	<time datetime="2017-09-22T00:53:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  fork()函数可以创建一个新的进程,被称为子进程,子进程获得父进程数据空间,堆和栈的副本.父子进程不共享这些存储空间部分,共享正文段.<br>  看下面一个实例:<br><a id="more"></a><br><figure class="highlight cpp"><figcaption><span>8.3.c/*打印父子进程的输出*/</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></div><div class="line"> <span class="keyword">int</span> globvar= <span class="number">6</span>;</div><div class="line"><span class="keyword">char</span> buf[] = <span class="string">"a write to stdout\n"</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> main()&#123;</div><div class="line">	<span class="keyword">int</span> var;</div><div class="line">	<span class="keyword">pid_t</span> pid;</div><div class="line">	var=<span class="number">88</span>;</div><div class="line">	<span class="keyword">if</span>(write(STDOUT_FILENO,buf,<span class="keyword">sizeof</span>(buf)<span class="number">-1</span>)!=<span class="keyword">sizeof</span>(buf)<span class="number">-1</span>)</div><div class="line">		err_sys(<span class="string">"write error"</span>);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"before fork\n"</span>);</div><div class="line">	<span class="keyword">if</span>((pid=fork())&lt;<span class="number">0</span>)</div><div class="line">	err_sys(<span class="string">"fork error"</span>);</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(pid==<span class="number">0</span>)&#123;</div><div class="line">		globvar++;</div><div class="line">		var++;</div><div class="line">	&#125;<span class="keyword">else</span></div><div class="line">		sleep(<span class="number">2</span>);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"pid=%ld,glob=%d,var=%d\n"</span>,(<span class="keyword">long</span>)getpid(),globvar,var);</div><div class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行后结果:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ gcc <span class="number">8.3</span>.c -o8<span class="number">.3</span> -lapue</div><div class="line">$ ./<span class="number">8.3</span></div><div class="line">a write to stdout</div><div class="line">before fork</div><div class="line">pid=<span class="number">5423</span>,glob=<span class="number">7</span>,var=<span class="number">89</span></div><div class="line">pid=<span class="number">5422</span>,glob=<span class="number">6</span>,var=<span class="number">88</span></div></pre></td></tr></table></figure><br>一切正常运行,但是如果我们重定向标准输出流之后:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ./<span class="number">8.3</span> &gt; temp.out</div><div class="line">$ cat temp.out</div><div class="line">a write to stdout</div><div class="line">before fork</div><div class="line">pid=<span class="number">5481</span>,glob=<span class="number">7</span>,var=<span class="number">89</span></div><div class="line">before fork</div><div class="line">pid=<span class="number">5480</span>,glob=<span class="number">6</span>,var=<span class="number">88</span></div></pre></td></tr></table></figure><br>  可以看到printf输出了两次,原因是在fork()之前调用了一次printf一次,但当调用fork()时,该行数据还在缓冲区中(因为重定向之后为全缓冲),然后讲父进程数据空间复制到子进程中时,该缓冲区数据也被复制到子进程中,此时父进程和子进程各自有了带该行内容的缓冲区.当进程终止时,缓冲区内容被刷新写到文件中.</p>
-<p>子进程和父进程之间的区别如下:<br> fork返回值不同(进程ID不同)<br>子进程不继承父进程设置的文件锁<br>子进程的未处理闹钟被清除.<br>子进程的未处理信号集设置为空集.<br>有时候实际用户ID的进程总数超过了系统限制,会导致fork()失败.</p>
-<p>vfork()函数用于创建一个新进程,而该进程的目的是exec一个新程序.vfork()不会将父进程的地址空间完全复制到子进程中,另一个区别是,vfork()保证子进程先运行,在它调用exec或exit之后父进程才可能被调度运行,当子进程调用这两个函数中的任意一个时,父进程会恢复运行.(如果在调用这两个函数之前子进程依赖父进程的进一步动作会导致死锁.)<br>引用网上的一个说法:<br>为什么会有vfork，因为以前的fork 很傻， 它创建一个子进程时，将会创建一个新的地址空间，并且拷贝父进程的资源，而往往在子进程中会执行exec 调用，这样，前面的拷贝工作就是白费力气了，这种情况下，聪明的人就想出了vfork，它产生的子进程刚开始暂时与父进程共享地址空间（其实就是线程的概念了），因为这时候子进程在父进程的地址空间中运行，所以子进程不能进行写操作，并且在儿子 霸占”着老子的房子时候，要委屈老子一下了，让他在外面歇着（阻塞），一旦儿子执行了exec 或者exit 后，相 于儿子买了自己的房子了，这时候就相当于分家了。</p>
+        <h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h2><h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>  shared_ptr 本身不是 100% 线程安全的。它的引用计数本身是安全且无锁的，但对象的读写则不是，因为 shared_ptr 有两个数据成员，读写操作不能原子化。根据文档，shared_ptr 的线程安全级别和内建类型、标准库容器、string 一样，即：</p>
+<ul>
+<li>一个 shared_ptr 实体可被多个线程同时读取；</li>
+<li>两个的 shared_ptr 实体可以被两个线程同时写入，“析构”算写操作；</li>
+<li>要从多个线程读写同一个 shared_ptr 对象，那么需要加锁。<a id="more"></a>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">shared_ptr&lt;int&gt; </span><span class="built_in">sp</span>(new int(<span class="number">10</span>))<span class="comment">;                //一个指向整数的shared_ptr    </span></div><div class="line">assert(<span class="built_in">sp</span>.unique())<span class="comment">;                            //现在shared_ptr是指针的唯一持有者     </span></div><div class="line"><span class="keyword">shared_ptr&lt;int&gt; </span>sp2 = <span class="built_in">sp</span><span class="comment">;                       //第二个shared_ptr,拷贝构造函数     </span></div><div class="line">assert(<span class="built_in">sp</span> == sp2 &amp;&amp; <span class="built_in">sp</span>.use_count() == <span class="number">2</span>)<span class="comment">;       //两个shared_ptr相等,指向同一个对象,引用计数为2    </span></div><div class="line">*sp2 = <span class="number">100</span><span class="comment">;                                     //使用解引用操作符修改被指对象    </span></div><div class="line">assert(*<span class="built_in">sp</span> == <span class="number">100</span>)<span class="comment">;                             //另一个shared_ptr也同时被修改     </span></div><div class="line"><span class="built_in">sp</span>.reset()<span class="comment">;                                     //停止shared_ptr的使用    </span></div><div class="line">assert(!<span class="built_in">sp</span>)<span class="comment">;                                    //sp不再持有任何指针(空指针)</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>提示:shared_ptr可作为容器的元素,重载了比较和拷贝操作符,auto_ptr不可以</p>
+<h3 id="使用陷阱"><a href="#使用陷阱" class="headerlink" title="使用陷阱"></a>使用陷阱</h3><h4 id="意外延长声明周期"><a href="#意外延长声明周期" class="headerlink" title="意外延长声明周期"></a>意外延长声明周期</h4><p> shared_ptr是强引用,只要有一个指向对象的shared_ptr存在,该对象就不会析构.<br> 要注意bind函数,bind会把实参拷贝一份,意外延长对象生命周期</p>
+<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><p> 我们用const引用来传递类型为shared_ptr的函数参数</p>
+<h4 id="析构所在的线程"><a href="#析构所在的线程" class="headerlink" title="析构所在的线程"></a>析构所在的线程</h4><p> 对象的析构是同步的,当最后一个指向x的shared_ptr离开其作用域的时候,x会同时在同一个线程析构,这个线程不一定是对象诞生的线程,如果析构比较耗时,并且在关键线程中析构,那么会拖累线程的速度,<br> 解决办法是我们可以单独开一个线程专门用来析构,通过一个BlockingQueue<shared_ptr<void> &gt;把对象的析构都转移到那个专用线程,从而解放关键线程.<br> 注:shared_ptr<void> 可以持有任何对象</void></shared_ptr<void></p>
+<h2 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h2><p>weak_ptr是为了配合shared_ptr而引入的一种智能指针，它更像是shared_ptr的一个助手而不是智能指针，因为它不具有普通指针的行为，没有重载operator*和-&gt;,它的最大作用在于协助shared_ptr工作，像旁观者那样观测资源的使用情况.<br>用法:</p>
+<ul>
+<li>weak_ptr被设计为与shared_ptr共同工作，可以从一个shared_ptr或者另一个weak_ptr对象构造，获得资源的观测权。但weak_ptr没有共享资源，它的构造不会引起指针引用计数的增加。</li>
+<li>使用weak_ptr的成员函数use_count()可以观测资源的引用计数，另一个成员函数expired()的功能等价于use_count()==0,但更快，表示被观测的资源(也就是shared_ptr的管理的资源)已经不复存在。</li>
+<li>weak_ptr可以使用一个非常重要的成员函数lock()从被观测的shared_ptr获得一个可用的shared_ptr对象， 从而操作资源。但当expired()==true的时候，lock()函数将返回一个存储空指针的shared_ptr.</li>
+</ul>
+<p>获得this的shared_ptr</p>
+<p>weak_ptr的一个重要用途是获得this指针的shared_ptr,使对象自己能够生产shared_ptr管理自己：对象使用weak_ptr观测this指针，这并不影响引用计数，在需要的时候就调用lock()函数，返回一个符合要求的shared_ptr使外界使用。</p>
+<p>这个解决方案被实现为一个惯用法，在头文件<boost enable_shared_from_this.hpp="">定义了一个助手类enable_shared_from_this<t>，其声明如下：<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">template&lt;<span class="keyword">class</span> T&gt;  </div><div class="line"><span class="keyword">class</span> enable<span class="number">_</span><span class="keyword">shared</span><span class="number">_f</span>rom<span class="number">_</span><span class="keyword">this</span>  </div><div class="line">&#123;  </div><div class="line">public:  </div><div class="line">   <span class="keyword">shared</span><span class="number">_p</span>tr&lt;T&gt; <span class="keyword">shared</span><span class="number">_f</span>rom<span class="number">_</span><span class="keyword">this</span>();  </div><div class="line">&#125;</div></pre></td></tr></table></figure></t></boost></p>
+<p>使用的时候只需要让想被shared_ptr管理的类从它继承即可，成员函数shared_from_this()会返回this的shared_ptr</p>
+<p>使用示例：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/smart_ptr.hpp&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/enable_shared_from_this.hpp&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/make_shared.hpp&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> boost;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> self_shared:</div><div class="line"><span class="keyword">public</span> enable_shared_from_this&lt;self_shared&gt;&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">    self_shared(<span class="keyword">int</span> n):x(n)&#123;&#125;</div><div class="line">    <span class="keyword">int</span> x;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"self_shared:"</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">shared_ptr</span>&lt;self_shared&gt; sp =</div><div class="line">                           make_shared&lt;self_shared&gt;(<span class="number">315</span>);</div><div class="line">    sp-&gt;print();</div><div class="line">    <span class="built_in">shared_ptr</span>&lt;self_shared&gt; p = sp-&gt;shared_from_this();</div><div class="line">    p-&gt;x = <span class="number">100</span>;</div><div class="line">    p-&gt;print();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>weak_ptr还有个用处就是解决循环引用造成的内存泄漏,举个例子:<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class A&#123;</div><div class="line"><span class="symbol">public:</span></div><div class="line">	~A()&#123;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">shared_ptr&lt;B&gt; </span><span class="keyword">b;</span></div><div class="line">&#125;<span class="comment">;</span></div><div class="line">class <span class="keyword">B&#123;</span></div><div class="line"><span class="symbol">public:</span></div><div class="line">	~<span class="keyword">B()&#123;</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">shared_ptr&lt;A&gt; </span>a<span class="comment">;</span></div><div class="line">&#125;<span class="comment">;</span></div><div class="line"></div><div class="line">int main()&#123;</div><div class="line">	<span class="keyword">shared_ptr&lt;A&gt; </span>test1=new A<span class="comment">;</span></div><div class="line">	<span class="keyword">shared_ptr&lt;B&gt; </span>test2=new <span class="keyword">B;</span></div><div class="line">	test1-&gt;<span class="keyword">b=test2;</span></div><div class="line">	test2-&gt;a=test1<span class="comment">;</span></div><div class="line">	return <span class="number">0</span><span class="comment">;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>由于A释放时引用计数大于1,所以不析构,导致B释放时引用计数也大于1,也不析构,造成内存泄漏,解决办法是将一方改成weak_ptr,但是必须要程序员意识到这里会出现循环引用.</p>
 
       
 
@@ -203,24 +233,17 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">apue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">stl</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -270,7 +293,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/04/fork-和vfork-的总结/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/22/shared-ptr和weak-ptr/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,18 +307,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/03/15/互斥量和避免死锁/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          互斥量和避免死锁
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/03/递归降序遍历目录结构/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">递归降序遍历目录结构</div>
+    <a href="/2017/08/31/服务器项目关键组件/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">服务器项目关键组件</div>
       <i class="icon-circle-right"></i>
     </a>
   

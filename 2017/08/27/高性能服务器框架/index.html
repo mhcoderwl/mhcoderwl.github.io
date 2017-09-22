@@ -8,33 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>高性能服务器框架 | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="两种高效的事件处理方式Reactor模式Reactor模式要求主线程只负责监听文件描述符的是否有事件发生,有的话就通知工作线程去处理,主线程本身不做任何实质性工作,接受新连接(accept),处理客户请求均在工作线程中完成使用同步I/O模型的话流程如下:
-
-主线程往epoll内核事件表中注册socket上的读就绪事件(这步先不用注册写)
-调用epoll_wait等待socket上有数据可读.
-当s">
+  <meta name="description" content="两种高效的事件处理方式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高性能服务器框架">
 <meta property="og:url" content="http://yoursite.com/2017/08/27/高性能服务器框架/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="两种高效的事件处理方式Reactor模式Reactor模式要求主线程只负责监听文件描述符的是否有事件发生,有的话就通知工作线程去处理,主线程本身不做任何实质性工作,接受新连接(accept),处理客户请求均在工作线程中完成使用同步I/O模型的话流程如下:
-
-主线程往epoll内核事件表中注册socket上的读就绪事件(这步先不用注册写)
-调用epoll_wait等待socket上有数据可读.
-当s">
+<meta property="og:description" content="两种高效的事件处理方式">
 <meta property="og:image" content="http://img.blog.csdn.net/20140224092317468?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20140224092338234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20140224092409312?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20140224092529312?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20140224092601953?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-08-30T02:23:38.386Z">
+<meta property="og:updated_time" content="2017-09-22T05:31:52.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能服务器框架">
-<meta name="twitter:description" content="两种高效的事件处理方式Reactor模式Reactor模式要求主线程只负责监听文件描述符的是否有事件发生,有的话就通知工作线程去处理,主线程本身不做任何实质性工作,接受新连接(accept),处理客户请求均在工作线程中完成使用同步I/O模型的话流程如下:
-
-主线程往epoll内核事件表中注册socket上的读就绪事件(这步先不用注册写)
-调用epoll_wait等待socket上有数据可读.
-当s">
+<meta name="twitter:description" content="两种高效的事件处理方式">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20140224092317468?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenM2MzQxMzQ1Nzg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
@@ -183,7 +171,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="两种高效的事件处理方式"><a href="#两种高效的事件处理方式" class="headerlink" title="两种高效的事件处理方式"></a>两种高效的事件处理方式</h2><h3 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h3><p>Reactor模式要求主线程只负责监听文件描述符的是否有事件发生,有的话就通知工作线程去处理,主线程本身不做任何实质性工作,接受新连接(accept),处理客户请求均在工作线程中完成<br>使用同步I/O模型的话流程如下:</p>
+        <h2 id="两种高效的事件处理方式"><a href="#两种高效的事件处理方式" class="headerlink" title="两种高效的事件处理方式"></a>两种高效的事件处理方式</h2><a id="more"></a>
+<h3 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h3><p>Reactor模式要求主线程只负责监听文件描述符的是否有事件发生,有的话就通知工作线程去处理,主线程本身不做任何实质性工作,接受新连接(accept),处理客户请求均在工作线程中完成<br>使用同步I/O模型的话流程如下:</p>
 <ol>
 <li>主线程往epoll内核事件表中注册socket上的读就绪事件(这步先不用注册写)</li>
 <li>调用epoll_wait等待socket上有数据可读.</li>
@@ -467,10 +456,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">apue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">unp</a>
               </li>
              
@@ -480,6 +465,22 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">apue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -507,10 +508,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -519,7 +516,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,10 +529,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
               </li>
             
             <div class="clearfix"></div>
