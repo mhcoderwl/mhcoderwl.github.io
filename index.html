@@ -168,23 +168,9 @@
       
         <h2 id="day5"><a href="#day5" class="headerlink" title="day5"></a>day5</h2><h3 id="1-RTTI"><a href="#1-RTTI" class="headerlink" title="1.RTTI"></a>1.RTTI</h3><p>在运用多态时才有意义。每个类都有个Class对象用来判断自己的RTTI。</p>
 <h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><p>所有的类在第一次加载时，也就是第一次调用类的静态成员，例如构造器，就会加载到JVM中。</p>
-<p>加载器会查找类的.class文件，然后Class对象被加载到内存后，用来构建这个类的所有对象。</p>
-<p>Class类的接口forName(String class)来取得一个类的对象的引用。</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Test<span class="comment">&#123;&#125;</span></div><div class="line"></div><div class="line"><span class="keyword">Class</span> cc<span class="class">=<span class="keyword">Class</span>.forName("Test");</span></div><div class="line"></div><div class="line">cc.getname();</div><div class="line"></div><div class="line">cc.isinterface();</div><div class="line"></div><div class="line">cc.getSuperclass();</div><div class="line"></div><div class="line">cc.newInstance();返回一个该类的对象，需要有<span class="keyword">default</span> <span class="function"><span class="keyword">constructor</span>。</span></div></pre></td></tr></table></figure>
-<p>还可以通过类字面量来得到一个类的Class，这适用于所有基本数据类型。</p>
-<p>int.class,double.class,void.class</p>
-<p>用.class调用不会对一个未初始化的类初始化，另外，static final变量不需要初始化就可以调用。比如：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Test</span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">static</span> final <span class="keyword">int</span> LENGTH=<span class="number">10</span>;</div><div class="line"></div><div class="line">	<span class="keyword">static</span>&#123;</div><div class="line"></div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">"constructor"</span>);</div><div class="line"></div><div class="line">	&#125;<span class="comment">//静态域第一次初始化会调用</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">		System.<span class="keyword">out</span>.println(Test.LENGTH);<span class="comment">//没有constructor打印</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>java中的通配符是？。</p>
-<p>RTTI的形式：</p>
-<p>我们用RTTI是为了对于一个接口或者基类，需要向下转换时，我们无法知道他是子类中的哪种。</p>
-<ul>
-<li><p>传统类型转换，(Class)object.</p>
-</li>
-<li><p>通过instanceof，调用为 class instanceof target，这个表达式返回一个boolean，判断一个类是否是目标类，如果是的话可以强制向下转换。或者Class.isInstance(),可以不用写多个instanceof()。</p>
-</li>
-</ul>
-<h3 id="2-反射"><a href="#2-反射" class="headerlink" title="2.反射"></a>2.反射</h3><p>定义：RTTI的限制在于，要识别的对象类型必须在编译阶段已知，如果对象类型的.class文件在网络或者本地磁盘上，需要动态加载。</p>
-
+        
+          <a class="article-more-a" href="/2017/12/18/Java学习笔记5/#more">more >></a>
+        
       
 
       
@@ -235,77 +221,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="1-StringBuilder"><a href="#1-StringBuilder" class="headerlink" title="1.StringBuilder"></a>1.StringBuilder</h3><p>我们在用+号相加两个String类时，JVM会创建一个StringBuilder类，然后将所有相加的String类全都append()，最后toString()返回最后结果。以下两段代码：</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> static StringBuilder&#123;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">implicit</span>(String[] fields)&#123;</div><div class="line"></div><div class="line">		String s=<span class="string">""</span>;</div><div class="line"></div><div class="line">		for(<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;fields.length;i++)&#123;</div><div class="line"></div><div class="line">			s+=fields[i];</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">return</span> s;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> explicit(String[] fields)&#123;</div><div class="line"></div><div class="line">		StringBuilder s=new StringBuilder();</div><div class="line"></div><div class="line">		for(<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;fields.length;i++)&#123;</div><div class="line"></div><div class="line">			s.append(fields[i]);</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">return</span> s.toString();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>第一个implicit方法中，每次循环都要创建一个StringBuilder类，而第二个只要创建一次。更优化的方法还可以先指定StringBuilder的大小，避免多次重新分配。</p>
-<p>注意：给一个类定义toString()接口时，如果内部有隐式调用本身的toString()，会发生无限递归。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Recurrsion</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="type">String</span> <span class="built_in">toString</span>()&#123;</div><div class="line"></div><div class="line">		<span class="comment">//return "recurrsion address: "+this;//+号隐式转换发生递归调用自己。</span></div><div class="line"></div><div class="line">		<span class="keyword">return</span> <span class="string">"recurrsion address： "</span>+<span class="keyword">super</span>.<span class="built_in">toString</span>();<span class="comment">//正确做法，基类是Object。</span></div></pre></td></tr></table></figure>
-<h3 id="2-内部类的static"><a href="#2-内部类的static" class="headerlink" title="2.内部类的static"></a>2.内部类的static</h3><p>内部类用static修饰，有两个作用：</p>
-<ul>
-<li><p>没有this，无法取得外部类的this。</p>
-</li>
-<li><p>调用时可以直接调用无需new，例如：</p>
-</li>
-</ul>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> InnerA&#123;&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	<span class="keyword">private</span> InnerB&#123;&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args)&#123;</div><div class="line"></div><div class="line">		<span class="keyword">new</span> <span class="type">Test</span>.InnerA();</div><div class="line"></div><div class="line">		<span class="keyword">new</span> <span class="type">Test</span>().<span class="keyword">new</span> <span class="type">InnerB</span>();<span class="comment">//区别。</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="3-格式化输出"><a href="#3-格式化输出" class="headerlink" title="3.格式化输出"></a>3.格式化输出</h3><p>System.out.format()方法模仿了c的printf()，用法一样。</p>
-<p>新的接口：</p>
-<p>Formatter类是Java中用来处理格式化输出的类，构造器需要一个想哪里输出的流。</p>
-<p>类中format()接口用来输出，格式：</p>
-<p>%[argument_index][flag][width][.precision]conversion</p>
-<p>%-10.5f:-表示左对齐，10表示宽度，.5精度，用来String上表示显示字符数量。f是float。</p>
-<p>String.format()一个static方法，接受一个格式串。</p>
-<h3 id="3-正则"><a href="#3-正则" class="headerlink" title="3.正则"></a>3.正则</h3><p>贪婪：意味着最大匹配，匹配最大长度。</p>
-<p>懒惰： 最小匹配，匹配满足的最小长度。</p>
-<p>比如”aaaa”中用<em>贪婪匹配能匹配”aaaa”，用</em>？懒惰匹配就匹配”a”</p>
-<h4 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h4><ul>
-<li><p>^:匹配行或者字符串的起始位置。</p>
-</li>
-<li><p>$:匹配行或者字符串的结尾。</p>
-</li>
-<li><p>\b:匹配一个位置，不消耗任何字符。</p>
-</li>
-<li><p>\d:匹配一个数字。</p>
-</li>
-<li><p>\w:匹配字母，数字，下划线。</p>
-</li>
-<li><p>\s:匹配空格。</p>
-</li>
-<li><p>.:匹配一个除了换行符以外所有字符。</p>
-</li>
-<li><p>[abc]:匹配一个括号内的字符。</p>
-</li>
-</ul>
-<h4 id="反义字符"><a href="#反义字符" class="headerlink" title="反义字符"></a>反义字符</h4><p>改成大写就行</p>
-<ul>
-<li><p>[^abc]:除了abc以外的字符。</p>
-</li>
-<li><p>\W:不是字母，数字，下划线的字符。</p>
-</li>
-</ul>
-<h4 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h4><ul>
-<li><p>*:匹配前面的一个闭包。贪婪的</p>
-</li>
-<li><p>+:与*相同，唯一区别是不可以0次匹配。懒惰的</p>
-</li>
-<li><p>[:标记一个中括号表达式的开始。</p>
-</li>
-<li><p>?:匹配前面的子表达式0或1次。可以指明一个非贪婪限定符。</p>
-</li>
-<li><p>{:标记限定符表达式的开始。</p>
-</li>
-<li><p>|:两个表达式或匹配。</p>
-</li>
-<li><p>{n}:匹配确定的n次</p>
-</li>
-<li><p>{n,}:至少匹配n次。</p>
-</li>
-<li><p>{n,m}:匹配n-m次。</p>
-</li>
-</ul>
-<p>String中匹配正则的接口是matches(String format)</p>
-<p>更高级的工具是Pattern和Matcher.</p>
-<p>Pattern通过static方法compile(String)编译一个正则，返回一个Matcher，Matcher有接口matcher(String)用来匹配字符串。还有接口group(),find(),</p>
-
+        
+          <a class="article-more-a" href="/2017/12/18/Java学习笔记4/#more">more >></a>
+        
       
 
       
@@ -357,51 +275,9 @@
       
         <h2 id="day3"><a href="#day3" class="headerlink" title="day3"></a>day3</h2><h3 id="1-Iterable"><a href="#1-Iterable" class="headerlink" title="1.Iterable"></a>1.Iterable</h3><p>继承这个接口就可以用foreach语法作用。</p>
 <p>数组不能转换成Iterable，要</p>
-<h3 id="2-Map补充"><a href="#2-Map补充" class="headerlink" title="2.Map补充"></a>2.Map补充</h3><p>Map中有接口</p>
-<ul>
-<li><p>KeySet()</p>
-</li>
-<li><p>entrySet()//返回k-v对的集合</p>
-</li>
-</ul>
-<p>Map.Entry是Map声明的一个内部接口，此接口为泛型，定义为Entry<k,v>。它表示Map中的一个实体（一个key-value对）。接口中有getKey(),getValue方法。</k,v></p>
-<p>标准Map访问方法：</p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Set keys = <span class="built_in">map</span>.keySet( );</div><div class="line"></div><div class="line"><span class="keyword">if</span>(keys != <span class="keyword">null</span>) &#123;</div><div class="line"></div><div class="line">Iterator iterator = keys.iterator( );</div><div class="line"></div><div class="line"><span class="keyword">while</span>(iterator.hasNext( )) &#123;</div><div class="line"></div><div class="line"><span class="keyword">Object</span> <span class="built_in">key</span> = iterator.next( );</div><div class="line"></div><div class="line"><span class="keyword">Object</span> value = <span class="built_in">map</span>.<span class="built_in">get</span>(<span class="built_in">key</span>);</div><div class="line"></div><div class="line">;....</div><div class="line"></div><div class="line">;&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>用entrySet()接口方法：</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="symbol">Set</span> entries = <span class="meta">map</span>.entrySet( )<span class="comment">;</span></div><div class="line"></div><div class="line"><span class="symbol">if</span>(entries != null) &#123;</div><div class="line"></div><div class="line"><span class="keyword">Iterator </span><span class="keyword">iterator </span>= entries.<span class="keyword">iterator( </span>)<span class="comment">;</span></div><div class="line"></div><div class="line"><span class="symbol">while</span>(<span class="keyword">iterator.hasNext( </span>)) &#123;</div><div class="line"></div><div class="line"><span class="symbol">Map.Entry</span> <span class="meta">entry</span> <span class="symbol">=iterator</span>.next( )<span class="comment">;</span></div><div class="line"></div><div class="line"><span class="symbol">Object</span> key = <span class="meta">entry</span>.getKey( )<span class="comment">;</span></div><div class="line"></div><div class="line"><span class="symbol">Object</span> value = <span class="meta">entry</span>.getValue()<span class="comment">;</span></div><div class="line"></div><div class="line"><span class="comment">;....</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到，每次迭代器都能直接得到K和V，不用向上面的方法迭代得到key,然后得到Value。</p>
-<h3 id="3-匿名内部类"><a href="#3-匿名内部类" class="headerlink" title="3.匿名内部类"></a>3.匿名内部类</h3><p>有时候我们在创建一个继承了某个接口或者父类的对象时，可以在创建同时定义：</p>
-<p>匿名内部类也就是没有名字的内部类</p>
-<p>正因为没有名字，所以匿名内部类只能使用一次，它通常用来简化代码编写</p>
-<p>但使用匿名内部类还有个前提条件：必须继承一个父类或实现一个接口</p>
-<p>实例1:不使用匿名内部类来实现抽象方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"eat something"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        Person p = <span class="keyword">new</span> Child();</div><div class="line"></div><div class="line">        p.eat();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果：eat something</p>
-<p>可以看到，我们用Child继承了Person类，然后实现了Child的一个实例，将其向上转型为Person类的引用</p>
-<p>但是，如果此处的Child类只使用一次，那么将其编写为独立的一个类岂不是很麻烦？</p>
-<p>这个时候就引入了匿名内部类</p>
-<p>实例2：匿名内部类的基本实现</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Person</span> &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eat</span>(<span class="params"></span>)</span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Demo</span> &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line"></div><div class="line">        Person p = <span class="keyword">new</span> Person() &#123;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">                System.<span class="keyword">out</span>.println(<span class="string">"eat something"</span>);</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        p.eat();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果：eat something</p>
-<p>可以看到，我们直接将抽象类Person中的方法在大括号中实现了</p>
-<p>这样便可以省略一个类的书写</p>
-<p>并且，匿名内部类还能用于接口上</p>
-<p>实例3：在接口上使用匿名内部类</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">interface</span> <span class="title">Person</span> &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span>(<span class="params"></span>)</span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Demo</span> &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line"></div><div class="line">        Person p = <span class="keyword">new</span> Person() &#123;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">                System.<span class="keyword">out</span>.println(<span class="string">"eat something"</span>);</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        p.eat();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果：eat something</p>
-<p>由上面的例子可以看出，只要一个类是抽象的或是一个接口，那么其子类中的方法都可以使用匿名内部类来实现</p>
-<p>最常用的情况就是在多线程的实现上，因为要实现多线程必须继承Thread类或是继承Runnable接口</p>
-<p>实例4：Thread类的匿名内部类实现</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Demo</span> &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line"></div><div class="line">        Thread t = <span class="keyword">new</span> Thread() &#123;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</div><div class="line"></div><div class="line">                    System.<span class="keyword">out</span>.print(i + <span class="string">" "</span>);</div><div class="line"></div><div class="line">                &#125;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        t.start();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果：1 2 3 4 5</p>
-<p>实例5：Runnable接口的匿名内部类实现</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Demo</span> &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line"></div><div class="line">        Runnable r = <span class="keyword">new</span> Runnable() &#123;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</div><div class="line"></div><div class="line">                    System.<span class="keyword">out</span>.print(i + <span class="string">" "</span>);</div><div class="line"></div><div class="line">                &#125;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        Thread t = <span class="keyword">new</span> Thread(r);</div><div class="line"></div><div class="line">        t.start();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果：1 2 3 4 5</p>
-<h3 id="4-容器补充"><a href="#4-容器补充" class="headerlink" title="4.容器补充"></a>4.容器补充</h3><p>容器不能拥有基本类型，比如List<int>就是错误的。</int></p>
-<h3 id="5-异常"><a href="#5-异常" class="headerlink" title="5.异常"></a>5.异常</h3><p>在需要抛出异常的方法声明最后加上throws exceptionType</p>
-<p>抛出的异常都是在堆上new出来的异常对象。抛出他的引用。</p>
-<p>printStackTrace()方法可以打印抛出异常的调用序列。</p>
-
+        
+          <a class="article-more-a" href="/2017/12/18/Java学习笔记3/#more">more >></a>
+        
       
 
       
@@ -452,83 +328,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h2><h3 id="1-abstract关键字"><a href="#1-abstract关键字" class="headerlink" title="1.abstract关键字"></a>1.abstract关键字</h3><p>抽象类中有若干个抽象方法，类和方法都要用abstract修饰。</p>
-<p>interface则不用实现任何方法，纯接口，如果有类来实现他，要用implements而不是extends</p>
-<h3 id="2-适配器模式"><a href="#2-适配器模式" class="headerlink" title="2.适配器模式"></a>2.适配器模式</h3><p>给一个类做一个适配器类，让这个类的接口可以任意指定。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	<span class="comment">// 适配器类，直接关联被适配类，同时实现标准接口</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Target</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">// 直接关联被适配类</span></div><div class="line"></div><div class="line">	<span class="keyword">private</span> Adaptee adaptee;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">// 可以通过构造函数传入具体需要适配的被适配类对象</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Adapter</span> <span class="params">(Adaptee adaptee)</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="keyword">this</span>.adaptee = adaptee;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="comment">// 这里是使用委托的方式完成特殊功能</span></div><div class="line"></div><div class="line">		<span class="keyword">this</span>.adaptee.specificRequest();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 测试类</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="comment">// 使用普通功能类</span></div><div class="line"></div><div class="line">		Target concreteTarget = <span class="keyword">new</span> ConcreteTarget();</div><div class="line"></div><div class="line">		concreteTarget.request();</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// 使用特殊功能类，即适配类，</span></div><div class="line"></div><div class="line">		<span class="comment">// 需要先创建一个被适配类的对象作为参数</span></div><div class="line"></div><div class="line">		Target adapter = <span class="keyword">new</span> Adapter(<span class="keyword">new</span> Adaptee());</div><div class="line"></div><div class="line">		adapter.request();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到，适配器模式用来将一个不符合我们要求的接口的类包装一下，成为一个符合我们接口的类。</p>
-<h3 id="3-接口内"><a href="#3-接口内" class="headerlink" title="3.接口内"></a>3.接口内</h3><p>接口内定义的成员变量都是默认public static final修饰。静态常量。接口的所有成员都是public</p>
-<h3 id="4-多重继承"><a href="#4-多重继承" class="headerlink" title="4.多重继承"></a>4.多重继承</h3><p>只能继承一个具体的类，可以继承任意多个接口。</p>
-<h3 id="5-内部类"><a href="#5-内部类" class="headerlink" title="5.内部类"></a>5.内部类</h3><p>内部类如果是非static类，就可以访问到外围类的对象成员，因为外围类对象在创建内部类对象时，内部类对象会捕获一个外围类对象的引用，进而可以访问。</p>
-<p>在内部类可以调用outerclassname.this来调用外部类的引用。</p>
-<p>还可以用outerclassname.new 来生成一个内部对象。</p>
-<p>protected权限包内类可访问。</p>
-<h3 id="6-ArrayList"><a href="#6-ArrayList" class="headerlink" title="6.ArrayList"></a>6.ArrayList</h3><p>类似于c++的vector，当作一个变长数组，不同的是，声明时可以不用声明所含数据类型。</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="attribute">a</span>=new ArrayList()<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>不能用[]访问，要用get(int id)方法访问。</p>
-<p>两种容器类型Collection和Map,他们本身就是一个基类。</p>
-<h3 id="7-List"><a href="#7-List" class="headerlink" title="7.List"></a>7.List</h3><p>分为ArrayList和LinkedList,相当于c++的vector和List。</p>
-<p>List的常用接口</p>
-<ul>
-<li><p>get(index)</p>
-</li>
-<li><p>indexOf(obj)</p>
-</li>
-<li><p>remove(obj)//删除引用的对象</p>
-</li>
-<li><p>add(obj)</p>
-</li>
-<li><p>add(index,obj)//插入</p>
-</li>
-<li><p>subList(start,end)</p>
-</li>
-<li><p>sort(List)</p>
-</li>
-<li><p>contains（obj)//查询</p>
-</li>
-<li><p>asList((args…))//包装成一个List返回</p>
-</li>
-<li><p>set(index,obj)</p>
-</li>
-<li><p>equals()</p>
-</li>
-<li><p>shuffle()//洗牌</p>
-</li>
-<li><p>replace()//同set()</p>
-</li>
-</ul>
-<p>LinkedList还有：</p>
-<ul>
-<li><p>add(),addLast()</p>
-</li>
-<li><p>addFirst()</p>
-</li>
-<li><p>peek()</p>
-</li>
-</ul>
-<h3 id="8-迭代器接口"><a href="#8-迭代器接口" class="headerlink" title="8.迭代器接口"></a>8.迭代器接口</h3><p>原理和c++一样。</p>
-<ul>
-<li><p>iterator()//返回一个迭代器，通过next()返回元素。</p>
-</li>
-<li><p>next()//返回下一个元素</p>
-</li>
-<li><p>hasNext()//是否还有</p>
-</li>
-<li><p>remove()//删除最近next的元素</p>
-</li>
-</ul>
-<p>Iterator只能向前移动，子类ListIterator可以双向移动。</p>
-<h3 id="9-Queue"><a href="#9-Queue" class="headerlink" title="9.Queue"></a>9.Queue</h3><p>同c++的queue，接口是：</p>
-<ul>
-<li>offer()//插入队尾</li>
-</ul>
-<h3 id="10-Map"><a href="#10-Map" class="headerlink" title="10.Map"></a>10.Map</h3><p>同c++的Map，接口：</p>
-<ul>
-<li>put（a,b)//插入</li>
-</ul>
-<h3 id="11-poll"><a href="#11-poll" class="headerlink" title="11.poll"></a>11.poll</h3><p>poll弹出并删除首个元素，pop仅查看。</p>
-<h3 id="12-Collection和Iterator"><a href="#12-Collection和Iterator" class="headerlink" title="12.Collection和Iterator"></a>12.Collection和Iterator</h3><p>可以同时实现Collection参数的方法，这样可以运用到所有子类中。</p>
-<p>也可以实现迭代器版本，达到同样效果。迭代器版本不局限于Collection的子类。</p>
-
+        
+          <a class="article-more-a" href="/2017/12/18/Java学习笔记2/#more">more >></a>
+        
       
 
       
@@ -580,22 +382,9 @@
       
         <p>从今天开始学习java，写一个java学习系列笔记，做好每一个比较重要和难懂的知识点。</p>
 <h2 id="day1"><a href="#day1" class="headerlink" title="day1"></a>day1</h2><h2 id="1-static"><a href="#1-static" class="headerlink" title="1.static"></a>1.static</h2><p>static关键字用法和c++基本相同，不过可以作用于一个域，比如:</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">pulbic <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</div><div class="line"></div><div class="line"><span class="keyword">static</span>&#123;</div><div class="line"></div><div class="line"><span class="comment">//...</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>static不能作用于局部变量，可以作用于类的接口，成员变量，类。</p>
-<h3 id="2-一切皆对象"><a href="#2-一切皆对象" class="headerlink" title="2.一切皆对象"></a>2.一切皆对象</h3><p>所有对象需要用new，new出来的对象存在堆中，对象的变量都是对象的引用，不需要手动释放，有垃圾回收</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Test</span>&#123;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">a=<span class="keyword">new</span> Test();</div><div class="line"></div><div class="line"><span class="keyword">new</span> Test().d();<span class="comment">//直接调用</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">d</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">System.<span class="keyword">out</span>.println(<span class="string">"d"</span>);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="3-数组"><a href="#3-数组" class="headerlink" title="3.数组"></a>3.数组</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">int</span>[] a1;<span class="comment">//Java写法，不允许指定数组大小</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> a2[];<span class="comment">//c写法</span></div><div class="line"></div><div class="line">a1=&#123;<span class="number">1</span>,<span class="number">1</span>&#125;;</div><div class="line"></div><div class="line">a2=a1;<span class="comment">//复制引用,共同引用一个堆上对象</span></div><div class="line"></div><div class="line">Integer[] a3=<span class="keyword">new</span> Integer[<span class="number">10</span>];<span class="comment">//此时a3是一个数组，所有元素都是引用。引用的对象没有初始化。</span></div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length;i++)&#123;</div><div class="line"></div><div class="line">a3[i]=<span class="number">0</span>;</div><div class="line"></div><div class="line">&#125;<span class="comment">//完成初始化</span></div></pre></td></tr></table></figure>
-<h3 id="4-对象和对象引用"><a href="#4-对象和对象引用" class="headerlink" title="4.对象和对象引用"></a>4.对象和对象引用</h3><p>new A()是一个对象，A a=new A()中a只是一个引用，翻译叫标识符。</p>
-<h3 id="5-enum"><a href="#5-enum" class="headerlink" title="5.enum"></a>5.enum</h3><p>enum也是一个对象</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public <span class="class"><span class="keyword">enum</span> <span class="title">S</span>&#123;</span></div><div class="line"></div><div class="line">HAHA,SB,HEHE</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">S s=S.HAHA;</div></pre></td></tr></table></figure>
-<p>enum类型自动添加一些接口，例如toString(),values(),ordinal()</p>
-<h3 id="6-package"><a href="#6-package" class="headerlink" title="6.package"></a>6.package</h3><p>使用方法 import <em>.</em>.*</p>
-<p>作用避免重名，类似c++namespace，每个.java只能有一个public类，而且与文件名同名。</p>
-<p>每个类都会产生一个.class文件，java通过解释器作用于一堆.class文件。</p>
-<p>一个源文件属于一个包，一个包中的文件应当在一个子目录下。</p>
-<p>一个子目录下的所有文件中的类默认一个包。</p>
-<h3 id="7-访问权限"><a href="#7-访问权限" class="headerlink" title="7.访问权限"></a>7.访问权限</h3><p>类的一个接口如果没有public，只有包内的类可以访问。</p>
-
+        
+          <a class="article-more-a" href="/2017/12/18/Java学习笔记1/#more">more >></a>
+        
       
 
       
@@ -1129,6 +918,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -1145,11 +942,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1161,23 +962,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">sockets</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">

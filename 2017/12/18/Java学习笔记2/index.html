@@ -8,25 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Java学习笔记2 | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="day21.abstract关键字抽象类中有若干个抽象方法，类和方法都要用abstract修饰。
-interface则不用实现任何方法，纯接口，如果有类来实现他，要用implements而不是extends
-2.适配器模式给一个类做一个适配器类，让这个类的接口可以任意指定。
-12345678910111213141516171819202122232425262728293031323334353">
+  <meta name="description" content="day21.abstract关键字抽象类中有若干个抽象方法，类和方法都要用abstract修饰。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java学习笔记2">
 <meta property="og:url" content="http://yoursite.com/2017/12/18/Java学习笔记2/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="day21.abstract关键字抽象类中有若干个抽象方法，类和方法都要用abstract修饰。
-interface则不用实现任何方法，纯接口，如果有类来实现他，要用implements而不是extends
-2.适配器模式给一个类做一个适配器类，让这个类的接口可以任意指定。
-12345678910111213141516171819202122232425262728293031323334353">
-<meta property="og:updated_time" content="2017-12-17T17:41:05.056Z">
+<meta property="og:description" content="day21.abstract关键字抽象类中有若干个抽象方法，类和方法都要用abstract修饰。">
+<meta property="og:updated_time" content="2017-12-17T17:47:36.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习笔记2">
-<meta name="twitter:description" content="day21.abstract关键字抽象类中有若干个抽象方法，类和方法都要用abstract修饰。
-interface则不用实现任何方法，纯接口，如果有类来实现他，要用implements而不是extends
-2.适配器模式给一个类做一个适配器类，让这个类的接口可以任意指定。
-12345678910111213141516171819202122232425262728293031323334353">
+<meta name="twitter:description" content="day21.abstract关键字抽象类中有若干个抽象方法，类和方法都要用abstract修饰。">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -175,6 +166,7 @@ interface则不用实现任何方法，纯接口，如果有类来实现他，�
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h2><h3 id="1-abstract关键字"><a href="#1-abstract关键字" class="headerlink" title="1.abstract关键字"></a>1.abstract关键字</h3><p>抽象类中有若干个抽象方法，类和方法都要用abstract修饰。</p>
+<a id="more"></a>
 <p>interface则不用实现任何方法，纯接口，如果有类来实现他，要用implements而不是extends</p>
 <h3 id="2-适配器模式"><a href="#2-适配器模式" class="headerlink" title="2.适配器模式"></a>2.适配器模式</h3><p>给一个类做一个适配器类，让这个类的接口可以任意指定。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	<span class="comment">// 适配器类，直接关联被适配类，同时实现标准接口</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Target</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">// 直接关联被适配类</span></div><div class="line"></div><div class="line">	<span class="keyword">private</span> Adaptee adaptee;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">// 可以通过构造函数传入具体需要适配的被适配类对象</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Adapter</span> <span class="params">(Adaptee adaptee)</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="keyword">this</span>.adaptee = adaptee;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="comment">// 这里是使用委托的方式完成特殊功能</span></div><div class="line"></div><div class="line">		<span class="keyword">this</span>.adaptee.specificRequest();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 测试类</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="comment">// 使用普通功能类</span></div><div class="line"></div><div class="line">		Target concreteTarget = <span class="keyword">new</span> ConcreteTarget();</div><div class="line"></div><div class="line">		concreteTarget.request();</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// 使用特殊功能类，即适配类，</span></div><div class="line"></div><div class="line">		<span class="comment">// 需要先创建一个被适配类的对象作为参数</span></div><div class="line"></div><div class="line">		Target adapter = <span class="keyword">new</span> Adapter(<span class="keyword">new</span> Adaptee());</div><div class="line"></div><div class="line">		adapter.request();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -487,6 +479,14 @@ interface则不用实现任何方法，纯接口，如果有类来实现他，�
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -503,11 +503,15 @@ interface则不用实现任何方法，纯接口，如果有类来实现他，�
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,23 +523,11 @@ interface则不用实现任何方法，纯接口，如果有类来实现他，�
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">sockets</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">

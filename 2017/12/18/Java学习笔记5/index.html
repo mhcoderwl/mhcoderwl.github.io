@@ -9,27 +9,18 @@
   <title>Java学习笔记5 | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="day51.RTTI在运用多态时才有意义。每个类都有个Class对象用来判断自己的RTTI。
-类加载器所有的类在第一次加载时，也就是第一次调用类的静态成员，例如构造器，就会加载到JVM中。
-加载器会查找类的.class文件，然后Class对象被加载到内存后，用来构建这个类的所有对象。
-Class类的接口forName(String class)来取得一个类的对象的引用。
-1234567891011">
+类加载器所有的类在第一次加载时，也就是第一次调用类的静态成员，例如构造器，就会加载到JVM中。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java学习笔记5">
 <meta property="og:url" content="http://yoursite.com/2017/12/18/Java学习笔记5/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
 <meta property="og:description" content="day51.RTTI在运用多态时才有意义。每个类都有个Class对象用来判断自己的RTTI。
-类加载器所有的类在第一次加载时，也就是第一次调用类的静态成员，例如构造器，就会加载到JVM中。
-加载器会查找类的.class文件，然后Class对象被加载到内存后，用来构建这个类的所有对象。
-Class类的接口forName(String class)来取得一个类的对象的引用。
-1234567891011">
-<meta property="og:updated_time" content="2017-12-17T17:44:20.332Z">
+类加载器所有的类在第一次加载时，也就是第一次调用类的静态成员，例如构造器，就会加载到JVM中。">
+<meta property="og:updated_time" content="2017-12-17T17:48:43.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习笔记5">
 <meta name="twitter:description" content="day51.RTTI在运用多态时才有意义。每个类都有个Class对象用来判断自己的RTTI。
-类加载器所有的类在第一次加载时，也就是第一次调用类的静态成员，例如构造器，就会加载到JVM中。
-加载器会查找类的.class文件，然后Class对象被加载到内存后，用来构建这个类的所有对象。
-Class类的接口forName(String class)来取得一个类的对象的引用。
-1234567891011">
+类加载器所有的类在第一次加载时，也就是第一次调用类的静态成员，例如构造器，就会加载到JVM中。">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -179,6 +170,7 @@ Class类的接口forName(String class)来取得一个类的对象的引用。
       
         <h2 id="day5"><a href="#day5" class="headerlink" title="day5"></a>day5</h2><h3 id="1-RTTI"><a href="#1-RTTI" class="headerlink" title="1.RTTI"></a>1.RTTI</h3><p>在运用多态时才有意义。每个类都有个Class对象用来判断自己的RTTI。</p>
 <h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><p>所有的类在第一次加载时，也就是第一次调用类的静态成员，例如构造器，就会加载到JVM中。</p>
+<a id="more"></a>
 <p>加载器会查找类的.class文件，然后Class对象被加载到内存后，用来构建这个类的所有对象。</p>
 <p>Class类的接口forName(String class)来取得一个类的对象的引用。</p>
 <figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Test<span class="comment">&#123;&#125;</span></div><div class="line"></div><div class="line"><span class="keyword">Class</span> cc<span class="class">=<span class="keyword">Class</span>.forName("Test");</span></div><div class="line"></div><div class="line">cc.getname();</div><div class="line"></div><div class="line">cc.isinterface();</div><div class="line"></div><div class="line">cc.getSuperclass();</div><div class="line"></div><div class="line">cc.newInstance();返回一个该类的对象，需要有<span class="keyword">default</span> <span class="function"><span class="keyword">constructor</span>。</span></div></pre></td></tr></table></figure>
@@ -422,6 +414,14 @@ Class类的接口forName(String class)来取得一个类的对象的引用。
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -438,11 +438,15 @@ Class类的接口forName(String class)来取得一个类的对象的引用。
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -454,23 +458,11 @@ Class类的接口forName(String class)来取得一个类的对象的引用。
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">sockets</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
