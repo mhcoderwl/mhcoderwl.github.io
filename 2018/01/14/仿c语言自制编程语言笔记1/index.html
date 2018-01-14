@@ -24,7 +24,7 @@
 (狭义的)编译
 汇编
 链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
-<meta property="og:updated_time" content="2018-01-14T13:36:30.851Z">
+<meta property="og:updated_time" content="2018-01-14T13:39:23.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="仿c语言自制编程语言笔记1">
 <meta name="twitter:description" content="编译的流程对于c语言这种,需要经历四个过程:
@@ -283,13 +283,9 @@
 <li>调用build方法对源文件进行编译,首先用compile得到汇编文件.然后用assemble运行汇编器,转换为目标文件.</li>
 <li>其中compile完成编译器前端部分,首先用对源文件用parser得到AST,然后语义分析完成抽象语法树.最后一个IR类生成中间代码.</li>
 </ol>
-<h1 id="解析器javaCC"><a href="#解析器javaCC" class="headerlink" title="解析器javaCC"></a>解析器javaCC</h1><p>解析器的作用是,规定好语法,自动生成解析相应语法的代码.否则手动编写NFA转DFA,状态转移表,LL算法,手动生成语法树.<br>javaCC是LL解析器,<br>语法规则用一个”.jj”的文件来描述,称为语法描述文件.首先,文件的大致格式如下:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">options</span>&#123;</div><div class="line">JAVA的选项</div><div class="line">&#125;</div><div class="line"></div><div class="line">PARSER_BEGIN(解析器类名)</div><div class="line"><span class="keyword">package</span> 包名;</div><div class="line"><span class="keyword">import</span> 库名;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> 解析器类名&#123;</div><div class="line">	<span class="comment">//任意java代码</span></div><div class="line">&#125;</div><div class="line">PRASER_END(解析器类名)</div><div class="line"></div><div class="line">扫描器的描述</div><div class="line"></div><div class="line">解析器的描述</div><div class="line">举个加法的例子:</div></pre></td></tr></table></figure></p>
-<p>options{<br>STATIC = false;<br>}</p>
-<p>PARSER_BEGIN(Adder)<br>import java.io.*;</p>
-<p>class Adder{<br>    static public void main(String[] args){<br>        for(String arg:args){<br>            try{<br>                System.out.println(evaluate(arg));<br>            }<br>            catch(ParseException e){<br>                System.err.println(e.getMessage());<br>            }<br>        }<br>    }<br>    static public long evaluate(String src)throws ParseException{<br>        Reader reader=new StringReader(src);<br>        return new Adder(reader).expr();<br>    }<br>}<br>PARSER_END(Adder)</p>
-<p>SKIP: { &lt;[“ “,”\t”,”\n”,”\r”]&gt; }</p>
-<p>TOKEN:{ &lt; INTEGER:([“0”-“9”])+ &gt;}</p>
-<p>long expr():<br>{<br>    Token x,y;<br>}<br>{<br>x=<integer>“+”y=<integer><eof><br>    {<br>        return Long.parseLong(x.image)+Long.parseLong(y.image);<br>    }<br>}<br>```<br>注意,要运行javaCC生成的解析器类,需要下面两个步骤:</eof></integer></integer></p>
+<h1 id="解析器javaCC"><a href="#解析器javaCC" class="headerlink" title="解析器javaCC"></a>解析器javaCC</h1><p>解析器的作用是,规定好语法,自动生成解析相应语法的代码.否则手动编写NFA转DFA,状态转移表,LL算法,手动生成语法树.<br>javaCC是LL解析器,<br>语法规则用一个”.jj”的文件来描述,称为语法描述文件.首先,文件的大致格式如下:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">options</span>&#123;</div><div class="line">JAVA的选项</div><div class="line">&#125;</div><div class="line"></div><div class="line">PARSER_BEGIN(解析器类名)</div><div class="line"><span class="keyword">package</span> 包名;</div><div class="line"><span class="keyword">import</span> 库名;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> 解析器类名&#123;</div><div class="line">	<span class="comment">//任意java代码</span></div><div class="line">&#125;</div><div class="line">PRASER_END(解析器类名)</div><div class="line"></div><div class="line">扫描器的描述</div><div class="line"></div><div class="line">解析器的描述</div></pre></td></tr></table></figure></p>
+<p>举个加法的例子:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">options</span>&#123;</div><div class="line"><span class="keyword">STATIC</span> = <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">PARSER_BEGIN(Adder)</div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Adder&#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> main(String[] args)&#123;</div><div class="line">		<span class="keyword">for</span>(String arg:args)&#123;</div><div class="line">			<span class="keyword">try</span>&#123;</div><div class="line">				System.out.<span class="keyword">println</span>(evaluate(arg));</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">catch</span>(ParseException e)&#123;</div><div class="line">				System.err.<span class="keyword">println</span>(e.getMessage());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">long</span> evaluate(String src)<span class="keyword">throws</span> ParseException&#123;</div><div class="line">		Reader reader=<span class="keyword">new</span> StringReader(src);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Adder(reader).expr();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">PARSER_END(Adder)</div><div class="line"></div><div class="line">SKIP: &#123; &lt;[<span class="string">" "</span>,<span class="string">"\t"</span>,<span class="string">"\n"</span>,<span class="string">"\r"</span>]&gt; &#125;</div><div class="line"></div><div class="line">TOKEN:&#123; &lt; INTEGER:([<span class="string">"0"</span>-<span class="string">"9"</span>])+ &gt;&#125;</div><div class="line"></div><div class="line"><span class="keyword">long</span> expr():</div><div class="line">&#123;</div><div class="line">	Token x,y;</div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">x=&lt;INTEGER&gt;<span class="string">"+"</span>y=&lt;INTEGER&gt;&lt;EOF&gt;</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">Long</span>.parseLong(x.image)+<span class="keyword">Long</span>.parseLong(y.image);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意,要运行javaCC生成的解析器类,需要下面两个步骤:</p>
 <ol>
 <li>生成解析器类的对象实例(上例Adder就是一个解析器类)</li>
 <li>用生成的对象调用和需要解析的语句同名的方法.(也就是调用expr())</li>
@@ -560,6 +556,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
@@ -588,18 +592,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
@@ -612,15 +604,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">sockets</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
