@@ -146,6 +146,228 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-仿c语言自制编程语言笔记3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/14/仿c语言自制编程语言笔记3/">仿c语言自制编程语言笔记3</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/14/仿c语言自制编程语言笔记3/" class="archive-article-date">
+  	<time datetime="2018-01-14T13:21:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CflatToken"><a href="#CflatToken" class="headerlink" title="CflatToken"></a>CflatToken</h1><p>这个类是对Token类的一个包装.这样能整合Token和SpecialToken.首先我们看一下官方的Token的定义,这里有两个关键的调用<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这个方法返回这个token的下一个非特殊token,而且是相连的,如果当前token是一个Specialtoken,则返回下一个Specialtoken.</span></div><div class="line">  <span class="keyword">public</span> Token <span class="keyword">next</span>;</div><div class="line"></div><div class="line"><span class="comment">//这个方法返回上上一段连续Specialtoken的最后一个,如果要找到第一个,一直调用直到这个方法返回null,</span></div><div class="line">  <span class="keyword">public</span> Token specialToken;</div></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2018/01/14/仿c语言自制编程语言笔记3/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">FakeC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/14/仿c语言自制编程语言笔记3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-仿c语言自制编程语言笔记2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/14/仿c语言自制编程语言笔记2/">仿c语言自制编程语言笔记2</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/14/仿c语言自制编程语言笔记2/" class="archive-article-date">
+  	<time datetime="2018-01-14T13:18:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>草,上周的词法分析,语句分析的笔记忘记保存没了….</p>
+<h1 id="表达式分析"><a href="#表达式分析" class="headerlink" title="表达式分析"></a>表达式分析</h1><p>javaCC将一个规则转化为一个方法,非终端符号直接调用方法,终端符号直接转化为TOKEN,所以一个方法中左侧不能调用方法本身否则会出现无限递归解析.<br>所以我们在解析表达式时,要考虑各个运算符的优先级,比如说:<br>1+2*3应该让乘法先解析,如果画成语法树的形式,那么低优先级的运算符号应该更加靠近根节点,按照自上而下的顺序来描述表达式的规则.</p>
+        
+          <a class="article-more-a" href="/2018/01/14/仿c语言自制编程语言笔记2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">FakeC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/14/仿c语言自制编程语言笔记2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-仿c语言自制编程语言笔记1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/14/仿c语言自制编程语言笔记1/">仿c语言自制编程语言笔记1</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/14/仿c语言自制编程语言笔记1/" class="archive-article-date">
+  	<time datetime="2018-01-14T13:11:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="编译的流程"><a href="#编译的流程" class="headerlink" title="编译的流程"></a>编译的流程</h1><p>对于c语言这种,需要经历四个过程:</p>
+<ol>
+<li>预处理</li>
+<li>(狭义的)编译</li>
+<li>汇编</li>
+<li>链接<br>第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进行加载.<br>在jvm中,使用了JIT编译器,能够在程序运行时将程序转换为机器语言的编译器.
+        
+          <a class="article-more-a" href="/2018/01/14/仿c语言自制编程语言笔记1/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">FakeC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/14/仿c语言自制编程语言笔记1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Java学习笔记11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -622,169 +844,9 @@
 
 
   
-    <article id="post-Java学习笔记4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/18/Java学习笔记4/">Java学习笔记4</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/18/Java学习笔记4/" class="archive-article-date">
-  	<time datetime="2017-12-17T17:42:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-StringBuilder"><a href="#1-StringBuilder" class="headerlink" title="1.StringBuilder"></a>1.StringBuilder</h3><p>我们在用+号相加两个String类时，JVM会创建一个StringBuilder类，然后将所有相加的String类全都append()，最后toString()返回最后结果。以下两段代码：</p>
-        
-          <a class="article-more-a" href="/2017/12/18/Java学习笔记4/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/18/Java学习笔记4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Java学习笔记3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/18/Java学习笔记3/">Java学习笔记3</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/18/Java学习笔记3/" class="archive-article-date">
-  	<time datetime="2017-12-17T17:41:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="day3"><a href="#day3" class="headerlink" title="day3"></a>day3</h2><h3 id="1-Iterable"><a href="#1-Iterable" class="headerlink" title="1.Iterable"></a>1.Iterable</h3><p>继承这个接口就可以用foreach语法作用。</p>
-<p>数组不能转换成Iterable，要</p>
-        
-          <a class="article-more-a" href="/2017/12/18/Java学习笔记3/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/18/Java学习笔记3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Java学习笔记2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/18/Java学习笔记2/">Java学习笔记2</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/18/Java学习笔记2/" class="archive-article-date">
-  	<time datetime="2017-12-17T17:40:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h2><h3 id="1-abstract关键字"><a href="#1-abstract关键字" class="headerlink" title="1.abstract关键字"></a>1.abstract关键字</h3><p>抽象类中有若干个抽象方法，类和方法都要用abstract修饰。</p>
-        
-          <a class="article-more-a" href="/2017/12/18/Java学习笔记2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/18/Java学习笔记2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -796,7 +858,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 mhcoderwl
+    		&copy; 2018 mhcoderwl
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -875,10 +937,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVASE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">unp</a>
               </li>
              
@@ -888,6 +946,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JAVASE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -907,39 +969,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">编译器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">sockets</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color1">FakeC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -956,6 +994,42 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Flask框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">sockets</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
