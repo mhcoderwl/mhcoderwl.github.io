@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="mhcoderwl的博客">
 <meta property="og:description" content="草,上周的词法分析,语句分析的笔记忘记保存没了….
 表达式分析javaCC将一个规则转化为一个方法,非终端符号直接调用方法,终端符号直接转化为TOKEN,所以一个方法中左侧不能调用方法本身否则会出现无限递归解析.所以我们在解析表达式时,要考虑各个运算符的优先级,比如说:1+2*3应该让乘法先解析,如果画成语法树的形式,那么低优先级的运算符号应该更加靠近根节点,按照自上而下的顺序来描述表达式的规则.">
-<meta property="og:updated_time" content="2018-01-14T13:50:49.647Z">
+<meta property="og:updated_time" content="2018-01-23T02:21:47.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="仿c语言自制编程语言笔记2">
 <meta name="twitter:description" content="草,上周的词法分析,语句分析的笔记忘记保存没了….
@@ -185,7 +185,7 @@
 <li>TypeDefinition    定义类型的节点的基类</li>
 </ul>
 <h1 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h1><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Type</span>	<span class="comment">//基本类型</span></div><div class="line">	ArrayType</div><div class="line">	IntegerType</div><div class="line">	FunctionType</div><div class="line">	VoidType</div><div class="line">	PointerType</div><div class="line">	NamedType	<span class="comment">//抽象出的自命名的类型</span></div><div class="line">		CompositeType		<span class="comment">//组合类型</span></div><div class="line">			UnionType</div><div class="line">			StructType</div><div class="line">		UserType	<span class="comment">//typedef的类型</span></div><div class="line">TypeRef</div><div class="line">	ArrayTypeRef</div><div class="line">	FunctionTypeRef</div><div class="line">	IntegerTypeRef</div><div class="line">	PointerTypeRef</div><div class="line">	StructTypeRef</div><div class="line">	UnionTypeRef</div><div class="line">	UserTypeRef</div><div class="line">	VoidTypeRef</div><div class="line">TypeTable</div></pre></td></tr></table></figure>
-<h2 id="ref类型的作用"><a href="#ref类型的作用" class="headerlink" title="ref类型的作用"></a>ref类型的作用</h2><p>TypeRef和Type的区别在与,前者是类型的名称,后者是类型的定义.比如解析 struct s point;struct s {int x;},如果仅仅看struct s直接解析成Type的话,后面找不到block块,无法生成正确的struct s所对应的对象.所以解决方法是先仅记录名称,然后在转换为Type对象.因此在Parser中生成的都是ref类型.</p>
+<h2 id="ref类型的作用"><a href="#ref类型的作用" class="headerlink" title="ref类型的作用"></a>ref类型的作用</h2><p>TypeRef和Type的区别在与,前者是类型的名称,后者是类型的定义.比如解析<code>struct s point;struct s {int x;}</code>,那么在定义struct s类型之前就遇到了其类型的变量,在寻找其type类型时找不到该类型的定义.<br>所以解决方法是先仅记录名称,然后在转换为Type对象.因此在Parser中生成的都是ref类型.</p>
 <h2 id="一元运算符的解析"><a href="#一元运算符的解析" class="headerlink" title="一元运算符的解析"></a>一元运算符的解析</h2><p>如果有x-&gt;y-&gt;z这样的语法怎样解析呢?我们知道首先解析出token x,’-&gt;’成员调用符号和token y,那么状态转变为创造一个MemberNode节点,含有一个创造的调用表达式x,然后调用的对象是y,这样就完成了,继续解析出”-&gt;”和z,那么之前的MemberNode成为一个调用表达式,调用的对象为y,这样可以递归的进行.</p>
 <h2 id="左结合与右结合"><a href="#左结合与右结合" class="headerlink" title="左结合与右结合"></a>左结合与右结合</h2><p>1-2-3左结合,要用表达式<code>expr1() (&quot;-&quot; expr1())*</code>来解析,赋值语句x=y=z应该是右结合,所以需要<code>expr():{}{term() &quot;=&quot; expr()}</code>来解析.两种解析方法可以解析相同的语句,但是得到的语法树不同.</p>
 <h1 id="语句的语法树"><a href="#语句的语法树" class="headerlink" title="语句的语法树"></a>语句的语法树</h1><p>关于location的调用,每个节点都有一个location方法,包含一个Location对象,记录了节点所在的文件名和行号.</p>
@@ -230,7 +230,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -238,7 +238,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">FakeC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
         		</li>
       		
 		</ul>
@@ -459,19 +459,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">编译器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">FakeC</a>
+                <a href="javascript:void(0)" class="js-tag color4">C--</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,6 +491,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
@@ -500,14 +504,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">

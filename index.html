@@ -146,6 +146,159 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-仿c语言自制编程语言笔记5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/30/仿c语言自制编程语言笔记5/">仿c语言自制编程语言笔记5</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/30/仿c语言自制编程语言笔记5/" class="archive-article-date">
+  	<time datetime="2018-01-30T05:25:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="中间代码的转换"><a href="#中间代码的转换" class="headerlink" title="中间代码的转换"></a>中间代码的转换</h1><p>中间代码的目的主要有两个:</p>
+<ul>
+<li>让抽象语法树的代码转成更接近机器语言的代码.直接编写从抽象语法树到汇编语言的代码比较困难.</li>
+<li>保留一些进一步优化的意图.<br>比如说两条语句<code>n=n*1;n*=1;</code>这两条语句都属于赋值类型,都不改变n的值,如果要删去的话属于两类节点Opassignnode,BinaryOpNode,优化代码会重复出现.<br>还有ifelseswitchwhile这些跳转语句,尽量翻译成接近汇编指令的形式,改成一系列的代码和jump.
+        
+          <a class="article-more-a" href="/2018/01/30/仿c语言自制编程语言笔记5/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/30/仿c语言自制编程语言笔记5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-仿c语言自制编程语言笔记4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/23/仿c语言自制编程语言笔记4/">仿c语言自制编程语言笔记4</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/23/仿c语言自制编程语言笔记4/" class="archive-article-date">
+  	<time datetime="2018-01-23T02:09:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h1><p>语义分析是对生成的抽象语法树的语义进行分析,并且实施变量引用的消解和类型检查.有如下几个处理:</p>
+<ol>
+<li><strong>变量引用的消解</strong> 确定具体指向哪个变量.比如有全局变量i,有局部变量i,通过作用域来消除.</li>
+<li><strong>类型名称的消解</strong> TypeRef表示类型的名称,要转化为Type.</li>
+<li><strong>类型定义的检查</strong> 检查语义问题,比如void数组不合法,结构体含有自身类型的成员不合法等.</li>
+<li><strong>表达式的有效性检查</strong> 检查表达式是否可以执行.</li>
+<li><strong>静态类型检查</strong> 检查类型是否正确.<br><strong>上述执行的顺序是1-&gt;4,2-&gt;3-&gt;4,4-&gt;5.</strong>
+        
+          <a class="article-more-a" href="/2018/01/23/仿c语言自制编程语言笔记4/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/23/仿c语言自制编程语言笔记4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-仿c语言自制编程语言笔记3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -182,7 +335,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -190,7 +343,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">FakeC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
         		</li>
       		
 		</ul>
@@ -255,7 +408,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -263,7 +416,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">FakeC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
         		</li>
       		
 		</ul>
@@ -332,7 +485,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -340,7 +493,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">FakeC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
         		</li>
       		
 		</ul>
@@ -725,125 +878,6 @@
 
 
   
-    <article id="post-Java学习笔记6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/28/Java学习笔记6/">Java学习笔记6</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/28/Java学习笔记6/" class="archive-article-date">
-  	<time datetime="2017-12-28T12:00:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="day7"><a href="#day7" class="headerlink" title="day7"></a>day7</h1><h2 id="1-泛型"><a href="#1-泛型" class="headerlink" title="1.泛型"></a>1.泛型</h2><p>与c++泛型的第一个区别是，<em>java泛型的参数T不能为基本数据类型</em>，如果是int编译器自动推导成Integer。</p>
-<p>泛型第一个应用就是可以创造生成器，<em>工厂模式</em>的一个应用：</p>
-        
-          <a class="article-more-a" href="/2017/12/28/Java学习笔记6/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/28/Java学习笔记6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Java学习笔记5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/18/Java学习笔记5/">Java学习笔记5</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/18/Java学习笔记5/" class="archive-article-date">
-  	<time datetime="2017-12-17T17:43:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="day5"><a href="#day5" class="headerlink" title="day5"></a>day5</h2><h3 id="1-RTTI"><a href="#1-RTTI" class="headerlink" title="1.RTTI"></a>1.RTTI</h3><p>在运用多态时才有意义。每个类都有个Class对象用来判断自己的RTTI。</p>
-<h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><p>所有的类在第一次加载时，也就是第一次调用类的静态成员，例如构造器，就会加载到JVM中。</p>
-        
-          <a class="article-more-a" href="/2017/12/18/Java学习笔记5/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/18/Java学习笔记5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -973,19 +1007,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">编译器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">FakeC</a>
+                <a href="javascript:void(0)" class="js-tag color4">C--</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1005,6 +1039,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
@@ -1014,14 +1052,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">

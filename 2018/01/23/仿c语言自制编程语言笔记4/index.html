@@ -6,33 +6,36 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>仿c语言自制编程语言笔记1 | mhcoderwl的博客</title>
+  <title>仿c语言自制编程语言笔记4 | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="编译的流程对于c语言这种,需要经历四个过程:
+  <meta name="description" content="语义分析语义分析是对生成的抽象语法树的语义进行分析,并且实施变量引用的消解和类型检查.有如下几个处理:
 
-预处理
-(狭义的)编译
-汇编
-链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
+变量引用的消解 确定具体指向哪个变量.比如有全局变量i,有局部变量i,通过作用域来消除.
+类型名称的消解 TypeRef表示类型的名称,要转化为Type.
+类型定义的检查 检查语义问题,比如void数组不合法,结构体含有自身类型的成员不合法等.
+表达式的有效性检查 检查表达式是否可以执行.
+静">
 <meta property="og:type" content="article">
-<meta property="og:title" content="仿c语言自制编程语言笔记1">
-<meta property="og:url" content="http://yoursite.com/2018/01/14/仿c语言自制编程语言笔记1/index.html">
+<meta property="og:title" content="仿c语言自制编程语言笔记4">
+<meta property="og:url" content="http://yoursite.com/2018/01/23/仿c语言自制编程语言笔记4/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="编译的流程对于c语言这种,需要经历四个过程:
+<meta property="og:description" content="语义分析语义分析是对生成的抽象语法树的语义进行分析,并且实施变量引用的消解和类型检查.有如下几个处理:
 
-预处理
-(狭义的)编译
-汇编
-链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
-<meta property="og:updated_time" content="2018-01-23T02:22:00.840Z">
+变量引用的消解 确定具体指向哪个变量.比如有全局变量i,有局部变量i,通过作用域来消除.
+类型名称的消解 TypeRef表示类型的名称,要转化为Type.
+类型定义的检查 检查语义问题,比如void数组不合法,结构体含有自身类型的成员不合法等.
+表达式的有效性检查 检查表达式是否可以执行.
+静">
+<meta property="og:updated_time" content="2018-01-23T02:17:31.484Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="仿c语言自制编程语言笔记1">
-<meta name="twitter:description" content="编译的流程对于c语言这种,需要经历四个过程:
+<meta name="twitter:title" content="仿c语言自制编程语言笔记4">
+<meta name="twitter:description" content="语义分析语义分析是对生成的抽象语法树的语义进行分析,并且实施变量引用的消解和类型检查.有如下几个处理:
 
-预处理
-(狭义的)编译
-汇编
-链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
+变量引用的消解 确定具体指向哪个变量.比如有全局变量i,有局部变量i,通过作用域来消除.
+类型名称的消解 TypeRef表示类型的名称,要转化为Type.
+类型定义的检查 检查语义问题,比如void数组不合法,结构体含有自身类型的成员不合法等.
+表达式的有效性检查 检查表达式是否可以执行.
+静">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -160,145 +163,87 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-仿c语言自制编程语言笔记1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-仿c语言自制编程语言笔记4" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      仿c语言自制编程语言笔记1
+      仿c语言自制编程语言笔记4
     </h1>
   
 
         
-        <a href="/2018/01/14/仿c语言自制编程语言笔记1/" class="archive-article-date">
-  	<time datetime="2018-01-14T13:11:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+        <a href="/2018/01/23/仿c语言自制编程语言笔记4/" class="archive-article-date">
+  	<time datetime="2018-01-23T02:09:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="编译的流程"><a href="#编译的流程" class="headerlink" title="编译的流程"></a>编译的流程</h1><p>对于c语言这种,需要经历四个过程:</p>
+        <h1 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h1><p>语义分析是对生成的抽象语法树的语义进行分析,并且实施变量引用的消解和类型检查.有如下几个处理:</p>
 <ol>
-<li>预处理</li>
-<li>(狭义的)编译</li>
-<li>汇编</li>
-<li>链接<br>第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进行加载.<br>在jvm中,使用了JIT编译器,能够在程序运行时将程序转换为机器语言的编译器.<a id="more"></a>
+<li><strong>变量引用的消解</strong> 确定具体指向哪个变量.比如有全局变量i,有局部变量i,通过作用域来消除.</li>
+<li><strong>类型名称的消解</strong> TypeRef表示类型的名称,要转化为Type.</li>
+<li><strong>类型定义的检查</strong> 检查语义问题,比如void数组不合法,结构体含有自身类型的成员不合法等.</li>
+<li><strong>表达式的有效性检查</strong> 检查表达式是否可以执行.</li>
+<li><strong>静态类型检查</strong> 检查类型是否正确.<br><strong>上述执行的顺序是1-&gt;4,2-&gt;3-&gt;4,4-&gt;5.</strong><a id="more"></a>
 </li>
 </ol>
-<h1 id="编译的阶段"><a href="#编译的阶段" class="headerlink" title="编译的阶段"></a>编译的阶段</h1><h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><p>对代码进行每个词的词法分析,用一些结构体将每个合法的词解析出来.比如”x=1+2”,分割成五个单词,并且识别出是单词的语义.</p>
-<h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><p>词法分析后需要进行语法分析,转换为”语法树”.</p>
-<h2 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h2><p>通过解析代码获得语法树后,需要对树进行处理生成抽象语法树(AST),语义分析包括:</p>
+<p>一颗语法树的结构大致如下:<br><figure class="highlight excel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">=</div><div class="line">     *   *</div><div class="line">   *       *</div><div class="line"> *          +</div><div class="line">i         *   *</div><div class="line">        *       *</div><div class="line">       <span class="number">1</span>         <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p><strong>我们作上述的检查需要对整个树进行遍历,而且是需要先遍历左右子树然后再到父节点,是一个后序遍历.我们可以在每个节点的–类中实现一个check方法,方法中调用自己所含的节点check方法.为了将代码能够整合到一起,可以用vsitior模式,编写一个专门用来check的类,然后在每个类中调用这个类中的方法.考虑到每种消解都要进行遍历,因此一个节点如果对每种消解方法都要写一个调用,会导致成倍的增加,因此我们把所有消解方法抽象出一个接口,然后每个类中的accept方法接受这个接口.</strong><br>比如说,对于节点的visit接口:<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ASTVisitor</span> &#123;</div><div class="line">	<span class="comment">//语句的接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visit</span>(<span class="params">BlockNode node</span>)</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visit</span>(<span class="params">ExprStmtNode node</span>)</span>;</div><div class="line">    <span class="comment">//...</span></div><div class="line"></div><div class="line">    <span class="comment">// 表达式的visit接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visit</span>(<span class="params">AssignNode node</span>)</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visit</span>(<span class="params">OpAssignNode node</span>)</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visit</span>(<span class="params">CondExprNode node</span>)</span>;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样对于语义分析中的类型检查,我们就可以让它实现这个接口,这样在每个节点类里只要有一个参数是这个接口的visitor方法就可以:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">TypeChecker implements ASTVisitor&#123;</div><div class="line">	void visit(BlockNode <span class="keyword">node</span><span class="title">)&#123;</span></div><div class="line">		for(StmtNode sn:<span class="keyword">node</span>.<span class="title">stmts</span>())&#123;</div><div class="line">			sn.accept(this);</div><div class="line">		&#125;</div><div class="line">		for(Entity en:<span class="keyword">node</span>.<span class="title">entity</span>())&#123;</div><div class="line">			en.accept(this);</div><div class="line">		&#125;</div><div class="line">//每个节点类中</div><div class="line">Class <span class="keyword">Node</span><span class="title">&#123;</span></div><div class="line">public abstract void accept(ASTVisitor visitor);</div><div class="line">&#125;</div><div class="line">Class AST extends <span class="keyword">Node</span><span class="title">&#123;</span></div><div class="line">	public void accept(ASTVisitor visitor)&#123;</div><div class="line">		visitor.visit(this);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有三个接口,分别是:</p>
 <ul>
-<li>区分变量为局部变量还是全局变量</li>
-<li>解析变量的声明和引用</li>
-<li>变量和表达式的类型检查</li>
-<li>检查在引用变量之前是否进行了初始化</li>
-<li>检查函数是否按照定义返回了结果</li>
+<li><strong>ASTVisitor 语句和表达式的节点遍历</strong></li>
+<li><strong>EntityVisitor 给实体类型遍历</strong></li>
+<li><strong>DeclarationVisitor 给声明的类型节点遍历</strong></li>
 </ul>
-<p>上述处理结果都会反应到抽象语法树中,语法分析生成的语法树只是将代码的构造搬了过来.</p>
-<h2 id="生成中间代码"><a href="#生成中间代码" class="headerlink" title="生成中间代码"></a>生成中间代码</h2><p>将抽象语法树转化为只在编译器内部使用的中间代码,为了支持多种编程语言或者机器语言.</p>
-<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><p>中间代码转化为汇编语言,称为代码生成,负责这个模块的称为<strong>代码生成器</strong>.比如说汇编语言中局部变量只能通过寄存器来存放,寄存器数量非常有限而c或java都可以随意定义局部变量.</p>
-<h1 id="cmm概要"><a href="#cmm概要" class="headerlink" title="cmm概要"></a>cmm概要</h1><p>仿c语言语法的编程语言c–,cmm相对c语言除去的功能:</p>
+<h1 id="变量引用的消解"><a href="#变量引用的消解" class="headerlink" title="变量引用的消解"></a>变量引用的消解</h1><p>当变量名有冲突时,我们要考虑变量i是全局变量i还是局部变量i,对生成的抽象语法树中的VariableNode节点添加该变量的定义的信息,也就是Variable对象.<br>将整个作用域分成两块:</p>
 <ul>
-<li>预处理器,改用java中的import</li>
-<li>浮点数</li>
-<li>enum枚举</li>
-<li>结构体的位域</li>
-<li>结构体和联合体的赋值和返回值</li>
-<li>逗号表达式</li>
-<li>const,volatile,auto,register</li>
-<li>添加了boolean关键字</li>
-<li>对于语义规则更加严格.<h2 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h2>语法类似如下:<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"><span class="meta-keyword">import</span> stdio;</span></div><div class="line"><span class="meta"><span class="meta-keyword">import</span> sys.params;</span></div></pre></td></tr></table></figure>
+<li>Scope 表示作用域的抽象类</li>
+<li>ToplevelScope 表示程序顶层的作用域.保存有函数和全局变量.</li>
+<li>LocalScope 表示一个临时变量的作用域,保存形参和临时变量.</li>
+</ul>
+<p>我们作用域可形成一颗树,根节点是全局作用域,其中包含着若干局部作用域,每个局部又包含局部,这样把整个域划分好:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ToplevelScope</div><div class="line"><span class="comment">*           *</span></div><div class="line"><span class="comment">      *              *</span></div><div class="line">  LocalScope       LocalScope</div><div class="line"><span class="comment">   *  *    *</span></div><div class="line"><span class="comment">  *   *      *</span></div></pre></td></tr></table></figure></p>
+<p>我们查找一个变量的定义,只要从引用了该变量的作用域往上查找到第一个变量定义即为其定义.<br><strong>用来做变量引用消解的类为LocalResolver,也是实现了ASTVisitor接口,该类利用栈来一边生成Scope对象的树一遍进行变量引用的消解.每次将当前作用域的符号表也就是LocalScope对象,push到栈内,对一个变量查找其定义时,从栈顶开始查找,这样能一边给变量添加定义,也能生成Scope树.</strong></p>
+<h2 id="Scope类"><a href="#Scope类" class="headerlink" title="Scope类"></a>Scope类</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Scope</span> </span>&#123;</div><div class="line">	<span class="keyword">protected</span> <span class="keyword">List</span>&lt;LocalScope&gt; children;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>主要就是包含若干子作用域.</p>
+<h2 id="ToplevelScope类"><a href="#ToplevelScope类" class="headerlink" title="ToplevelScope类"></a>ToplevelScope类</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ToplevelScope</span> <span class="keyword">extends</span> <span class="title">Scope</span></span>&#123;</div><div class="line">	<span class="type">Map</span>&lt;<span class="type">String</span>, <span class="type">Entity</span>&gt;entities;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="LocalScope类"><a href="#LocalScope类" class="headerlink" title="LocalScope类"></a>LocalScope类</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LocalScope</span> <span class="keyword">extends</span> <span class="title">Scope</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="type">Scope</span> parent;</div><div class="line">	<span class="keyword">private</span> <span class="type">Map</span>&lt;<span class="type">String</span>, <span class="type">DefinedVariable</span>&gt;variables;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>包含了一个保存当前作用域内定义的变量或者函数,称之为符号表.局部作用域还保存了父作用域.</p>
+<h2 id="LocalResolver"><a href="#LocalResolver" class="headerlink" title="LocalResolver"></a>LocalResolver</h2><p>通过之前编写的visitor模式,对于我们想要实现的操作,我们只要在类中实现具体的visit方法即可,不用管如何在节点中遍历的.<br>先看含有的成员:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LocalResolver</span> <span class="keyword">extends</span> <span class="title">Visitor</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="type">LinkedList</span>&lt;<span class="type">Scope</span>&gt;scopeStack;<span class="comment">//用来处理的栈</span></div><div class="line">	<span class="keyword">private</span> <span class="type">ConstantTable</span> constantTable<span class="comment">//用来管理字符串常量的表</span></div><div class="line">	<span class="keyword">private</span> <span class="type">ErrorHandler</span> errorHandler;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中栈通过pushScope操作来完成,对于变量节点VariableNode的处理,都是在当前栈顶的作用域或向上查找定义.<br>下面是总的调用,我们先导入所有全局变量的定义,因此不需要像c语言一样考虑全局变量或函数定义和使用的先后顺序:<br><figure class="highlight pony"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public void resolve(<span class="type">AST</span> ast)&#123;</div><div class="line">		<span class="type">ToplevelScope</span> scope=<span class="function"><span class="keyword">new</span> <span class="title">ToplevelScope</span>();</span></div><div class="line">		<span class="title">scopeStack</span>.<span class="title">push</span>(scope);</div><div class="line">		<span class="comment">//首先添加全局声明</span></div><div class="line">		<span class="title">for</span>(<span class="type">Entity</span> entity:ast.declarations() )&#123;</div><div class="line">			<span class="title">scope</span>.<span class="title">declareEntity</span>(entity);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//添加全局定义</span></div><div class="line">		<span class="title">for</span>(<span class="type">Entity</span> entity :ast.definitions())&#123;</div><div class="line">			<span class="title">scope</span>.<span class="title">defineEntity</span>(entity);</div><div class="line">		&#125;</div><div class="line">		<span class="title">resolveConstantValues</span>(ast.constants());</div><div class="line">		<span class="title">resolveFunctions</span>(ast.definedFunctions());</div><div class="line">		<span class="title">resolveDefinedGvars</span>(ast.definedVariables());</div><div class="line">		<span class="title">scope</span>.<span class="title">checkReference</span>(errorHandler);</div><div class="line">		<span class="comment">//保存信息</span></div><div class="line">		<span class="title">ast</span>.<span class="title">setScope</span>(scope);</div><div class="line">		<span class="title">ast</span>.<span class="title">setConstantTable</span>(constantTable);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>最后实现具体的三个visit:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public Void visit(VariableNode <span class="keyword">node</span><span class="title">)&#123;</span></div><div class="line">		String <span class="attr">varName=</span><span class="keyword">node</span>.<span class="title">name</span>();</div><div class="line">		Entity <span class="attr">ent=</span>currentScope().get(varName);//得到定义</div><div class="line">		ent.refered();</div><div class="line">		<span class="keyword">node</span>.<span class="title">setEntity</span>(ent);//建立联系</div><div class="line">	&#125;</div><div class="line">	public Void visit(StringLiteralNode <span class="keyword">node</span><span class="title">)&#123;</span></div><div class="line">		String <span class="attr">name=</span><span class="keyword">node</span>.<span class="title">value</span>();</div><div class="line">		<span class="keyword">node</span>.<span class="title">setEntry</span>(constantTable.insert(name));</div><div class="line">		return null;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是作用域入栈和出栈的方法,由于形参的元素parameter是继承自DefinedVariable,因此需要向下兼容.<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pushScope</span>(<span class="params">List&lt;? extends DefinedVariable&gt; vars</span>)</span>&#123;</div><div class="line">		LocalScope scope = <span class="keyword">new</span> LocalScope(currentScope());</div><div class="line">        <span class="keyword">for</span> (DefinedVariable <span class="keyword">var</span> : vars) &#123;</div><div class="line">            <span class="keyword">if</span> (scope.hasDefinedVariable(<span class="keyword">var</span>.name())) &#123;</div><div class="line">                error(<span class="keyword">var</span>.location(),</div><div class="line">                    <span class="string">"duplicated variable in scope: "</span> + <span class="keyword">var</span>.name());</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                scope.defineVariable(<span class="keyword">var</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        scopeStack.addLast(scope);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> Scope <span class="title">popScope</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> scopeStack.pop();</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="类型名称的消解"><a href="#类型名称的消解" class="headerlink" title="类型名称的消解"></a>类型名称的消解</h1><p>目的在于将TypeRef转换Type,我们用TypeResolver类来处理,功能仅仅是遍历抽象语法树,遇到TypeRef类就从叶子节点开始转换为Type类型.没有作用域的限制.<br>TypeRef和Type的对应关系保存在TypeTable中.<br>TypeResolver需要一张类型表和一个错误处理的类,类型表在我们遍历语法树的同时向其中添加类型定义.<br>变量的类型有两种一种定义的一种是声明的,定义的变量又分是否有初始化的.</p>
+<h2 id="TypeResolver"><a href="#TypeResolver" class="headerlink" title="TypeResolver"></a>TypeResolver</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TypeResolver</span> <span class="keyword">extends</span> <span class="title">Visitor</span></span></div><div class="line">		implements <span class="type">DeclarationVisitor</span>&lt;<span class="type">Void</span>&gt;,<span class="type">EntityVisitor</span>&lt;<span class="type">Void</span>&gt;&#123;</div><div class="line">	<span class="type">TypeTable</span> typeTable;</div><div class="line">	<span class="type">ErrorHandler</span> errorHandler;</div><div class="line">	public void resolve(<span class="type">AST</span>  ast)&#123;</div><div class="line">		defineTypes(ast.types());</div><div class="line">		<span class="keyword">for</span>(<span class="type">TypeDefinition</span> t:ast.types())&#123;</div><div class="line">			t.accept(<span class="keyword">this</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span>(<span class="type">Entity</span> ent:ast.entities())&#123;</div><div class="line">			ent.accept(<span class="keyword">this</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line">用来消解的方法首先对全局定义的结构体,联合体,还有类型别名这些类型添加到表中,这样接下来遇到typeRef类型就从表中查找其对应的<span class="type">Type</span>,然后绑定到节点的<span class="type">TypeNode</span>上.(这也是为什么<span class="type">TypeNode</span>有两个成员<span class="type">Type</span>和<span class="type">TypeRef</span>)</div></pre></td></tr></table></figure>
+<h2 id="TypeTable"><a href="#TypeTable" class="headerlink" title="TypeTable"></a>TypeTable</h2><p>关键代码:<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TypeTable</span> &#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> intSize;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> longSize;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pointerSize;<span class="comment">//规定的指针所占字节</span></div><div class="line">    Map&lt;TypeRef,Type&gt;table;</div><div class="line">	&#123;...&#125;<span class="comment">//一段静态代码用来添加表中基本类型</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TypeTable</span>(<span class="params"><span class="keyword">int</span> intSize,<span class="keyword">int</span> longSize,<span class="keyword">int</span> pointerSize</span>)</span>&#123;</div><div class="line">		<span class="keyword">this</span>.intSize = intSize;</div><div class="line">	    <span class="keyword">this</span>.longSize = longSize;</div><div class="line">	    <span class="keyword">this</span>.pointerSize = pointerSize;</div><div class="line">		table=<span class="keyword">new</span> HashMap&lt;TypeRef,Type&gt;();</div><div class="line">	&#125;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们的table其实就是一个类型名称和其对应类型的map,在遇到定义的类型时,我们向表中添加自己定义的类型元素.</p>
+<h1 id="类型定义检查"><a href="#类型定义检查" class="headerlink" title="类型定义检查"></a>类型定义检查</h1><p>主要检查三个问题:</p>
+<ul>
+<li>包含void数组,结构体,联合体不合法.</li>
+<li>成员重复的结构体联合体.</li>
+<li>循环定义的结构体,联合体.<br>第三个问题的解决可以转成图的有环问题:<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">	 * 检查是否有循环定义:</div><div class="line">	 * 			结构体a中含有结构体b,b中含c,c中含a</div><div class="line">	 * 转换成一个有向图中检查是否有环的问题.</div><div class="line">	 * 可以用DFS,也可以用拓扑排序,后者需要得到图的所有节点,前者可以查看以某一个节点为起点来检查</div><div class="line">	 */</div><div class="line">	<span class="comment">//**************DFS实现***************</span></div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">checkRecursiveDefinition</span><span class="params">(Type t,ErrorHandler errorHandler)</span></span>&#123;</div><div class="line">		HashSet&lt;Type&gt;visited=<span class="keyword">new</span> HashSet&lt;Type&gt;();</div><div class="line">		_checkRecursiveDefinition( t, errorHandler,visited);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">_checkRecursiveDefinition</span><span class="params">(Type t,ErrorHandler errorHandler,HashSet&lt;Type&gt; visited)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(visited.contains(t))&#123;</div><div class="line">			errorHandler.<span class="keyword">error</span>(((NamedType)t).location(),<span class="string">"recursive Type Definition: "</span>+t);</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			visited.add(t);</div><div class="line">			<span class="comment">//复合类型检查所有成员</span></div><div class="line">			<span class="keyword">if</span>(t <span class="keyword">instanceof</span> CompositeType)&#123;</div><div class="line">				CompositeType tmp=(CompositeType)t;</div><div class="line">				<span class="keyword">for</span>(Type memberType:tmp.memberTypes())&#123;</div><div class="line">					_checkRecursiveDefinition( memberType, errorHandler,visited);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="comment">//类型别名指向的类型</span></div><div class="line">			<span class="keyword">if</span>(t <span class="keyword">instanceof</span> UserType)&#123;</div><div class="line">				_checkRecursiveDefinition( ((UserType)t).realType(), errorHandler,visited);</div><div class="line">			&#125;</div><div class="line">			<span class="comment">//数组的基本类型也在图中</span></div><div class="line">			<span class="keyword">if</span>(t <span class="keyword">instanceof</span> ArrayType)&#123;</div><div class="line">				ArrayType tmp=(ArrayType)t;</div><div class="line">				_checkRecursiveDefinition( tmp.baseType(), errorHandler,visited);</div><div class="line">			&#125;</div><div class="line">			visited.remove(t);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>后缀名为’.cmm’的类似于c语言中的源文件,后缀名为’.hm’的为头文件,一般包含下述声明:</p>
+<h1 id="表达式有效性"><a href="#表达式有效性" class="headerlink" title="表达式有效性"></a>表达式有效性</h1><p>主要解决表达式不正确的情况,有如下几种:</p>
 <ul>
-<li>函数声明</li>
-<li>变量声明(不可包含初始值的定义)</li>
-<li>常量定义(这里必须有初始值)</li>
-<li>结构体定义</li>
-<li>联合体定义</li>
-<li>typedef<br>比如<code>stdio.hm</code>的内容:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> stddef;</div><div class="line"><span class="keyword">import</span> stdarg;</div><div class="line">typefef <span class="keyword">unsigned</span> <span class="keyword">long</span> FILE;<span class="comment">// dummy</span></div><div class="line"><span class="keyword">extern</span> FILE* <span class="built_in">stdin</span>;</div><div class="line">...</div></pre></td></tr></table></figure>
-</li>
+<li>无法赋值的表达式被赋值 1=2</li>
+<li>非法的数组引用 “ab”[1]</li>
+<li>非法的函数调用 “string”(a)</li>
+<li>非法的成员调用 1.member</li>
+<li>操作数非法的指针间接引用(1-&gt;memb)</li>
+<li>非指针对象取值 *1</li>
+<li>非左值表达式取地址 &amp;func(a)</li>
 </ul>
-<h1 id="cmc编译器的代码构成"><a href="#cmc编译器的代码构成" class="headerlink" title="cmc编译器的代码构成"></a>cmc编译器的代码构成</h1><table>
-<thead>
-<tr>
-<th><strong>包</strong></th>
-<th><strong>包中的类</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>asm</td>
-<td>汇编对象的类</td>
-</tr>
-<tr>
-<td>ast</td>
-<td>抽象语法树的类</td>
-</tr>
-<tr>
-<td>compiler</td>
-<td>Compiler类等编译器的核心类</td>
-</tr>
-<tr>
-<td>entity</td>
-<td>表示函数和变量等实体的类</td>
-</tr>
-<tr>
-<td>exception</td>
-<td>异常的类</td>
-</tr>
-<tr>
-<td>ir</td>
-<td>中间代码的类</td>
-</tr>
-<tr>
-<td>parser</td>
-<td>解析器类</td>
-</tr>
-<tr>
-<td>sysdep</td>
-<td>包含依赖于OS的代码的类(汇编器和链接器)</td>
-</tr>
-<tr>
-<td>sysdep.x86</td>
-<td>包含依赖于OS和CPU代码的类(代码生成器)</td>
-</tr>
-<tr>
-<td>type</td>
-<td>表示cb的类型的类</td>
-</tr>
-<tr>
-<td>utils</td>
-<td>小的工具类</td>
-</tr>
-</tbody>
-</table>
-<p>一个大致的流程:</p>
-<ol>
-<li>首先看Compiler包,其中包含了一个Compiler类,有main入口,也就是编译的入口</li>
-<li>由传入的命令行参数得到所有源文件的名字.</li>
-<li>调用build方法对源文件进行编译,首先用compile得到汇编文件.然后用assemble运行汇编器,转换为目标文件.</li>
-<li>其中compile完成编译器前端部分,首先用对源文件用parser得到AST,然后语义分析完成抽象语法树.最后一个IR类生成中间代码.</li>
-</ol>
-<h1 id="解析器javaCC"><a href="#解析器javaCC" class="headerlink" title="解析器javaCC"></a>解析器javaCC</h1><p>解析器的作用是,规定好语法,自动生成解析相应语法的代码.否则手动编写NFA转DFA,状态转移表,LL算法,手动生成语法树.<br>javaCC是LL解析器,<br>语法规则用一个”.jj”的文件来描述,称为语法描述文件.首先,文件的大致格式如下:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">options</span>&#123;</div><div class="line">JAVA的选项</div><div class="line">&#125;</div><div class="line"></div><div class="line">PARSER_BEGIN(解析器类名)</div><div class="line"><span class="keyword">package</span> 包名;</div><div class="line"><span class="keyword">import</span> 库名;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> 解析器类名&#123;</div><div class="line">	<span class="comment">//任意java代码</span></div><div class="line">&#125;</div><div class="line">PRASER_END(解析器类名)</div><div class="line"></div><div class="line">扫描器的描述</div><div class="line"></div><div class="line">解析器的描述</div></pre></td></tr></table></figure></p>
-<p>举个加法的例子:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">options</span>&#123;</div><div class="line"><span class="keyword">STATIC</span> = <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">PARSER_BEGIN(Adder)</div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Adder&#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> main(String[] args)&#123;</div><div class="line">		<span class="keyword">for</span>(String arg:args)&#123;</div><div class="line">			<span class="keyword">try</span>&#123;</div><div class="line">				System.out.<span class="keyword">println</span>(evaluate(arg));</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">catch</span>(ParseException e)&#123;</div><div class="line">				System.err.<span class="keyword">println</span>(e.getMessage());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">long</span> evaluate(String src)<span class="keyword">throws</span> ParseException&#123;</div><div class="line">		Reader reader=<span class="keyword">new</span> StringReader(src);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Adder(reader).expr();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">PARSER_END(Adder)</div><div class="line"></div><div class="line">SKIP: &#123; &lt;[<span class="string">" "</span>,<span class="string">"\t"</span>,<span class="string">"\n"</span>,<span class="string">"\r"</span>]&gt; &#125;</div><div class="line"></div><div class="line">TOKEN:&#123; &lt; INTEGER:([<span class="string">"0"</span>-<span class="string">"9"</span>])+ &gt;&#125;</div><div class="line"></div><div class="line"><span class="keyword">long</span> expr():</div><div class="line">&#123;</div><div class="line">	Token x,y;</div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">x=&lt;INTEGER&gt;<span class="string">"+"</span>y=&lt;INTEGER&gt;&lt;EOF&gt;</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">Long</span>.parseLong(x.image)+<span class="keyword">Long</span>.parseLong(y.image);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>注意,要运行javaCC生成的解析器类,需要下面两个步骤:</p>
-<ol>
-<li>生成解析器类的对象实例(上例Adder就是一个解析器类)</li>
-<li>用生成的对象调用和需要解析的语句同名的方法.(也就是调用expr())</li>
-<li>JavaCC生成的解析器中默认定义有如下4个类型的构造函数:</li>
-</ol>
-<ul>
-<li>Parser(inputStream s)</li>
-<li>Parser(inputStream s,String encoding)//如果要解析中文必须用这个或者下面的构造函数,并且在设置里将UNICODE_INPUT设为true.</li>
-<li>Parser(Reader r)</li>
-<li>Parser(xxxxTokenManager tm)</li>
-</ul>
+<p>检查的方法主要分成两类,<strong>第一,检查表达式是否可以被赋值,第二,检查操作数的类型是否符合.</strong><br>CorrectExprChecker类<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">CorrectExprChecker</span> <span class="keyword">extends</span> <span class="title">Visitor</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="type">TypeTable</span> table;<span class="comment">//用来生成指针类型(指定指针大小)</span></div><div class="line">	<span class="keyword">private</span> <span class="type">ErrorHandler</span> errorHandler;<span class="comment">//错误处理</span></div><div class="line">	public <span class="type">CorrectExprChecker</span>(<span class="type">TypeTable</span> table,<span class="type">ErrorHandler</span> errorHandler)&#123;</div><div class="line">		<span class="keyword">this</span>.table=table;</div><div class="line">		<span class="keyword">this</span>.errorHandler=errorHandler;</div><div class="line">	&#125;</div><div class="line">	public void check(<span class="type">AST</span> ast)<span class="keyword">throws</span> <span class="type">SemanticException</span>&#123;</div><div class="line">		checkGlobalVariables(ast.definedVariables());</div><div class="line">		checkfunctions(ast.definedFunctions());</div><div class="line">		<span class="keyword">if</span> (errorHandler.errorOccured()) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">SemanticException</span>(<span class="string">"compile failed."</span>);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>关键调用为check,首先处理全局变量中的初始化的表达式,然后处理定义的函数内部的表达式的正确性.</p>
+<h1 id="静态类型检查"><a href="#静态类型检查" class="headerlink" title="静态类型检查"></a>静态类型检查</h1><p>负责检查操作数的类型限制.比如乘法和加法左右必须都是整数,参数为int类型的函数不能传入其他类型的实参.<br>个人不喜欢编译器自动隐式转换,如果需要隐式转换则对于需要转换的节点改成CastNode节点,并附上要转换的类型即可,不实现此功能.<br>首先是启动方法,检查变量:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">check</span><span class="params">(AST ast)</span></span>&#123;</div><div class="line">		 checkVariables(ast.definedVariables());</div><div class="line">		 checkFunctions(ast.definedFunctions());</div><div class="line">		 <span class="keyword">if</span>(errorHandler.errorOccured()) &#123;</div><div class="line">	            <span class="keyword">throw</span> <span class="keyword">new</span> SemanticException(<span class="string">"compile failed."</span>);</div><div class="line">		 &#125;</div><div class="line">	 &#125;</div></pre></td></tr></table></figure></p>
+<p>对于运算符两侧含有short和char类型,需要向上转换到signed int,这属于整型提升.<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">Type</span> <span class="type">integralPromotion(<span class="keyword">Type</span> </span>t) &#123;</div><div class="line">        <span class="keyword">if</span> (!t.isInteger()) &#123;</div><div class="line">            throw <span class="keyword">new</span> Error(<span class="string">"integralPromotion for "</span> + t);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">Type</span> <span class="type">intType </span>= typeTable.signedInt();</div><div class="line">        <span class="keyword">if</span> (t.size() &lt; intType.size()) &#123;</div><div class="line">            <span class="keyword">return</span> intType;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> t;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>在函数类型中,规定禁止结构体或者联合体称为函数参数类型并且不能赋值.<br><strong>在这一步加了一个boolean类型,对于条件表达式的返回类型,暂且归到整型中,添加了boolean关键字,转换为一个0或者1的字符字面量.占一个字节</strong></p>
 
       
 
@@ -397,7 +342,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/14/仿c语言自制编程语言笔记1/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/23/仿c语言自制编程语言笔记4/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -411,18 +356,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/01/14/仿c语言自制编程语言笔记2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/01/30/仿c语言自制编程语言笔记5/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          仿c语言自制编程语言笔记2
+          仿c语言自制编程语言笔记5
         
       </div>
     </a>
   
   
-    <a href="/2017/12/28/Java学习笔记11/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java学习笔记11</div>
+    <a href="/2018/01/14/仿c语言自制编程语言笔记3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">仿c语言自制编程语言笔记3</div>
       <i class="icon-circle-right"></i>
     </a>
   

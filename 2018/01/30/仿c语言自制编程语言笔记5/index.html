@@ -6,33 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>仿c语言自制编程语言笔记1 | mhcoderwl的博客</title>
+  <title>仿c语言自制编程语言笔记5 | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="编译的流程对于c语言这种,需要经历四个过程:
+  <meta name="description" content="中间代码的转换中间代码的目的主要有两个:
 
-预处理
-(狭义的)编译
-汇编
-链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
+让抽象语法树的代码转成更接近机器语言的代码.直接编写从抽象语法树到汇编语言的代码比较困难.
+保留一些进一步优化的意图.比如说两条语句n=n*1;n*=1;这两条语句都属于赋值类型,都不改变n的值,如果要删去的话属于两类节点Opassignnode,BinaryOpNode,优化代码会重复出现.还有ifelseswitchwhile这些跳转语句,尽量翻译成">
 <meta property="og:type" content="article">
-<meta property="og:title" content="仿c语言自制编程语言笔记1">
-<meta property="og:url" content="http://yoursite.com/2018/01/14/仿c语言自制编程语言笔记1/index.html">
+<meta property="og:title" content="仿c语言自制编程语言笔记5">
+<meta property="og:url" content="http://yoursite.com/2018/01/30/仿c语言自制编程语言笔记5/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="编译的流程对于c语言这种,需要经历四个过程:
+<meta property="og:description" content="中间代码的转换中间代码的目的主要有两个:
 
-预处理
-(狭义的)编译
-汇编
-链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
-<meta property="og:updated_time" content="2018-01-23T02:22:00.840Z">
+让抽象语法树的代码转成更接近机器语言的代码.直接编写从抽象语法树到汇编语言的代码比较困难.
+保留一些进一步优化的意图.比如说两条语句n=n*1;n*=1;这两条语句都属于赋值类型,都不改变n的值,如果要删去的话属于两类节点Opassignnode,BinaryOpNode,优化代码会重复出现.还有ifelseswitchwhile这些跳转语句,尽量翻译成">
+<meta property="og:updated_time" content="2018-01-30T05:27:47.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="仿c语言自制编程语言笔记1">
-<meta name="twitter:description" content="编译的流程对于c语言这种,需要经历四个过程:
+<meta name="twitter:title" content="仿c语言自制编程语言笔记5">
+<meta name="twitter:description" content="中间代码的转换中间代码的目的主要有两个:
 
-预处理
-(狭义的)编译
-汇编
-链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
+让抽象语法树的代码转成更接近机器语言的代码.直接编写从抽象语法树到汇编语言的代码比较困难.
+保留一些进一步优化的意图.比如说两条语句n=n*1;n*=1;这两条语句都属于赋值类型,都不改变n的值,如果要删去的话属于两类节点Opassignnode,BinaryOpNode,优化代码会重复出现.还有ifelseswitchwhile这些跳转语句,尽量翻译成">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -160,145 +154,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-仿c语言自制编程语言笔记1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-仿c语言自制编程语言笔记5" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      仿c语言自制编程语言笔记1
+      仿c语言自制编程语言笔记5
     </h1>
   
 
         
-        <a href="/2018/01/14/仿c语言自制编程语言笔记1/" class="archive-article-date">
-  	<time datetime="2018-01-14T13:11:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+        <a href="/2018/01/30/仿c语言自制编程语言笔记5/" class="archive-article-date">
+  	<time datetime="2018-01-30T05:25:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="编译的流程"><a href="#编译的流程" class="headerlink" title="编译的流程"></a>编译的流程</h1><p>对于c语言这种,需要经历四个过程:</p>
-<ol>
-<li>预处理</li>
-<li>(狭义的)编译</li>
-<li>汇编</li>
-<li>链接<br>第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进行加载.<br>在jvm中,使用了JIT编译器,能够在程序运行时将程序转换为机器语言的编译器.<a id="more"></a>
-</li>
-</ol>
-<h1 id="编译的阶段"><a href="#编译的阶段" class="headerlink" title="编译的阶段"></a>编译的阶段</h1><h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><p>对代码进行每个词的词法分析,用一些结构体将每个合法的词解析出来.比如”x=1+2”,分割成五个单词,并且识别出是单词的语义.</p>
-<h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><p>词法分析后需要进行语法分析,转换为”语法树”.</p>
-<h2 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h2><p>通过解析代码获得语法树后,需要对树进行处理生成抽象语法树(AST),语义分析包括:</p>
+        <h1 id="中间代码的转换"><a href="#中间代码的转换" class="headerlink" title="中间代码的转换"></a>中间代码的转换</h1><p>中间代码的目的主要有两个:</p>
 <ul>
-<li>区分变量为局部变量还是全局变量</li>
-<li>解析变量的声明和引用</li>
-<li>变量和表达式的类型检查</li>
-<li>检查在引用变量之前是否进行了初始化</li>
-<li>检查函数是否按照定义返回了结果</li>
-</ul>
-<p>上述处理结果都会反应到抽象语法树中,语法分析生成的语法树只是将代码的构造搬了过来.</p>
-<h2 id="生成中间代码"><a href="#生成中间代码" class="headerlink" title="生成中间代码"></a>生成中间代码</h2><p>将抽象语法树转化为只在编译器内部使用的中间代码,为了支持多种编程语言或者机器语言.</p>
-<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><p>中间代码转化为汇编语言,称为代码生成,负责这个模块的称为<strong>代码生成器</strong>.比如说汇编语言中局部变量只能通过寄存器来存放,寄存器数量非常有限而c或java都可以随意定义局部变量.</p>
-<h1 id="cmm概要"><a href="#cmm概要" class="headerlink" title="cmm概要"></a>cmm概要</h1><p>仿c语言语法的编程语言c–,cmm相对c语言除去的功能:</p>
-<ul>
-<li>预处理器,改用java中的import</li>
-<li>浮点数</li>
-<li>enum枚举</li>
-<li>结构体的位域</li>
-<li>结构体和联合体的赋值和返回值</li>
-<li>逗号表达式</li>
-<li>const,volatile,auto,register</li>
-<li>添加了boolean关键字</li>
-<li>对于语义规则更加严格.<h2 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h2>语法类似如下:<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"><span class="meta-keyword">import</span> stdio;</span></div><div class="line"><span class="meta"><span class="meta-keyword">import</span> sys.params;</span></div></pre></td></tr></table></figure>
+<li>让抽象语法树的代码转成更接近机器语言的代码.直接编写从抽象语法树到汇编语言的代码比较困难.</li>
+<li>保留一些进一步优化的意图.<br>比如说两条语句<code>n=n*1;n*=1;</code>这两条语句都属于赋值类型,都不改变n的值,如果要删去的话属于两类节点Opassignnode,BinaryOpNode,优化代码会重复出现.<br>还有ifelseswitchwhile这些跳转语句,尽量翻译成接近汇编指令的形式,改成一系列的代码和jump.<a id="more"></a>
+按照语法树的结构遍历树,生成中间代码,因此生成的中间代码本身还是树型,中间代码是单纯的语句列表,列表由一系列表达式组成.<br>和抽象语法树的节点结构一样,组成中间代码的节点结构也是继承关系,如下所示:<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">IR				<span class="comment">//中间代码的根节点</span></div><div class="line">Stmt				<span class="comment">//基类</span></div><div class="line">	Assign			<span class="comment">//赋值</span></div><div class="line">	CJump			<span class="comment">//跳转</span></div><div class="line">	Jump			<span class="comment">//无条件跳转</span></div><div class="line">	<span class="keyword">Switch</span>			<span class="comment">//多分支跳转</span></div><div class="line">	LabelStmt		<span class="comment">//标签</span></div><div class="line">	ExprStmt		<span class="comment">//仅包含一个表达式的语句</span></div><div class="line">	<span class="keyword">Return</span>			<span class="comment">//返回语句</span></div><div class="line">Expr				<span class="comment">//基类</span></div><div class="line">	UnaryOp			<span class="comment">//一元运算</span></div><div class="line">	BinaryOp		<span class="comment">//二元运算</span></div><div class="line">	<span class="keyword">Call</span>			<span class="comment">//函数调用</span></div><div class="line">	Addr			<span class="comment">//取地址</span></div><div class="line">	Mem			<span class="comment">//取值</span></div><div class="line">	Var			<span class="comment">//变量</span></div><div class="line">	<span class="keyword">Int</span>			<span class="comment">//整数常量</span></div><div class="line">	Str			<span class="comment">//字符串常量</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>后缀名为’.cmm’的类似于c语言中的源文件,后缀名为’.hm’的为头文件,一般包含下述声明:</p>
-<ul>
-<li>函数声明</li>
-<li>变量声明(不可包含初始值的定义)</li>
-<li>常量定义(这里必须有初始值)</li>
-<li>结构体定义</li>
-<li>联合体定义</li>
-<li>typedef<br>比如<code>stdio.hm</code>的内容:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> stddef;</div><div class="line"><span class="keyword">import</span> stdarg;</div><div class="line">typefef <span class="keyword">unsigned</span> <span class="keyword">long</span> FILE;<span class="comment">// dummy</span></div><div class="line"><span class="keyword">extern</span> FILE* <span class="built_in">stdin</span>;</div><div class="line">...</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="cmc编译器的代码构成"><a href="#cmc编译器的代码构成" class="headerlink" title="cmc编译器的代码构成"></a>cmc编译器的代码构成</h1><table>
-<thead>
-<tr>
-<th><strong>包</strong></th>
-<th><strong>包中的类</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>asm</td>
-<td>汇编对象的类</td>
-</tr>
-<tr>
-<td>ast</td>
-<td>抽象语法树的类</td>
-</tr>
-<tr>
-<td>compiler</td>
-<td>Compiler类等编译器的核心类</td>
-</tr>
-<tr>
-<td>entity</td>
-<td>表示函数和变量等实体的类</td>
-</tr>
-<tr>
-<td>exception</td>
-<td>异常的类</td>
-</tr>
-<tr>
-<td>ir</td>
-<td>中间代码的类</td>
-</tr>
-<tr>
-<td>parser</td>
-<td>解析器类</td>
-</tr>
-<tr>
-<td>sysdep</td>
-<td>包含依赖于OS的代码的类(汇编器和链接器)</td>
-</tr>
-<tr>
-<td>sysdep.x86</td>
-<td>包含依赖于OS和CPU代码的类(代码生成器)</td>
-</tr>
-<tr>
-<td>type</td>
-<td>表示cb的类型的类</td>
-</tr>
-<tr>
-<td>utils</td>
-<td>小的工具类</td>
-</tr>
-</tbody>
-</table>
-<p>一个大致的流程:</p>
+<p>相比于语法树中的表达式节点,这里的表达式的类型直接定义在基类中,为asm中定义的type,而不是语法树中定义的type,asm中定义的type只含有定义不同字节长度INT类型.除此之外还要制定运算符op的类型,用一个枚举类型定义各种运算符的名称.而且运算符的定义有有无符号的区分,这样asm.Type中的类型就不需要符号.类型中的代码基本都和翻译对应的语法树节点代码相符.</p>
+<h2 id="IRGenerator"><a href="#IRGenerator" class="headerlink" title="IRGenerator"></a>IRGenerator</h2><p><strong>和语义分析的几个类的结构一样,都是对抽象语法树进行遍历,但是每个对表达式的visit方法返回的不是空,而是一个中间代码的表达式节点对象.而且这个对象要保存到对应的抽象语法树的节点上</strong>.<br><strong>对stmtnode的处理不返回新生成的节点,而是用一个列表来保存每条转换后的stmt.完毕后才保存到对应的函数节点上</strong>.<br>总的启动入口:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="type">IR</span> generate(<span class="type">AST</span> ast)&#123;</div><div class="line">    	<span class="keyword">for</span>(<span class="type">DefinedVariable</span> <span class="keyword">var</span>:ast.definedVariables())&#123;</div><div class="line">    		<span class="keyword">if</span>(<span class="keyword">var</span>.hasInitializer())&#123;</div><div class="line">    			<span class="keyword">var</span>.setIR(transformExpr(<span class="keyword">var</span>.initializer()));</div><div class="line">    		&#125;</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">for</span>(<span class="type">DefinedFunction</span> <span class="function"><span class="keyword">func</span>:<span class="title">ast</span>.<span class="title">definedFunctions</span><span class="params">()</span></span>)&#123;</div><div class="line">    		<span class="function"><span class="keyword">func</span>.<span class="title">setIR</span><span class="params">(compileFunctionBody<span class="params">(<span class="keyword">func</span>)</span></span></span>);</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">if</span>(errorHandler.errorOccured())&#123;</div><div class="line">    		<span class="keyword">throw</span> new <span class="type">SemanticException</span>(<span class="string">"IR generation failed"</span>);</div><div class="line">    	&#125;</div><div class="line"><span class="keyword">return</span> new <span class="type">IR</span>(ast.location(),ast.</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>删除了分开解析表达式是否需要返回值的功能.</p>
+<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><h3 id="跳转语句"><a href="#跳转语句" class="headerlink" title="跳转语句"></a>跳转语句</h3><p>解析break和continue时,需要一个栈来存放当前对应跳转的Label,还需要一个栈来保存作用域生成临时变量时可以使用.<br>对于if的解析,解析可分为有条件跳转,无条件跳转,跳转标签组成.在需要添加label的地方在stmt列表中按顺序添加一个LabelStmt对象,当做跳转目标用来控循环等.<br>对于switch,while,for等跳转语句实现原理类似.</p>
+<h3 id="没有副作用的表达式转换"><a href="#没有副作用的表达式转换" class="headerlink" title="没有副作用的表达式转换"></a>没有副作用的表达式转换</h3><p>主要是二元运算符的表达式转换.首先转换左右表达式和操作符,先处理右侧表达式,因为有可能表达式会改变某些值,比如右侧有i++这种,左侧也有i这个值,那么处理左侧时i的值就会被+1,还要处理指针之间的运算:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Expr <span class="title">visit</span><span class="params">(BinaryOpNode node)</span> </span>&#123;</div><div class="line">    Expr right = transformExpr(node.right());</div><div class="line">    Expr left = transformExpr(node.left());</div><div class="line">    Op op = Op.internBinary(node.operator(), node.type().isSigned());</div><div class="line">    type.Type t = node.type();</div><div class="line">    type.Type r = node.right().type();</div><div class="line">    type.Type l = node.left().type();</div><div class="line">    <span class="comment">//指针类型间的运算</span></div><div class="line">    <span class="keyword">if</span> (isPointerMinus(op, l, r)) &#123;</div><div class="line">        <span class="comment">//指针相减的情况,添加一个除法,除去基本类型的大小.</span></div><div class="line">        Expr tmp = <span class="keyword">new</span> BinaryOp(asmType(t), op, left, right);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BinaryOp(asmType(t), Op.S_DIV, tmp, ptrBaseSize(l));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (isPointerAddNum(l,op,r)) &#123;</div><div class="line">        <span class="comment">// 指针加上一个整数的情况,要乘上基本类型的大小.</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BinaryOp(asmType(t), op,</div><div class="line">                left,<span class="keyword">new</span> BinaryOp(asmType(r), Op.MUL, right, ptrBaseSize(l)));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (isNumAddPointer(l,op,r)) &#123;</div><div class="line">        <span class="comment">//同上</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BinaryOp(asmType(t), op,</div><div class="line">                <span class="keyword">new</span> BinaryOp(asmType(l), Op.MUL, left, ptrBaseSize(r)),</div><div class="line">                right);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BinaryOp(asmType(t), op, left, right);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="有副作用的表达式转换"><a href="#有副作用的表达式转换" class="headerlink" title="有副作用的表达式转换"></a>有副作用的表达式转换</h3><p><strong>副作用</strong>是指执行表达式时,表达式除返回值之外产生的影响,比如赋值语句会导致内存中的某个值发生了变化,比如一个函数的调用也会改变内存中某些值,也存在副作用.<br>有副作用会导致语句的执行顺序会对结果产生影响,不利于程序的优化.<br>如何转化带副作用的表达式:</p>
 <ol>
-<li>首先看Compiler包,其中包含了一个Compiler类,有main入口,也就是编译的入口</li>
-<li>由传入的命令行参数得到所有源文件的名字.</li>
-<li>调用build方法对源文件进行编译,首先用compile得到汇编文件.然后用assemble运行汇编器,转换为目标文件.</li>
-<li>其中compile完成编译器前端部分,首先用对源文件用parser得到AST,然后语义分析完成抽象语法树.最后一个IR类生成中间代码.</li>
-</ol>
-<h1 id="解析器javaCC"><a href="#解析器javaCC" class="headerlink" title="解析器javaCC"></a>解析器javaCC</h1><p>解析器的作用是,规定好语法,自动生成解析相应语法的代码.否则手动编写NFA转DFA,状态转移表,LL算法,手动生成语法树.<br>javaCC是LL解析器,<br>语法规则用一个”.jj”的文件来描述,称为语法描述文件.首先,文件的大致格式如下:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">options</span>&#123;</div><div class="line">JAVA的选项</div><div class="line">&#125;</div><div class="line"></div><div class="line">PARSER_BEGIN(解析器类名)</div><div class="line"><span class="keyword">package</span> 包名;</div><div class="line"><span class="keyword">import</span> 库名;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> 解析器类名&#123;</div><div class="line">	<span class="comment">//任意java代码</span></div><div class="line">&#125;</div><div class="line">PRASER_END(解析器类名)</div><div class="line"></div><div class="line">扫描器的描述</div><div class="line"></div><div class="line">解析器的描述</div></pre></td></tr></table></figure></p>
-<p>举个加法的例子:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">options</span>&#123;</div><div class="line"><span class="keyword">STATIC</span> = <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">PARSER_BEGIN(Adder)</div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Adder&#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> main(String[] args)&#123;</div><div class="line">		<span class="keyword">for</span>(String arg:args)&#123;</div><div class="line">			<span class="keyword">try</span>&#123;</div><div class="line">				System.out.<span class="keyword">println</span>(evaluate(arg));</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">catch</span>(ParseException e)&#123;</div><div class="line">				System.err.<span class="keyword">println</span>(e.getMessage());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">long</span> evaluate(String src)<span class="keyword">throws</span> ParseException&#123;</div><div class="line">		Reader reader=<span class="keyword">new</span> StringReader(src);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Adder(reader).expr();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">PARSER_END(Adder)</div><div class="line"></div><div class="line">SKIP: &#123; &lt;[<span class="string">" "</span>,<span class="string">"\t"</span>,<span class="string">"\n"</span>,<span class="string">"\r"</span>]&gt; &#125;</div><div class="line"></div><div class="line">TOKEN:&#123; &lt; INTEGER:([<span class="string">"0"</span>-<span class="string">"9"</span>])+ &gt;&#125;</div><div class="line"></div><div class="line"><span class="keyword">long</span> expr():</div><div class="line">&#123;</div><div class="line">	Token x,y;</div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">x=&lt;INTEGER&gt;<span class="string">"+"</span>y=&lt;INTEGER&gt;&lt;EOF&gt;</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">Long</span>.parseLong(x.image)+<span class="keyword">Long</span>.parseLong(y.image);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>注意,要运行javaCC生成的解析器类,需要下面两个步骤:</p>
-<ol>
-<li>生成解析器类的对象实例(上例Adder就是一个解析器类)</li>
-<li>用生成的对象调用和需要解析的语句同名的方法.(也就是调用expr())</li>
-<li>JavaCC生成的解析器中默认定义有如下4个类型的构造函数:</li>
+<li>要严格保证一条语句中副作用部分和其他部分发生的顺序不变,这样生成的中间代码也按顺序排列.</li>
+<li>有副作用的情况分为赋值和函数调用.</li>
+<li>有副作用的表达式如果含有函数调用,那么就会多出一个表达式,visit方法只能返回一个Expr,需要向stmts列表中添加.</li>
+<li>要灵活运用临时变量,对于有递归的表达式,先生成一个临时变量来保存子表达式的值,然后返回给上一层表达式.<br>什么是左值?比如一个语句<code>int i=0;i++=i;</code>这样编译不合法,因为赋值左边的(expr)++拆成了三个部分,<code>int tmp=i;i=i+1; return tmp;</code>返回的是一个临时局部变量,不是一个左值.因此<code>int i=0;i=i++;</code>这样的语句i的值还是0.<h3 id="左值转换"><a href="#左值转换" class="headerlink" title="左值转换"></a>左值转换</h3>C–中左值包括:</li>
 </ol>
 <ul>
-<li>Parser(inputStream s)</li>
-<li>Parser(inputStream s,String encoding)//如果要解析中文必须用这个或者下面的构造函数,并且在设置里将UNICODE_INPUT设为true.</li>
-<li>Parser(Reader r)</li>
-<li>Parser(xxxxTokenManager tm)</li>
+<li>变量,节点为VariableNode</li>
+<li>指针取值,节点为DereferenceNode</li>
+<li>数组,节点为ArefNode</li>
+<li>结构体和联合体的成员,节点为PtrMemberNode,MemberNode<br>如果一个变量写在左边那么需要转换成这个变量的地址的代码,如果写在右边,那么就转换成获取变量的值的代码.<br>变量的节点作为左值的话直接可以转成Addr中间节点,右值的话直接转成Var中间节点.具体对应的方法是visit到MemberNode,或者二元运算节点,转化为一个Derefer解引用节点,其中保存了一个解引用的地址.</li>
 </ul>
+<p>结构体成员的偏移,要考虑<strong>字节对齐</strong>.字节对齐的调用主要通过计算每个成员的偏移量,这样在结构体调用成员时直接转成对应的地址,然后再加上一个Mem节点,既可以成为右值,也可以成为左值.代码中需要频繁用到左值和右值的情况,为了方便,将表达式先转成解引用节点或者Var节点,这些都是右值,写一个addressOf方法专门用来将右值转左值.</p>
 
       
 
@@ -397,7 +298,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/14/仿c语言自制编程语言笔记1/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/30/仿c语言自制编程语言笔记5/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -411,18 +312,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/01/14/仿c语言自制编程语言笔记2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          仿c语言自制编程语言笔记2
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/28/Java学习笔记11/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java学习笔记11</div>
+    <a href="/2018/01/23/仿c语言自制编程语言笔记4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">仿c语言自制编程语言笔记4</div>
       <i class="icon-circle-right"></i>
     </a>
   

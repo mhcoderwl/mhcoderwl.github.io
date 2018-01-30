@@ -6,33 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>仿c语言自制编程语言笔记1 | mhcoderwl的博客</title>
+  <title>Tag: C-- | mhcoderwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="编译的流程对于c语言这种,需要经历四个过程:
-
-预处理
-(狭义的)编译
-汇编
-链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
-<meta property="og:type" content="article">
-<meta property="og:title" content="仿c语言自制编程语言笔记1">
-<meta property="og:url" content="http://yoursite.com/2018/01/14/仿c语言自制编程语言笔记1/index.html">
+  <meta name="description" content="c/c++">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mhcoderwl的博客">
+<meta property="og:url" content="http://yoursite.com/tags/C/index.html">
 <meta property="og:site_name" content="mhcoderwl的博客">
-<meta property="og:description" content="编译的流程对于c语言这种,需要经历四个过程:
-
-预处理
-(狭义的)编译
-汇编
-链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
-<meta property="og:updated_time" content="2018-01-23T02:22:00.840Z">
+<meta property="og:description" content="c/c++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="仿c语言自制编程语言笔记1">
-<meta name="twitter:description" content="编译的流程对于c语言这种,需要经历四个过程:
-
-预处理
-(狭义的)编译
-汇编
-链接第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进">
+<meta name="twitter:title" content="mhcoderwl的博客">
+<meta name="twitter:description" content="c/c++">
   
     <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
   
@@ -160,174 +144,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-仿c语言自制编程语言笔记1" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      仿c语言自制编程语言笔记1
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/01/30/仿c语言自制编程语言笔记5/" class="archive-article-date">
+  	<time datetime="2018-01-30T05:25:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-30</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/01/30/仿c语言自制编程语言笔记5/">仿c语言自制编程语言笔记5</a>
     </h1>
   
 
-        
-        <a href="/2018/01/14/仿c语言自制编程语言笔记1/" class="archive-article-date">
-  	<time datetime="2018-01-14T13:11:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="编译的流程"><a href="#编译的流程" class="headerlink" title="编译的流程"></a>编译的流程</h1><p>对于c语言这种,需要经历四个过程:</p>
-<ol>
-<li>预处理</li>
-<li>(狭义的)编译</li>
-<li>汇编</li>
-<li>链接<br>第一步,由预处理器对一些宏进行展开和一些包括的头文件进行填充,不考虑其他语法含义.第二步,需要生成汇编语言,也就是扩展名为”.s”的文件,内容是接近机器语言的汇编代码.第三步,由汇编器转换为机器语言,内容是机器可执行的二进制文件,后缀名为”.o”,也称为目标文件.还需要进行一步链接,有些需要用库,这一步可以对程序库进行加载.<br>在jvm中,使用了JIT编译器,能够在程序运行时将程序转换为机器语言的编译器.<a id="more"></a>
-</li>
-</ol>
-<h1 id="编译的阶段"><a href="#编译的阶段" class="headerlink" title="编译的阶段"></a>编译的阶段</h1><h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><p>对代码进行每个词的词法分析,用一些结构体将每个合法的词解析出来.比如”x=1+2”,分割成五个单词,并且识别出是单词的语义.</p>
-<h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><p>词法分析后需要进行语法分析,转换为”语法树”.</p>
-<h2 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h2><p>通过解析代码获得语法树后,需要对树进行处理生成抽象语法树(AST),语义分析包括:</p>
-<ul>
-<li>区分变量为局部变量还是全局变量</li>
-<li>解析变量的声明和引用</li>
-<li>变量和表达式的类型检查</li>
-<li>检查在引用变量之前是否进行了初始化</li>
-<li>检查函数是否按照定义返回了结果</li>
-</ul>
-<p>上述处理结果都会反应到抽象语法树中,语法分析生成的语法树只是将代码的构造搬了过来.</p>
-<h2 id="生成中间代码"><a href="#生成中间代码" class="headerlink" title="生成中间代码"></a>生成中间代码</h2><p>将抽象语法树转化为只在编译器内部使用的中间代码,为了支持多种编程语言或者机器语言.</p>
-<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><p>中间代码转化为汇编语言,称为代码生成,负责这个模块的称为<strong>代码生成器</strong>.比如说汇编语言中局部变量只能通过寄存器来存放,寄存器数量非常有限而c或java都可以随意定义局部变量.</p>
-<h1 id="cmm概要"><a href="#cmm概要" class="headerlink" title="cmm概要"></a>cmm概要</h1><p>仿c语言语法的编程语言c–,cmm相对c语言除去的功能:</p>
-<ul>
-<li>预处理器,改用java中的import</li>
-<li>浮点数</li>
-<li>enum枚举</li>
-<li>结构体的位域</li>
-<li>结构体和联合体的赋值和返回值</li>
-<li>逗号表达式</li>
-<li>const,volatile,auto,register</li>
-<li>添加了boolean关键字</li>
-<li>对于语义规则更加严格.<h2 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h2>语法类似如下:<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"><span class="meta-keyword">import</span> stdio;</span></div><div class="line"><span class="meta"><span class="meta-keyword">import</span> sys.params;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>后缀名为’.cmm’的类似于c语言中的源文件,后缀名为’.hm’的为头文件,一般包含下述声明:</p>
-<ul>
-<li>函数声明</li>
-<li>变量声明(不可包含初始值的定义)</li>
-<li>常量定义(这里必须有初始值)</li>
-<li>结构体定义</li>
-<li>联合体定义</li>
-<li>typedef<br>比如<code>stdio.hm</code>的内容:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> stddef;</div><div class="line"><span class="keyword">import</span> stdarg;</div><div class="line">typefef <span class="keyword">unsigned</span> <span class="keyword">long</span> FILE;<span class="comment">// dummy</span></div><div class="line"><span class="keyword">extern</span> FILE* <span class="built_in">stdin</span>;</div><div class="line">...</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="cmc编译器的代码构成"><a href="#cmc编译器的代码构成" class="headerlink" title="cmc编译器的代码构成"></a>cmc编译器的代码构成</h1><table>
-<thead>
-<tr>
-<th><strong>包</strong></th>
-<th><strong>包中的类</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>asm</td>
-<td>汇编对象的类</td>
-</tr>
-<tr>
-<td>ast</td>
-<td>抽象语法树的类</td>
-</tr>
-<tr>
-<td>compiler</td>
-<td>Compiler类等编译器的核心类</td>
-</tr>
-<tr>
-<td>entity</td>
-<td>表示函数和变量等实体的类</td>
-</tr>
-<tr>
-<td>exception</td>
-<td>异常的类</td>
-</tr>
-<tr>
-<td>ir</td>
-<td>中间代码的类</td>
-</tr>
-<tr>
-<td>parser</td>
-<td>解析器类</td>
-</tr>
-<tr>
-<td>sysdep</td>
-<td>包含依赖于OS的代码的类(汇编器和链接器)</td>
-</tr>
-<tr>
-<td>sysdep.x86</td>
-<td>包含依赖于OS和CPU代码的类(代码生成器)</td>
-</tr>
-<tr>
-<td>type</td>
-<td>表示cb的类型的类</td>
-</tr>
-<tr>
-<td>utils</td>
-<td>小的工具类</td>
-</tr>
-</tbody>
-</table>
-<p>一个大致的流程:</p>
-<ol>
-<li>首先看Compiler包,其中包含了一个Compiler类,有main入口,也就是编译的入口</li>
-<li>由传入的命令行参数得到所有源文件的名字.</li>
-<li>调用build方法对源文件进行编译,首先用compile得到汇编文件.然后用assemble运行汇编器,转换为目标文件.</li>
-<li>其中compile完成编译器前端部分,首先用对源文件用parser得到AST,然后语义分析完成抽象语法树.最后一个IR类生成中间代码.</li>
-</ol>
-<h1 id="解析器javaCC"><a href="#解析器javaCC" class="headerlink" title="解析器javaCC"></a>解析器javaCC</h1><p>解析器的作用是,规定好语法,自动生成解析相应语法的代码.否则手动编写NFA转DFA,状态转移表,LL算法,手动生成语法树.<br>javaCC是LL解析器,<br>语法规则用一个”.jj”的文件来描述,称为语法描述文件.首先,文件的大致格式如下:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">options</span>&#123;</div><div class="line">JAVA的选项</div><div class="line">&#125;</div><div class="line"></div><div class="line">PARSER_BEGIN(解析器类名)</div><div class="line"><span class="keyword">package</span> 包名;</div><div class="line"><span class="keyword">import</span> 库名;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> 解析器类名&#123;</div><div class="line">	<span class="comment">//任意java代码</span></div><div class="line">&#125;</div><div class="line">PRASER_END(解析器类名)</div><div class="line"></div><div class="line">扫描器的描述</div><div class="line"></div><div class="line">解析器的描述</div></pre></td></tr></table></figure></p>
-<p>举个加法的例子:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">options</span>&#123;</div><div class="line"><span class="keyword">STATIC</span> = <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">PARSER_BEGIN(Adder)</div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Adder&#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> main(String[] args)&#123;</div><div class="line">		<span class="keyword">for</span>(String arg:args)&#123;</div><div class="line">			<span class="keyword">try</span>&#123;</div><div class="line">				System.out.<span class="keyword">println</span>(evaluate(arg));</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">catch</span>(ParseException e)&#123;</div><div class="line">				System.err.<span class="keyword">println</span>(e.getMessage());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">long</span> evaluate(String src)<span class="keyword">throws</span> ParseException&#123;</div><div class="line">		Reader reader=<span class="keyword">new</span> StringReader(src);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Adder(reader).expr();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">PARSER_END(Adder)</div><div class="line"></div><div class="line">SKIP: &#123; &lt;[<span class="string">" "</span>,<span class="string">"\t"</span>,<span class="string">"\n"</span>,<span class="string">"\r"</span>]&gt; &#125;</div><div class="line"></div><div class="line">TOKEN:&#123; &lt; INTEGER:([<span class="string">"0"</span>-<span class="string">"9"</span>])+ &gt;&#125;</div><div class="line"></div><div class="line"><span class="keyword">long</span> expr():</div><div class="line">&#123;</div><div class="line">	Token x,y;</div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">x=&lt;INTEGER&gt;<span class="string">"+"</span>y=&lt;INTEGER&gt;&lt;EOF&gt;</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">Long</span>.parseLong(x.image)+<span class="keyword">Long</span>.parseLong(y.image);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>注意,要运行javaCC生成的解析器类,需要下面两个步骤:</p>
-<ol>
-<li>生成解析器类的对象实例(上例Adder就是一个解析器类)</li>
-<li>用生成的对象调用和需要解析的语句同名的方法.(也就是调用expr())</li>
-<li>JavaCC生成的解析器中默认定义有如下4个类型的构造函数:</li>
-</ol>
-<ul>
-<li>Parser(inputStream s)</li>
-<li>Parser(inputStream s,String encoding)//如果要解析中文必须用这个或者下面的构造函数,并且在设置里将UNICODE_INPUT设为true.</li>
-<li>Parser(Reader r)</li>
-<li>Parser(xxxxTokenManager tm)</li>
-</ul>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -347,97 +193,203 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/14/仿c语言自制编程语言笔记1/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/01/23/仿c语言自制编程语言笔记4/" class="archive-article-date">
+  	<time datetime="2018-01-23T02:09:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-23</time>
+</a>
+        </div>
+    	 
   
-    <a href="/2018/01/14/仿c语言自制编程语言笔记2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          仿c语言自制编程语言笔记2
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/12/28/Java学习笔记11/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java学习笔记11</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-    <div class="duoshuo"></div>
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/01/23/仿c语言自制编程语言笔记4/">仿c语言自制编程语言笔记4</a>
+    </h1>
   
 
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/01/14/仿c语言自制编程语言笔记3/" class="archive-article-date">
+  	<time datetime="2018-01-14T13:21:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/01/14/仿c语言自制编程语言笔记3/">仿c语言自制编程语言笔记3</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/01/14/仿c语言自制编程语言笔记2/" class="archive-article-date">
+  	<time datetime="2018-01-14T13:18:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/01/14/仿c语言自制编程语言笔记2/">仿c语言自制编程语言笔记2</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/01/14/仿c语言自制编程语言笔记1/" class="archive-article-date">
+  	<time datetime="2018-01-14T13:11:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/01/14/仿c语言自制编程语言笔记1/">仿c语言自制编程语言笔记1</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C--</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
+
+    
 
 
           </div>
@@ -460,9 +412,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
