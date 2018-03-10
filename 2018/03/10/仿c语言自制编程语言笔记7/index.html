@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>仿c语言自制编程语言笔记7 | mhcoderwl的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="x86架构的概要完成中间代码的生成之后,需要转成汇编语言,也就是代码生成这一步骤.首先了解计算机系统的架构.
+计算机系统架构计算所包含的基本单元分为:
+
+cpu
+存储器
+其他设备cpu中含有多个寄存器,寄存器是CPU计算的存储单元,,存储二进制的数据.首先寄存器读取存储器中某个数据,然后计算完毕在写回存储器.物理地址和虚拟地址由于计算机上有多个进程需要同时占有存储器,为了让所有进程的地址空间都能从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="仿c语言自制编程语言笔记7">
+<meta property="og:url" content="http://yoursite.com/2018/03/10/仿c语言自制编程语言笔记7/index.html">
+<meta property="og:site_name" content="mhcoderwl的博客">
+<meta property="og:description" content="x86架构的概要完成中间代码的生成之后,需要转成汇编语言,也就是代码生成这一步骤.首先了解计算机系统的架构.
+计算机系统架构计算所包含的基本单元分为:
+
+cpu
+存储器
+其他设备cpu中含有多个寄存器,寄存器是CPU计算的存储单元,,存储二进制的数据.首先寄存器读取存储器中某个数据,然后计算完毕在写回存储器.物理地址和虚拟地址由于计算机上有多个进程需要同时占有存储器,为了让所有进程的地址空间都能从">
+<meta property="og:updated_time" content="2018-03-10T06:39:39.654Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="仿c语言自制编程语言笔记7">
+<meta name="twitter:description" content="x86架构的概要完成中间代码的生成之后,需要转成汇编语言,也就是代码生成这一步骤.首先了解计算机系统的架构.
+计算机系统架构计算所包含的基本单元分为:
+
+cpu
+存储器
+其他设备cpu中含有多个寄存器,寄存器是CPU计算的存储单元,,存储二进制的数据.首先寄存器读取存储器中某个数据,然后计算完毕在写回存储器.物理地址和虚拟地址由于计算机上有多个进程需要同时占有存储器,为了让所有进程的地址空间都能从">
+  
+    <link rel="alternative" href="/atom.xml" title="mhcoderwl的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" type="text/css" href="/./main.2d7529.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/img/weixin.jpg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">mhcoderwl</a></h1>
+		</hgroup>
+		
+		<p class="header-subtitle">自顶向下探索世界,自底向上改变世界 -----WL</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/">标签</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="http://github.com/mhcoderwl/" title="github"><i class="icon-github"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/img/weixin.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">mhcoderwl</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>自顶向下探索世界,自底向上改变世界 -----WL<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/mhcoderwl/" title="github"><i class="icon-github"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 50%">
+				
+				
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/tags/">标签</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-仿c语言自制编程语言笔记7" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      仿c语言自制编程语言笔记7
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/仿c语言自制编程语言笔记7/" class="archive-article-date">
+  	<time datetime="2018-03-10T06:26:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="x86架构的概要"><a href="#x86架构的概要" class="headerlink" title="x86架构的概要"></a>x86架构的概要</h1><p>完成中间代码的生成之后,需要转成汇编语言,也就是代码生成这一步骤.首先了解计算机系统的架构.</p>
+<h2 id="计算机系统架构"><a href="#计算机系统架构" class="headerlink" title="计算机系统架构"></a>计算机系统架构</h2><p>计算所包含的基本单元分为:</p>
+<ol>
+<li>cpu</li>
+<li>存储器</li>
+<li>其他设备<br>cpu中含有多个寄存器,寄存器是CPU计算的存储单元,,存储二进制的数据.首先寄存器读取存储器中某个数据,然后计算完毕在写回存储器.<h2 id="物理地址和虚拟地址"><a href="#物理地址和虚拟地址" class="headerlink" title="物理地址和虚拟地址"></a>物理地址和虚拟地址</h2>由于计算机上有多个进程需要同时占有存储器,为了让所有进程的地址空间都能从0-0xFFFFFFFF,我们将进程空间对应的地址为虚拟地址,虚拟地址通过MMU地址转换映射到物理地址上,物理地址按照单位为页进行分割,一页为4kb或8kb大小,当进程需要新的内存时,会分配新的页给进程.<br>x86系列的cpu按照64位和32位划分,即包含两个条件:</li>
+</ol>
+<ul>
+<li>通用寄存器的宽度为32bit.</li>
+<li>地址空间的长度32位以上.</li>
+</ul>
+<a id="more"></a>
+<h2 id="指令集架构IA-32"><a href="#指令集架构IA-32" class="headerlink" title="指令集架构IA-32"></a>指令集架构IA-32</h2><p>x86系列cpu中的32位cpu的指令集架构为IA-32,也是我们要使用的指令集.首先了解一下其中含有的寄存器:</p>
+<ul>
+<li>通用寄存器.有eax,ebx,ecx,edx,esi,edi,esp,ebp共8个,用于整数运算和指针处理</li>
+<li>指令指针,eip,用来存放下一条要执行的代码的地址.</li>
+<li>标志寄存器,用于保存cpu的运行模式(常见的用户模式内核模式)和表示运算状态</li>
+<li>浮点数寄存器,存放浮点数的寄存器</li>
+<li>其他<br>我们主要关注通用寄存器和标志寄存器的使用:<br><strong>ebp和esp</strong>用来操作机器栈帧,esp用来当做栈指针存放栈顶地址的寄存器,其余的6个寄存器可随意使用.<br>由于寄存器的数量有限,因此在一条语句生成的临时变量过多时,需要将临时变量压入当前栈中,然后在计算完成后弹出,恢复栈的原来状态.<br>一个函数在调用前,首先需要将当前执行代码的地址push进栈,然后将当前%ebp的值push进栈,因为当前%ebp的值保存着调用者函数的栈底,我们需要在调用函数执行完后,代码地址要弹出,这样能返回继续执行代码,函数栈底也要知道才能返回调用前的状态.存放下一条指令的寄存器为指令指针,也称为程序计数器.<br>标志寄存器中每一bit用来表示一个标志位,用户可以用的只有状态标志和控制标志,比如说比较标志位用来存放cmp指令的结果,用来做跳转.<h2 id="数据的表现形式"><a href="#数据的表现形式" class="headerlink" title="数据的表现形式"></a>数据的表现形式</h2>一个整数有32位,如果是有符号整数类型则第一位用来存放正负,1为负,0为正,如果为负数的话后面31位存放的是绝对值的补码.<br>一个数的补码计算方式如下:</li>
+</ul>
+<ol>
+<li>先按位取反</li>
+<li>然后加1<br>比如3的补码为<code>011-&gt;100-&gt;101</code>那么-3在计算机中为<code>11111101</code>(16进制)</li>
+</ol>
+<h1 id="基于x86汇编器编程"><a href="#基于x86汇编器编程" class="headerlink" title="基于x86汇编器编程"></a>基于x86汇编器编程</h1><p>gnu汇编指令语法包括:</p>
+<ul>
+<li>指令,有CPU直接运行的指令,例如<code>movl %esp %ebp</code>.</li>
+<li>汇编伪操作.语法为以.开头,伪操作不是由cpu处理而是由汇编器处理的语句,一般用于目标文件中记录元数据或者设定指令的属性等.例如<code>.string &quot;hello world&quot;.text</code></li>
+<li>标签,语法为.开头冒号结尾,为汇编伪操作生成的数据或者指令命名的功能,这样就可以在文件的其他地方调用通过标签定义的符号.</li>
+<li>各种各样的操作数:</li>
+</ul>
+<ol>
+<li>立即数 相当于字面量,需要在前面加上$符号,否则会变成直接内存引用.</li>
+<li>寄存器 寄存器都已%开头</li>
+<li>直接内存引用    直接一个整数字面量表示内存地址.</li>
+<li>间接内存引用    间接内存引用格式disp(Base,index,scale),地址为disp+(base+index*scale),其中disp为偏移量.index和scale在数组访问时用到.比如说4(%eax)就是访问eax中值再加4的地址.<br>对于寄存器有外加括号的写法,意思是寄存器所含地址上保存的值.<br>指令有后缀,例如movb,movw,movl表示操作数的位数为8,16,32位.<h2 id="传输指令"><a href="#传输指令" class="headerlink" title="传输指令"></a>传输指令</h2></li>
+</ol>
+<ul>
+<li>mov 单纯的1对1的传输</li>
+<li>push,pop 压栈和出栈</li>
+<li>lea 加载地址</li>
+<li>movsx,movzx 伴随有符号扩展/零扩展的数据传输<br>mov指令后面带有两个操作对象,可以为寄存器,内存,立即数.第一个操作对象为源,第二个为目标.内存的读取方法一般可以通过立即数或者寄存器寻址例如(%eax)<br>push指令后可以加寄存器或者立即数,将操作对象的值压入栈顶.<br>pop后加一个寄存器,表示将栈顶值弹出到寄存器内.<br>lea后加上内存和寄存器,表示将内存的地址直接加载到寄存器,而不是寻址后加载.与mov不同.</li>
+</ul>
+<h2 id="算数运算"><a href="#算数运算" class="headerlink" title="算数运算"></a>算数运算</h2><ul>
+<li>add</li>
+<li>sub</li>
+<li>imul    有符号乘法</li>
+<li>idiv    有符号除法</li>
+<li>div    无符号除法</li>
+<li>inc    自增</li>
+<li>dec    自减</li>
+<li>neg    取反<br>add 将第一个操作数和第二个操作数相加,并将结果写入第二操作数.<br>sub 将第二个操作数减去第一个然后写入第二个操作数.<br>imul 将第二个操作数乘上第一个保存到第二个操作数中,不推荐使用无符号mul指令.<br><strong>div</strong>后面只能加上一个操作数用来做除数,由于被除数的位宽必须为除数的倍,被除数固定为<strong>%eax和%edx拼接而成,一个保存高32位,一个保存低32位</strong>,除法的商保存在%eax余数保存在%edx中.<br>cltd指令是用来对寄存器edx进行零扩展的指令,为了让32位数据与32位数据相除,对edx需要零扩展.<br>下面是一个对栈上两个变量做除法的例子:<figure class="highlight cos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">movl -<span class="number">12</span>(<span class="built_in">%ebp</span>),<span class="built_in">%ecx</span></div><div class="line">movl -<span class="number">8</span>(<span class="built_in">%ebp</span>),<span class="built_in">%eax</span></div><div class="line">cltd</div><div class="line">idivl <span class="built_in">%ecx</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>inc,dec指令是用来将后面的操作数的值加1减1<br>neg指令是用来将操作数的符号反转.</p>
+<h2 id="位运算指令"><a href="#位运算指令" class="headerlink" title="位运算指令"></a>位运算指令</h2><ul>
+<li>and    按位与</li>
+<li>or    按位或</li>
+<li>xor    按位异或</li>
+<li>not    按位取反</li>
+<li>sar    算数右移</li>
+<li>sal    算数左移</li>
+<li>shr    逻辑右移</li>
+</ul>
+<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><ul>
+<li>jmp 无条件跳转</li>
+<li>jz,jnz,je,jne    条件跳转</li>
+<li>cmp    数据比较</li>
+<li>test    数据的非0检查</li>
+<li>sete,setne,setg,setge,setl,setle    获取eflags寄存器中的各个标志位</li>
+<li>call    函数调用</li>
+<li>ret    从子程序返回<br>jmp+立即数或者寄存器,常用的是jmp+一个符号,符号是有标签定义的,例如:<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">	movl $1,%eax	<span class="comment">#if语句的then部分</span></div><div class="line">	jmp end_if<span class="number">0</span>	<span class="comment">#跳转结尾</span></div><div class="line"><span class="keyword">else</span><span class="number">0</span>:</div><div class="line">	movl $4,%eax</div><div class="line">end_if<span class="number">0</span>:</div><div class="line">	<span class="keyword">push</span> %eax</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>所以中间代码中的Jump节点可以直接转成jmp指令.</p>
+<p>条件跳转指令例如jnz+立即数or寄存器,如果标志寄存器ZF为零,程序计数器pc跳转到后面操作数的地址,ZF位由cmp指令操作,cmp比较两个数是否相等,相等置1.<br>比如说if(x==y)then的语句可以转成:<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">	movl &amp;<span class="keyword">x</span>,%eax</div><div class="line">	movl &amp;<span class="keyword">y</span>,%edx</div><div class="line">	cmp %eax,%edx</div><div class="line">	jnz if_else<span class="number">0</span></div><div class="line">	<span class="comment">#...</span></div><div class="line">if_else<span class="number">0</span>:</div><div class="line">	<span class="comment">#...</span></div></pre></td></tr></table></figure></p>
+<p>先说一下cmp指令,cmp指令比较两个操作数的差(第2个-第1个)然后根据结果来设定标志位:</p>
+<ul>
+<li>CF    进位或借位置1</li>
+<li>ZF    比较结果为0置1(相等)</li>
+<li>OF    溢出位</li>
+<li>SF     为负数时置1</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作数的关系</th>
+<th style="text-align:center">CF</th>
+<th style="text-align:center">ZF</th>
+<th style="text-align:center">OF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1&lt;2</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">SF</td>
+</tr>
+<tr>
+<td style="text-align:center">1==2</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1&gt;2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">not SF</td>
+</tr>
+</tbody>
+</table>
+<p>test比较两个操作数的逻辑与,根据结果设置标志寄存器eflags中的标志位,test指令本质上和and指令相同,但不会改变操作数的值.<br>test指令一般用来检查某个位是否被置位.<br>那么eflags中的标志位如何读取,根据指令sete来读取.sete+操作数,将对应标志位的值置入寄存器或内存.</p>
+<ul>
+<li>sete,setne 对应ZF</li>
+<li>seta,setae 对应CF<br>setcc指令通常和cmp一起用,在cmp指令调用后利用setcc获取数据比较的结果,例如用cmp指令比较eax寄存器和ecx寄存器的值之后,调用sete指令获取比较结果.<br>call指令,可以调用由第一个操作数指定的函数,一般是用符号来写成<code>call f</code>的形式.call指令可分解成两步:<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">	pushl $next_insn	<span class="meta">#先将下一条指令地址压入栈</span></div><div class="line">	<span class="keyword">jmp</span> 第<span class="number">1</span>操作数</div><div class="line"><span class="symbol">next_insn:</span></div><div class="line">	<span class="meta">#...</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>ret指令用于从子函数返回,也等价于<code>popl %eip</code>,弹出call指令下一条指令的地址.同时函数返回值通过寄存器%eax来保存.</p>
+<h1 id="程序调用约定"><a href="#程序调用约定" class="headerlink" title="程序调用约定"></a>程序调用约定</h1><p>esp寄存器总是指向栈顶,ebp总是指向当前函数栈的栈底.在调用一个函数的开头一般要创建该函数的栈帧:<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">call</span> <span class="function"><span class="keyword">func</span></span></div><div class="line">pushl %ebp <span class="meta">#压入当前函数的帧指针地址</span></div><div class="line">movl $esp, %ebp	<span class="meta">#把esp(栈顶)寄存器的值给ebp(栈底)</span></div><div class="line">subl $8, %esp	<span class="meta">#下拉栈顶,分配子函数的栈</span></div></pre></td></tr></table></figure></p>
+<p>在结尾处的处理:<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">movl %ebp,%esp	<span class="comment">#栈顶回收</span></div><div class="line">popl %ebp	<span class="comment">#弹出父函数的栈底地址</span></div><div class="line">ret</div></pre></td></tr></table></figure></p>
+<p>调用的完整过程是:</p>
+<ol>
+<li>下拉栈顶,然后把要传入的参数从右往左顺序push进栈</li>
+<li>调用call func语句</li>
+<li>准备栈帧</li>
+<li>执行func的代码</li>
+<li>释放栈帧</li>
+<li>调用ret</li>
+<li>释放push的参数地址,即上拉栈顶<br>寄存器还可以分成两种,调用者寄存器和被调用者寄存器,在发生函数调用时将前者类型的寄存器中的值强制保存,这样在子函数中就可以直接使用这些寄存器,而后者是在被调用函数的开始将要使用的寄存器的值保存下来.前者适合保存一些临时变量,后者适合保存一些生命周期较长的数据.</li>
+</ol>
+<ul>
+<li>caller-save    eax,ecx,edx,esp</li>
+<li>callee-save    ebx,ebp,esi,edi</li>
+</ul>
+<h2 id="x86汇编对象的类"><a href="#x86汇编对象的类" class="headerlink" title="x86汇编对象的类"></a>x86汇编对象的类</h2><p>我们生成的汇编代码有三种类型:</p>
+<ol>
+<li><p>程序本身<br>程序本身有四种情况:是一个标签,一个汇编伪操作,一条指令,一个注释.<br>那么需要编写表示每种情况的类:</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Assembly</div><div class="line">	Comment</div><div class="line">	Directive	<span class="comment">//伪操作</span></div><div class="line">	Instruction</div><div class="line">	<span class="keyword">Label</span></div><div class="line">AssemblyCode	<span class="comment">//用来管理这些类的实例列表</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>表示指令的操作数<br>包括:立即数,寄存器,内存引用</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Operand</div><div class="line">	ImmediateValue</div><div class="line">	MemoryReference</div><div class="line">		DirectMemoryReference</div><div class="line">		IndirectMemoryReference</div><div class="line">	<span class="keyword">Register</span></div><div class="line">	AbsoluteAddress</div></pre></td></tr></table></figure>
+</li>
+<li><p>表示字面量的类</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Literal</div><div class="line">	IntegerLiteral</div><div class="line">	<span class="built_in">Symbol</span></div><div class="line">		NamedSymbol	<span class="comment">//例如源代码里定义的函数</span></div><div class="line">		UnnamedSymbol	<span class="comment">//伪操作生成的.;例如`.LC0`</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="如何生成汇编对象"><a href="#如何生成汇编对象" class="headerlink" title="如何生成汇编对象"></a>如何生成汇编对象</h1><p>CodeGenerator类中用来添加一个汇编对象的方式如下:<br><code>as.mov(imm(0),edx());</code><br>对应的汇编代码为:<br><code>movl $0,%edx</code><br>用来返回一个寄存器实例的方法有:<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ax<span class="comment">()</span>	<span class="meta">%</span>eax</div><div class="line">bx<span class="comment">()</span>	<span class="meta">%</span>ebx</div><div class="line">cx<span class="comment">()</span>	<span class="meta">%</span>ecx</div><div class="line">dx<span class="comment">()</span>	<span class="meta">%</span>edx</div><div class="line">ax<span class="comment">(t)</span>	保存类型t大小的ax寄存器</div></pre></td></tr></table></figure></p>
+<p>一个寄存器的类中需要有区分寄存器的名称的枚举类型,用一个RegisterClass枚举类,含有8个对象.还需要一个asm.type,来表示需要寄存器的多少位.比如char就是INT8.</p>
+<h2 id="表示立即数和引用"><a href="#表示立即数和引用" class="headerlink" title="表示立即数和引用"></a>表示立即数和引用</h2><p>总共有如下方法:</p>
+<ul>
+<li>imm(long num)    用来返回一个整数num的值(ImmediateValue类型,$num)</li>
+<li>imm(Symbol sym) 返回一个符号sym的值(ImmediateValue类型,$num)</li>
+<li>mem(Symbol sym) 符号sym的直接地址引用(sym)</li>
+<li>mem(Register reg) 根据寄存器reg返回间接引用地址</li>
+<li>mem(long off,Register reg) 根据偏移量和寄存器reg返回间接引用地址(off(reg))</li>
+</ul>
+<h2 id="指令生成"><a href="#指令生成" class="headerlink" title="指令生成"></a>指令生成</h2><p>是AssemblyCode类的方法,总共有如下几个方法:</p>
+<ul>
+<li>mov(Register s,Register d)</li>
+<li>mov</li>
+<li>mov</li>
+<li>push</li>
+<li>pop</li>
+<li>add</li>
+<li>sub</li>
+<li>imul</li>
+<li>call(Symbol sym) 使用call指令调用函数sym,函数是一个NamedSymbol</li>
+<li>jmp(Label lab) 标签用来跳转,函数的Symbol用来调用<br>这些方法都会在一个该类的指令列表中添加一个Instruction类对象.</li>
+</ul>
+<h2 id="表示汇编伪操作-标签和注释"><a href="#表示汇编伪操作-标签和注释" class="headerlink" title="表示汇编伪操作,标签和注释"></a>表示汇编伪操作,标签和注释</h2><p>首先是伪操作的部分,我们需要用到三个伪操作分别是:</p>
+<ul>
+<li>_file(String name) 使用汇编伪操作.file声明当前的文件名</li>
+<li>_globl(Symbol sym) .globl能使得sym成为全局变量</li>
+<li>_section(String sect) .section切换到sect代码片段<br>标签和注释:</li>
+<li>label(Symbol sym) 输出定义了符号sym的标签</li>
+<li>label(Label label) 输出定义了和标签label同样符号的标签</li>
+<li>comment(String str) 输出注释.<br><strong>在汇编中跳转的目标有两种,一种是函数入口和字符串常量,属于NamedSymbol,还有一种是后期加入的标签,也就是.xxx:的形式,适用于while,if这些</strong>.</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">FakeCC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/10/仿c语言自制编程语言笔记7/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/03/10/仿c语言自制编程语言笔记8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          仿c语言自制编程语言笔记8
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/10/仿c语言自制编程语言笔记6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">仿c语言自制编程语言笔记6</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
+  
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 mhcoderwl
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script>!function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="./",n(0)}([function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}function o(t,n){var e=/\/|index.html/g;return t.replace(e,"")===n.replace(e,"")}function i(){for(var t=document.querySelectorAll(".js-header-menu li a"),n=window.location.pathname,e=0,r=t.length;e<r;e++){var i=t[e];o(n,i.getAttribute("href"))&&(0,d.default)(i,"active")}}function u(t){for(var n=t.offsetLeft,e=t.offsetParent;null!==e;)n+=e.offsetLeft,e=e.offsetParent;return n}function f(t){for(var n=t.offsetTop,e=t.offsetParent;null!==e;)n+=e.offsetTop,e=e.offsetParent;return n}function c(t,n,e,r,o){var i=u(t),c=f(t)-n;if(c-e<=o){var a=t.$newDom;a||(a=t.cloneNode(!0),(0,h.default)(t,a),t.$newDom=a,a.style.position="fixed",a.style.top=(e||c)+"px",a.style.left=i+"px",a.style.zIndex=r||2,a.style.width="100%",a.style.color="#fff"),a.style.visibility="visible",t.style.visibility="hidden"}else{t.style.visibility="visible";var s=t.$newDom;s&&(s.style.visibility="hidden")}}function a(){var t=document.querySelector(".js-overlay"),n=document.querySelector(".js-header-menu");c(t,document.body.scrollTop,-63,2,0),c(n,document.body.scrollTop,1,3,0)}function s(){document.querySelector("#container").addEventListener("scroll",function(t){a()}),window.addEventListener("scroll",function(t){a()}),a()}function l(){x.default.versions.mobile&&window.screen.width<800&&(i(),s())}var p=e(71),d=r(p),v=e(72),y=(r(v),e(84)),h=r(y),b=e(69),x=r(b),m=e(75),g=r(m),w=e(70);l(),(0,w.addLoadEvent)(function(){g.default.init()}),t.exports={}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(49),o=e(15);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports=!e(8)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(6),o=e(12);t.exports=e(4)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){var r=e(10),o=e(30),i=e(24),u=Object.defineProperty;n.f=e(4)?Object.defineProperty:function(t,n,e){if(r(t),n=i(n,!0),r(e),o)try{return u(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(22)("wks"),o=e(13),i=e(1).Symbol,u="function"==typeof i,f=t.exports=function(t){return r[t]||(r[t]=u&&i[t]||(u?i:o)("Symbol."+t))};f.store=r},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n,e){var r=e(35),o=e(16);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(11);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n){t.exports={}},function(t,n){t.exports=!0},function(t,n){n.f={}.propertyIsEnumerable},function(t,n,e){var r=e(6).f,o=e(2),i=e(7)("toStringTag");t.exports=function(t,n,e){t&&!o(t=e?t:t.prototype,i)&&r(t,i,{configurable:!0,value:n})}},function(t,n,e){var r=e(22)("keys"),o=e(13);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(1),o="__core-js_shared__",i=r[o]||(r[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(11);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n,e){var r=e(1),o=e(14),i=e(18),u=e(26),f=e(6).f;t.exports=function(t){var n=o.Symbol||(o.Symbol=i?{}:r.Symbol||{});"_"==t.charAt(0)||t in n||f(n,t,{value:u.f(t)})}},function(t,n,e){n.f=e(7)},function(t,n,e){var r=e(1),o=e(14),i=e(46),u=e(5),f="prototype",c=function(t,n,e){var a,s,l,p=t&c.F,d=t&c.G,v=t&c.S,y=t&c.P,h=t&c.B,b=t&c.W,x=d?o:o[n]||(o[n]={}),m=x[f],g=d?r:v?r[n]:(r[n]||{})[f];d&&(e=n);for(a in e)s=!p&&g&&void 0!==g[a],s&&a in x||(l=s?g[a]:e[a],x[a]=d&&"function"!=typeof g[a]?e[a]:h&&s?i(l,r):b&&g[a]==l?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[f]=t[f],n}(l):y&&"function"==typeof l?i(Function.call,l):l,y&&((x.virtual||(x.virtual={}))[a]=l,t&c.R&&m&&!m[a]&&u(m,a,l)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11),o=e(1).document,i=r(o)&&r(o.createElement);t.exports=function(t){return i?o.createElement(t):{}}},function(t,n,e){t.exports=!e(4)&&!e(8)(function(){return 7!=Object.defineProperty(e(29)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){"use strict";var r=e(18),o=e(27),i=e(36),u=e(5),f=e(2),c=e(17),a=e(51),s=e(20),l=e(58),p=e(7)("iterator"),d=!([].keys&&"next"in[].keys()),v="@@iterator",y="keys",h="values",b=function(){return this};t.exports=function(t,n,e,x,m,g,w){a(e,n,x);var O,S,_,j=function(t){if(!d&&t in A)return A[t];switch(t){case y:return function(){return new e(this,t)};case h:return function(){return new e(this,t)}}return function(){return new e(this,t)}},P=n+" Iterator",E=m==h,M=!1,A=t.prototype,T=A[p]||A[v]||m&&A[m],L=T||j(m),N=m?E?j("entries"):L:void 0,C="Array"==n?A.entries||T:T;if(C&&(_=l(C.call(new t)),_!==Object.prototype&&(s(_,P,!0),r||f(_,p)||u(_,p,b))),E&&T&&T.name!==h&&(M=!0,L=function(){return T.call(this)}),r&&!w||!d&&!M&&A[p]||u(A,p,L),c[n]=L,c[P]=b,m)if(O={values:E?L:j(h),keys:g?L:j(y),entries:N},w)for(S in O)S in A||i(A,S,O[S]);else o(o.P+o.F*(d||M),n,O);return O}},function(t,n,e){var r=e(10),o=e(55),i=e(16),u=e(21)("IE_PROTO"),f=function(){},c="prototype",a=function(){var t,n=e(29)("iframe"),r=i.length,o="<",u=">";for(n.style.display="none",e(48).appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write(o+"script"+u+"document.F=Object"+o+"/script"+u),t.close(),a=t.F;r--;)delete a[c][i[r]];return a()};t.exports=Object.create||function(t,n){var e;return null!==t?(f[c]=r(t),e=new f,f[c]=null,e[u]=t):e=a(),void 0===n?e:o(e,n)}},function(t,n,e){var r=e(35),o=e(16).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(t){return r(t,o)}},function(t,n){n.f=Object.getOwnPropertySymbols},function(t,n,e){var r=e(2),o=e(3),i=e(45)(!1),u=e(21)("IE_PROTO");t.exports=function(t,n){var e,f=o(t),c=0,a=[];for(e in f)e!=u&&r(f,e)&&a.push(e);for(;n.length>c;)r(f,e=n[c++])&&(~i(a,e)||a.push(e));return a}},function(t,n,e){t.exports=e(5)},function(t,n,e){var r=e(15);t.exports=function(t){return Object(r(t))}},function(t,n,e){t.exports={default:e(41),__esModule:!0}},function(t,n,e){t.exports={default:e(42),__esModule:!0}},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}n.__esModule=!0;var o=e(39),i=r(o),u=e(38),f=r(u),c="function"==typeof f.default&&"symbol"==typeof i.default?function(t){return typeof t}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":typeof t};n.default="function"==typeof f.default&&"symbol"===c(i.default)?function(t){return"undefined"==typeof t?"undefined":c(t)}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":"undefined"==typeof t?"undefined":c(t)}},function(t,n,e){e(65),e(63),e(66),e(67),t.exports=e(14).Symbol},function(t,n,e){e(64),e(68),t.exports=e(26).f("iterator")},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){t.exports=function(){}},function(t,n,e){var r=e(3),o=e(61),i=e(60);t.exports=function(t){return function(n,e,u){var f,c=r(n),a=o(c.length),s=i(u,a);if(t&&e!=e){for(;a>s;)if(f=c[s++],f!=f)return!0}else for(;a>s;s++)if((t||s in c)&&c[s]===e)return t||s||0;return!t&&-1}}},function(t,n,e){var r=e(43);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(9),o=e(34),i=e(19);t.exports=function(t){var n=r(t),e=o.f;if(e)for(var u,f=e(t),c=i.f,a=0;f.length>a;)c.call(t,u=f[a++])&&n.push(u);return n}},function(t,n,e){t.exports=e(1).document&&document.documentElement},function(t,n,e){var r=e(28);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(28);t.exports=Array.isArray||function(t){return"Array"==r(t)}},function(t,n,e){"use strict";var r=e(32),o=e(12),i=e(20),u={};e(5)(u,e(7)("iterator"),function(){return this}),t.exports=function(t,n,e){t.prototype=r(u,{next:o(1,e)}),i(t,n+" Iterator")}},function(t,n){t.exports=function(t,n){return{value:n,done:!!t}}},function(t,n,e){var r=e(9),o=e(3);t.exports=function(t,n){for(var e,i=o(t),u=r(i),f=u.length,c=0;f>c;)if(i[e=u[c++]]===n)return e}},function(t,n,e){var r=e(13)("meta"),o=e(11),i=e(2),u=e(6).f,f=0,c=Object.isExtensible||function(){return!0},a=!e(8)(function(){return c(Object.preventExtensions({}))}),s=function(t){u(t,r,{value:{i:"O"+ ++f,w:{}}})},l=function(t,n){if(!o(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!i(t,r)){if(!c(t))return"F";if(!n)return"E";s(t)}return t[r].i},p=function(t,n){if(!i(t,r)){if(!c(t))return!0;if(!n)return!1;s(t)}return t[r].w},d=function(t){return a&&v.NEED&&c(t)&&!i(t,r)&&s(t),t},v=t.exports={KEY:r,NEED:!1,fastKey:l,getWeak:p,onFreeze:d}},function(t,n,e){var r=e(6),o=e(10),i=e(9);t.exports=e(4)?Object.defineProperties:function(t,n){o(t);for(var e,u=i(n),f=u.length,c=0;f>c;)r.f(t,e=u[c++],n[e]);return t}},function(t,n,e){var r=e(19),o=e(12),i=e(3),u=e(24),f=e(2),c=e(30),a=Object.getOwnPropertyDescriptor;n.f=e(4)?a:function(t,n){if(t=i(t),n=u(n,!0),c)try{return a(t,n)}catch(t){}if(f(t,n))return o(!r.f.call(t,n),t[n])}},function(t,n,e){var r=e(3),o=e(33).f,i={}.toString,u="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],f=function(t){try{return o(t)}catch(t){return u.slice()}};t.exports.f=function(t){return u&&"[object Window]"==i.call(t)?f(t):o(r(t))}},function(t,n,e){var r=e(2),o=e(37),i=e(21)("IE_PROTO"),u=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=o(t),r(t,i)?t[i]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?u:null}},function(t,n,e){var r=e(23),o=e(15);t.exports=function(t){return function(n,e){var i,u,f=String(o(n)),c=r(e),a=f.length;return c<0||c>=a?t?"":void 0:(i=f.charCodeAt(c),i<55296||i>56319||c+1===a||(u=f.charCodeAt(c+1))<56320||u>57343?t?f.charAt(c):i:t?f.slice(c,c+2):(i-55296<<10)+(u-56320)+65536)}}},function(t,n,e){var r=e(23),o=Math.max,i=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):i(t,n)}},function(t,n,e){var r=e(23),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){"use strict";var r=e(44),o=e(52),i=e(17),u=e(3);t.exports=e(31)(Array,"Array",function(t,n){this._t=u(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,e=this._i++;return!t||e>=t.length?(this._t=void 0,o(1)):"keys"==n?o(0,e):"values"==n?o(0,t[e]):o(0,[e,t[e]])},"values"),i.Arguments=i.Array,r("keys"),r("values"),r("entries")},function(t,n){},function(t,n,e){"use strict";var r=e(59)(!0);e(31)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,e=this._i;return e>=n.length?{value:void 0,done:!0}:(t=r(n,e),this._i+=t.length,{value:t,done:!1})})},function(t,n,e){"use strict";var r=e(1),o=e(2),i=e(4),u=e(27),f=e(36),c=e(54).KEY,a=e(8),s=e(22),l=e(20),p=e(13),d=e(7),v=e(26),y=e(25),h=e(53),b=e(47),x=e(50),m=e(10),g=e(3),w=e(24),O=e(12),S=e(32),_=e(57),j=e(56),P=e(6),E=e(9),M=j.f,A=P.f,T=_.f,L=r.Symbol,N=r.JSON,C=N&&N.stringify,k="prototype",F=d("_hidden"),q=d("toPrimitive"),I={}.propertyIsEnumerable,B=s("symbol-registry"),D=s("symbols"),W=s("op-symbols"),H=Object[k],K="function"==typeof L,R=r.QObject,J=!R||!R[k]||!R[k].findChild,U=i&&a(function(){return 7!=S(A({},"a",{get:function(){return A(this,"a",{value:7}).a}})).a})?function(t,n,e){var r=M(H,n);r&&delete H[n],A(t,n,e),r&&t!==H&&A(H,n,r)}:A,G=function(t){var n=D[t]=S(L[k]);return n._k=t,n},$=K&&"symbol"==typeof L.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof L},z=function(t,n,e){return t===H&&z(W,n,e),m(t),n=w(n,!0),m(e),o(D,n)?(e.enumerable?(o(t,F)&&t[F][n]&&(t[F][n]=!1),e=S(e,{enumerable:O(0,!1)})):(o(t,F)||A(t,F,O(1,{})),t[F][n]=!0),U(t,n,e)):A(t,n,e)},Y=function(t,n){m(t);for(var e,r=b(n=g(n)),o=0,i=r.length;i>o;)z(t,e=r[o++],n[e]);return t},Q=function(t,n){return void 0===n?S(t):Y(S(t),n)},X=function(t){var n=I.call(this,t=w(t,!0));return!(this===H&&o(D,t)&&!o(W,t))&&(!(n||!o(this,t)||!o(D,t)||o(this,F)&&this[F][t])||n)},V=function(t,n){if(t=g(t),n=w(n,!0),t!==H||!o(D,n)||o(W,n)){var e=M(t,n);return!e||!o(D,n)||o(t,F)&&t[F][n]||(e.enumerable=!0),e}},Z=function(t){for(var n,e=T(g(t)),r=[],i=0;e.length>i;)o(D,n=e[i++])||n==F||n==c||r.push(n);return r},tt=function(t){for(var n,e=t===H,r=T(e?W:g(t)),i=[],u=0;r.length>u;)!o(D,n=r[u++])||e&&!o(H,n)||i.push(D[n]);return i};K||(L=function(){if(this instanceof L)throw TypeError("Symbol is not a constructor!");var t=p(arguments.length>0?arguments[0]:void 0),n=function(e){this===H&&n.call(W,e),o(this,F)&&o(this[F],t)&&(this[F][t]=!1),U(this,t,O(1,e))};return i&&J&&U(H,t,{configurable:!0,set:n}),G(t)},f(L[k],"toString",function(){return this._k}),j.f=V,P.f=z,e(33).f=_.f=Z,e(19).f=X,e(34).f=tt,i&&!e(18)&&f(H,"propertyIsEnumerable",X,!0),v.f=function(t){return G(d(t))}),u(u.G+u.W+u.F*!K,{Symbol:L});for(var nt="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),et=0;nt.length>et;)d(nt[et++]);for(var nt=E(d.store),et=0;nt.length>et;)y(nt[et++]);u(u.S+u.F*!K,"Symbol",{for:function(t){return o(B,t+="")?B[t]:B[t]=L(t)},keyFor:function(t){if($(t))return h(B,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){J=!0},useSimple:function(){J=!1}}),u(u.S+u.F*!K,"Object",{create:Q,defineProperty:z,defineProperties:Y,getOwnPropertyDescriptor:V,getOwnPropertyNames:Z,getOwnPropertySymbols:tt}),N&&u(u.S+u.F*(!K||a(function(){var t=L();return"[null]"!=C([t])||"{}"!=C({a:t})||"{}"!=C(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!$(t)){for(var n,e,r=[t],o=1;arguments.length>o;)r.push(arguments[o++]);return n=r[1],"function"==typeof n&&(e=n),!e&&x(n)||(n=function(t,n){if(e&&(n=e.call(this,t,n)),!$(n))return n}),r[1]=n,C.apply(N,r)}}}),L[k][q]||e(5)(L[k],q,L[k].valueOf),l(L,"Symbol"),l(Math,"Math",!0),l(r.JSON,"JSON",!0)},function(t,n,e){e(25)("asyncIterator")},function(t,n,e){e(25)("observable")},function(t,n,e){e(62);for(var r=e(1),o=e(5),i=e(17),u=e(7)("toStringTag"),f=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],c=0;c<5;c++){var a=f[c],s=r[a],l=s&&s.prototype;l&&!l[u]&&o(l,u,a),i[a]=i.Array}},function(t,n){"use strict";var e={versions:function(){var t=window.navigator.userAgent;return{trident:t.indexOf("Trident")>-1,presto:t.indexOf("Presto")>-1,webKit:t.indexOf("AppleWebKit")>-1,gecko:t.indexOf("Gecko")>-1&&t.indexOf("KHTML")==-1,mobile:!!t.match(/AppleWebKit.*Mobile.*/),ios:!!t.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),android:t.indexOf("Android")>-1||t.indexOf("Linux")>-1,iPhone:t.indexOf("iPhone")>-1||t.indexOf("Mac")>-1,iPad:t.indexOf("iPad")>-1,webApp:t.indexOf("Safari")==-1,weixin:t.indexOf("MicroMessenger")==-1}}()};t.exports=e},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}var o=e(40),i=r(o),u=function(){function t(t,n,e){return n||e?String.fromCharCode(n||e):o[t]||t}function n(t){return l[t]}var e=/&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g,r=/['<> "&]/g,o={"&quot;":'"',"&lt;":"<","&gt;":">","&amp;":"&","&nbsp;":" "},f=/\u00a0/g,c=/<br\s*\/?>/gi,a=/\r?\n/g,s=/\s/g,l={};for(var p in o)l[o[p]]=p;return o["&apos;"]="'",l["'"]="&#39;",{encode:function(t){return t?(""+t).replace(r,n).replace(a,"<br/>").replace(s,"&nbsp;"):""},decode:function(n){return n?(""+n).replace(c,"\n").replace(e,t).replace(f," "):""},encodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},encodeBase16forJSON:function(t){if(!t)return t;t=t.replace(/[\u4E00-\u9FBF]/gi,function(t){return escape(t).replace("%u","\\u")});for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},decodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e+=2)n.push(String.fromCharCode("0x"+t.slice(e,e+2)));return n.join("")},encodeObject:function(t){if(t instanceof Array)for(var n=0,e=t.length;e>n;n++)t[n]=u.encodeObject(t[n]);else if("object"==("undefined"==typeof t?"undefined":(0,i.default)(t)))for(var r in t)t[r]=u.encodeObject(t[r]);else if("string"==typeof t)return u.encode(t);return t},loadScript:function(t){var n=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(n),n.setAttribute("src",t)},addLoadEvent:function(t){var n=window.onload;"function"!=typeof window.onload?window.onload=t:window.onload=function(){n(),t()}}}}();t.exports=u},function(t,n){function e(t,n){t.classList?t.classList.add(n):t.className+=" "+n}t.exports=e},function(t,n){function e(t,n){if(t.classList)t.classList.remove(n);else{var e=new RegExp("(^|\\b)"+n.split(" ").join("|")+"(\\b|$)","gi");t.className=t.className.replace(e," ")}}t.exports=e},,,function(t,n){"use strict";function e(){var t=document.querySelector("#page-nav");if(t&&!document.querySelector("#page-nav .extend.prev")&&(t.innerHTML='<a class="extend prev disabled" rel="prev">&laquo; Prev</a>'+t.innerHTML),t&&!document.querySelector("#page-nav .extend.next")&&(t.innerHTML=t.innerHTML+'<a class="extend next disabled" rel="next">Next &raquo;</a>'),yiliaConfig&&yiliaConfig.open_in_new){var n=document.querySelectorAll(".article-entry a:not(.article-more-a)");n.forEach(function(t){t.setAttribute("target","_blank")})}var e=document.querySelector("#js-aboutme");e&&0!==e.length&&(e.innerHTML=e.innerText)}t.exports={init:e}},,,,,,,,,function(t,n){function e(t,n){if("string"==typeof n)return t.insertAdjacentHTML("afterend",n);var e=t.nextSibling;return e?t.parentNode.insertBefore(n,e):t.parentNode.appendChild(n)}t.exports=e}])</script><script src="/./main.2d7529.js"></script><script>!function(){var e=function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)};e("/slider.885efe.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">unp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">unix</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JAVASE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">apue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">muduo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">c/c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">编译器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C--</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">FakeCC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">web 开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Flask框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">sockets</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://soaringhawkcheng.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>昊师兄的博客</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">目前在东南大学读研&lt;br&gt;擅长c/c++,linux,shellscript&lt;br&gt;做一些3D人脸识别的研究&lt;br&gt;有兴趣一起交流学习!</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

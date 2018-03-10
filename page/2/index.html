@@ -146,6 +146,223 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java学习笔记9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/28/Java学习笔记9/">Java学习笔记9</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/28/Java学习笔记9/" class="archive-article-date">
+  	<time datetime="2017-12-28T12:09:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="day10"><a href="#day10" class="headerlink" title="day10"></a>day10</h1><h2 id="Class-newInstance和Constructor-newInstance"><a href="#Class-newInstance和Constructor-newInstance" class="headerlink" title="Class.newInstance和Constructor.newInstance()"></a>Class.newInstance和Constructor.newInstance()</h2><p>首先来分析new和newInstance(),在使用new来创建一个对象时，我们必须知道这个对象的确切类型，而用newInstance()不知道知道确切类型，通过反射来创建实例。</p>
+<p>我们知道newInstance()是通过类加载机制，也就是说，要加载过我们要创建的类型，才能创建对象实体。</p>
+<ul>
+<li><p>Class.newInstance() 只能够调用无参的构造函数，即默认的构造函数；</p>
+</li>
+<li><p>Constructor.newInstance() 可以根据传入的参数，调用任意构造构造函数。</p>
+</li>
+<li><p>Class.newInstance() 抛出所有由被调用构造函数抛出的异常。</p>
+</li>
+<li><p>Class.newInstance() 要求被调用的构造函数是可见的，也即必须是public类型的;</p>
+</li>
+<li><p>Constructor.newInstance() 在特定的情况下，可以调用私有的构造函数。</p>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/12/28/Java学习笔记9/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/28/Java学习笔记9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Java学习笔记8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/28/Java学习笔记8/">Java学习笔记8</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/28/Java学习笔记8/" class="archive-article-date">
+  	<time datetime="2017-12-28T12:05:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="day9"><a href="#day9" class="headerlink" title="day9"></a>day9</h1><p>开始对容器的完整学习，几个常用容器是重点，无论是写算法题还是项目开发必备。</p>
+<h2 id="1-容器分类表"><a href="#1-容器分类表" class="headerlink" title="1.容器分类表"></a>1.容器分类表</h2><p>首先，对JAVA中的容器进行总体上的把握，按照继承关系可看下图：</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/305856/2012062417074359.jpg" alt="容器家族"></p>
+<p>根据Oracle公司的官方文档：</p>
+<ol>
+<li>Collection是对Iterable接口的拓展。故所有的Collection对象都可以使用foreach方式，对元素进行方便的遍历。</li>
+</ol>
+<p>由于Iterable接口中定义了的唯一方法为：返回一个Iterator对象，故所有的Collection都可以用 对象名.iterator()的方式获取该collection的迭代器iterator对象（结合工厂方法和内部类的思想来理解，其作用十分大）</p>
+<ol>
+<li>Map中提供了产生Collection的方法，以支持方便的对键值对的值域进行操作。</li>
+</ol>
+<p><code>Collection&lt;V&gt; values()  // Returns:a collection view of the values contained in this map.</code></p>
+        
+          <a class="article-more-a" href="/2017/12/28/Java学习笔记8/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/28/Java学习笔记8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Java学习笔记7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/28/Java学习笔记7/">Java学习笔记7</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/28/Java学习笔记7/" class="archive-article-date">
+  	<time datetime="2017-12-28T12:03:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="day8"><a href="#day8" class="headerlink" title="day8"></a>day8</h1><h2 id="1-使用泛型出现的问题"><a href="#1-使用泛型出现的问题" class="headerlink" title="1.使用泛型出现的问题"></a>1.使用泛型出现的问题</h2><h3 id="任何基本类型都不能作为类型参数"><a href="#任何基本类型都不能作为类型参数" class="headerlink" title="任何基本类型都不能作为类型参数"></a><em>任何基本类型都不能作为类型参数</em></h3><p>因此，不能创建类如ArrayList<int>之类的东西，解决方法是使用基本类型的包装器类和自动包装机制，如果创建一个ArrayList<Integer>,可以自动实现int到Integer的<em>双向转换</em>。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ListOfInt</span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span>&#123;</div><div class="line"></div><div class="line">		List&lt;Integer&gt; list=<span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line"></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</div><div class="line"></div><div class="line">			list.<span class="keyword">add</span>(i);</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i:li)</div><div class="line"></div><div class="line">			System.<span class="keyword">out</span>.println(i+<span class="string">" "</span>);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;<span class="comment">//output 0 1 2 3 4</span></div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/12/28/Java学习笔记7/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVASE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/28/Java学习笔记7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Java学习笔记6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -575,221 +792,6 @@
 
 
   
-    <article id="post-服务器开发测试常用命令和工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/22/服务器开发测试常用命令和工具/">服务器开发测试常用命令和工具</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/22/服务器开发测试常用命令和工具/" class="archive-article-date">
-  	<time datetime="2017-09-22T08:45:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h2><p>linux 下首先会用的就是gdb,关于gdb我们分单独一篇来写</p>
-<h2 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h2><h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><h2 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h2><h2 id="isof"><a href="#isof" class="headerlink" title="isof"></a>isof</h2><h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">sockets</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/22/服务器开发测试常用命令和工具/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-shared-ptr和weak-ptr" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/22/shared-ptr和weak-ptr/">shared_ptr和weak_ptr</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/22/shared-ptr和weak-ptr/" class="archive-article-date">
-  	<time datetime="2017-09-22T00:53:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h2><h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>  shared_ptr 本身不是 100% 线程安全的。它的引用计数本身是安全且无锁的，但对象的读写则不是，因为 shared_ptr 有两个数据成员，读写操作不能原子化。根据文档，shared_ptr 的线程安全级别和内建类型、标准库容器、string 一样，即：</p>
-<ul>
-<li>一个 shared_ptr 实体可被多个线程同时读取；</li>
-<li>两个的 shared_ptr 实体可以被两个线程同时写入，“析构”算写操作；</li>
-<li>要从多个线程读写同一个 shared_ptr 对象，那么需要加锁。
-        
-          <a class="article-more-a" href="/2017/09/22/shared-ptr和weak-ptr/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">stl</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/22/shared-ptr和weak-ptr/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-服务器项目关键组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/31/服务器项目关键组件/">服务器项目关键组件</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/31/服务器项目关键组件/" class="archive-article-date">
-  	<time datetime="2017-08-31T01:52:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p>话说网络程序通常需要处理的三类事件:第一是IO事件,第二是信号,第三就是定时事件,比如定期检测一个客户连接的状态,定时指的是一段时间后触发某段代码的机制.<br>为了实现一个定时器容器,我们选择用链表来实现,可按触发时间来排序存储,每个节点都是一个定时器,储存着:</p>
-<ol>
-<li>触发时间和触发事件</li>
-<li>所处理的对象</li>
-<li>上一个和下一个定时器的位置</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/08/31/服务器项目关键组件/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/31/服务器项目关键组件/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -927,11 +929,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color2">FakeCC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -951,7 +953,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -964,10 +974,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
